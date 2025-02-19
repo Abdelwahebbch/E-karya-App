@@ -18,6 +18,6 @@ The **e-Karya** app is a mobile application designed to simplify the process of 
 ## Team Members
 - **Bouchahwa Abdelwaheb**
 - **Bettaib Houssem**
-- **Boujlida Aziz**
+- **Boujlida Mohamed Aziz**
 - **Gammoudi Ahmed**
 
