@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" 
+      fx:controller="com.example.SignUpController"
+      spacing="10" alignment="CENTER" styleClass="card">
+    
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Sign Up" styleClass="title"/>
+    <Label text="Create your account to get started." styleClass="description"/>
+
+    <GridPane vgap="10" hgap="10">
+        <Label text="Full Name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="fullNameField" promptText="John Doe" 
+                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Email" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="emailField" promptText="john@example.com" 
+                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Password" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <PasswordField fx:id="passwordField" 
+                       GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Phone Number" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="phoneField" promptText="+1 (555) 000-0000" 
+                   GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <Label text="Account Type" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <VBox spacing="5" GridPane.rowIndex="4" GridPane.columnIndex="1">
+            <RadioButton fx:id="personalRadio" text="Personal Account" selected="true">
+                <toggleGroup>
+                    <ToggleGroup fx:id="accountTypeGroup"/>
+                </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="businessRadio" text="Business Account" toggleGroup="$accountTypeGroup"/>
+        </VBox>
+    </GridPane>
+
+    <Button text="Sign Up" onAction="#handleSignUp" maxWidth="Infinity"/>
+</VBox>
