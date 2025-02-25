@@ -23,7 +23,7 @@
     <!-- Top Navigation Bar -->
     <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 10;" stylesheets="@../styles/homePage.css">
         <ImageView fitHeight="40" fitWidth="40">
-            <Image url="@logo.png" />
+            <Image url="@images.jpg" />
         </ImageView>
 
         <Region HBox.hgrow="ALWAYS" />
@@ -102,8 +102,8 @@
             </columnConstraints>
 
             <!-- Listing Card 1 -->
-            <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd;" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                <ImageView fitHeight="200" fitWidth="300" preserveRatio="true">
+            <VBox onMouseClicked="#handleListingClick" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd; -fx-cursor: hand;" styleClass="clickable-listing" userData="listing_1" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <ImageView fitHeight="200" fitWidth="300" onMouseClicked="#handleListingClick" preserveRatio="true">
                     <Image url="@placeholder.jpg" />
                 </ImageView>
                 <VBox spacing="5" style="-fx-padding: 10;">
@@ -191,10 +191,10 @@
                     <Text style="-fx-font-weight: bold;" text="104 € par nuit" />
                 </VBox>
             </VBox>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
         </GridPane>
     </ScrollPane>
 </VBox>
