@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="600" minHeight="600" prefHeight="600" spacing="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.MainController">
+    <!-- Top Navigation Bar -->
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 10;">
+        <ImageView fitHeight="40" fitWidth="40">
+            <Image url="@logo.png" />
+        </ImageView>
+
+        <Region HBox.hgrow="ALWAYS" />
+
+        <Button style="-fx-background-color: transparent;" text="Logements" />
+        <Button style="-fx-background-color: transparent;" text="Expériences" />
+        <Button style="-fx-background-color: transparent;" text="Mettre mon logement" />
+        <MenuButton text="Profile">
+            <items>
+                <MenuItem text="Settings" />
+                <MenuItem text="Logout" />
+            </items>
+        </MenuButton>
+    </HBox>
+
+    <!-- Search Section -->
+    <HBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+        <VBox style="-fx-background-color: white; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #ddd; -fx-padding: 5 15;">
+            <HBox alignment="CENTER" spacing="15">
+                <VBox spacing="5">
+                    <Label text="Destination" />
+                    <TextField prefWidth="200" promptText="Rechercher une destination" />
+                </VBox>
+
+                <Separator orientation="VERTICAL" />
+
+                <VBox spacing="5">
+                    <Label text="Arrivée" />
+                    <DatePicker promptText="Quand ?" />
+                </VBox>
+
+                <Separator orientation="VERTICAL" />
+
+                <VBox spacing="5">
+                    <Label text="Départ" />
+                    <DatePicker promptText="Quand ?" />
+                </VBox>
+
+                <Separator orientation="VERTICAL" />
+
+                <VBox spacing="5">
+                    <Label text="Voyageurs" />
+                    <ComboBox promptText="Ajouter des voyageurs" />
+                </VBox>
+
+                <Button style="-fx-background-color: #FF385C; -fx-text-fill: white; -fx-background-radius: 50;">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20">
+                            <Image url="@search.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+        </VBox>
+    </HBox>
+
+    <!-- Categories ScrollPane -->
+    <ScrollPane hbarPolicy="NEVER" style="-fx-background-color: transparent;">
+        <HBox spacing="20" style="-fx-padding: 10;">
+            <Button style="-fx-background-color: transparent;" text="Chambres" />
+            <Button style="-fx-background-color: transparent;" text="Iconiques" />
+            <Button style="-fx-background-color: transparent;" text="Chambres d'hôtes" />
+            <Button style="-fx-background-color: transparent;" text="Bord de mer" />
+            <Button style="-fx-background-color: transparent;" text="Châteaux" />
+            <Button style="-fx-background-color: transparent;" text="Moulins à vent" />
+        </HBox>
+    </ScrollPane>
+
+    <!-- Listings Grid -->
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+        <GridPane hgap="20" style="-fx-padding: 20;" vgap="20">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="33" />
+                <ColumnConstraints percentWidth="33" />
+                <ColumnConstraints percentWidth="33" />
+            </columnConstraints>
+
+            <!-- Listing Card 1 -->
+            <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <ImageView fitHeight="200" fitWidth="300" preserveRatio="true">
+                    <Image url="@placeholder.jpg" />
+                </ImageView>
+                <VBox spacing="5" style="-fx-padding: 10;">
+                    <HBox spacing="10">
+                        <Text style="-fx-font-weight: bold;" text="Levallois-Perret, France" />
+                        <Text text="★ 4,96" />
+                    </HBox>
+                    <Text text="Séjournez chez Annie" />
+                    <Text text="1-6 mars" />
+                    <Text style="-fx-font-weight: bold;" text="104 € par nuit" />
+                </VBox>
+            </VBox>
+            <!-- Listing Card 2 -->
+            <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <ImageView fitHeight="200" fitWidth="300" preserveRatio="true">
+                    <Image url="@placeholder.jpg" />
+                </ImageView>
+                <VBox spacing="5" style="-fx-padding: 10;">
+                    <HBox spacing="10">
+                        <Text style="-fx-font-weight: bold;" text="Levallois-Perret, France" />
+                        <Text text="★ 4,96" />
+                    </HBox>
+                    <Text text="Séjournez chez Annie" />
+                    <Text text="1-6 mars" />
+                    <Text style="-fx-font-weight: bold;" text="104 € par nuit" />
+                </VBox>
+            </VBox>
+            <!-- Listing Card 3 -->
+            <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd;" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <ImageView fitHeight="200" fitWidth="300" preserveRatio="true">
+                    <Image url="@placeholder.jpg" />
+                </ImageView>
+                <VBox spacing="5" style="-fx-padding: 10;">
+                    <HBox spacing="10">
+                        <Text style="-fx-font-weight: bold;" text="Levallois-Perret, France" />
+                        <Text text="★ 4,96" />
+                    </HBox>
+                    <Text text="Séjournez chez Annie" />
+                    <Text text="1-6 mars" />
+                    <Text style="-fx-font-weight: bold;" text="104 € par nuit" />
+                </VBox>
+            </VBox>
+            <!-- Listing Card 4 -->
+            <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <ImageView fitHeight="200" fitWidth="300" preserveRatio="true">
+                    <Image url="@placeholder.jpg" />
+                </ImageView>
+                <VBox spacing="5" style="-fx-padding: 10;">
+                    <HBox spacing="10">
+                        <Text style="-fx-font-weight: bold;" text="Levallois-Perret, France" />
+                        <Text text="★ 4,96" />
+                    </HBox>
+                    <Text text="Séjournez chez Annie" />
+                    <Text text="1-6 mars" />
+                    <Text style="-fx-font-weight: bold;" text="104 € par nuit" />
+                </VBox>
+            </VBox>
+            <!-- Listing Card 5 -->
+            <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <ImageView fitHeight="200" fitWidth="300" preserveRatio="true">
+                    <Image url="@placeholder.jpg" />
+                </ImageView>
+                <VBox spacing="5" style="-fx-padding: 10;">
+                    <HBox spacing="10">
+                        <Text style="-fx-font-weight: bold;" text="Levallois-Perret, France" />
+                        <Text text="★ 4,96" />
+                    </HBox>
+                    <Text text="Séjournez chez Annie" />
+                    <Text text="1-6 mars" />
+                    <Text style="-fx-font-weight: bold;" text="104 € par nuit" />
+                </VBox>
+            </VBox>
+            <!-- Listing Card 6 -->
+            <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <ImageView fitHeight="200" fitWidth="300" preserveRatio="true">
+                    <Image url="@placeholder.jpg" />
+                </ImageView>
+                <VBox spacing="5" style="-fx-padding: 10;">
+                    <HBox spacing="10">
+                        <Text style="-fx-font-weight: bold;" text="Levallois-Perret, France" />
+                        <Text text="★ 4,96" />
+                    </HBox>
+                    <Text text="Séjournez chez Annie" />
+                    <Text text="1-6 mars" />
+                    <Text style="-fx-font-weight: bold;" text="104 € par nuit" />
+                </VBox>
+            </VBox>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
+    </ScrollPane>
+</VBox>
