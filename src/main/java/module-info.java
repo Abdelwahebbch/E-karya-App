@@ -4,5 +4,5 @@ module com.ekarya {
     requires transitive javafx.graphics;
     
     exports com.ekarya.app;
-     opens com.ekarya.controller to javafx.fxml;
+    opens com.ekarya.controller to javafx.fxml;
 }

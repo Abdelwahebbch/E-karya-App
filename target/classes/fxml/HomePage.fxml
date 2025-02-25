@@ -21,7 +21,7 @@
 
 <VBox maxHeight="600" minHeight="600" prefHeight="600" spacing="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.MainController">
     <!-- Top Navigation Bar -->
-    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 10;">
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 10;" stylesheets="@../styles/homePage.css">
         <ImageView fitHeight="40" fitWidth="40">
             <Image url="@logo.png" />
         </ImageView>
