@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" 
-      fx:controller="com.example.SignUpController"
-      spacing="10" alignment="CENTER" styleClass="card">
+<VBox alignment="CENTER" spacing="10" styleClass="card" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.SignUpController">
     
     <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
+        <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
 
-    <Label text="Sign Up" styleClass="title"/>
-    <Label text="Create your account to get started." styleClass="description"/>
+    <Label styleClass="title" text="Sign Up" />
+    <Label styleClass="description" text="Create your account to get started." />
 
-    <GridPane vgap="10" hgap="10">
-        <Label text="Full Name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="fullNameField" promptText="John Doe" 
-                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <GridPane hgap="10" vgap="10">
+        <Label text="Full Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="fullNameField" promptText="exemple exemple" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-        <Label text="Email" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="emailField" promptText="john@example.com" 
-                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label text="Email" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="emailField" promptText="exemple@example.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-        <Label text="Password" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <PasswordField fx:id="passwordField" 
-                       GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <Label text="Password" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-        <Label text="Phone Number" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <TextField fx:id="phoneField" promptText="+1 (555) 000-0000" 
-                   GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
-        <Label text="Account Type" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-        <VBox spacing="5" GridPane.rowIndex="4" GridPane.columnIndex="1">
-            <RadioButton fx:id="personalRadio" text="Personal Account" selected="true">
-                <toggleGroup>
-                    <ToggleGroup fx:id="accountTypeGroup"/>
-                </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="businessRadio" text="Business Account" toggleGroup="$accountTypeGroup"/>
-        </VBox>
+        <Label text="Phone Number" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="phoneField" promptText="+216 12345678" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
     </GridPane>
 
-    <Button text="Sign Up" onAction="#handleSignUp" maxWidth="Infinity"/>
+    <Button maxWidth="Infinity" onAction="#handleSignUp" text="Sign Up" />
 </VBox>
