@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb Dashboard</title>
+    <link rel="stylesheet" href="MessageStyle.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fab fa-airbnb"></i>
+        </div>
+        <nav class="nav-center">
+            <a href="#">Aujourd'hui</a>
+            <a href="#">Calendrier</a>
+            <a href="#">Annonces</a>
+            <a href="#" class="active">Messages</a>
+            <a href="#">Menu</a>
+        </nav>
+        <div class="nav-right">
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>Messages</h1>
+                <div class="sidebar-actions">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-filter"></i>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active">Tous</button>
+                <button class="tab">Non lus</button>
+            </div>
+
+            <div class="empty-state">
+                <i class="fas fa-inbox"></i>
+                <h2>Vous n'avez aucun message</h2>
+                <p>Lorsque vous recevez un nouveau message, il apparaîtra ici.</p>
+            </div>
+        </aside>
+
+        <!-- Content area -->
+        <section class="content">
+            <!-- Empty by design -->
+        </section>
+    </main>
+</body>
+</html>

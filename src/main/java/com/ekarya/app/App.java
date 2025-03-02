@@ -13,6 +13,7 @@ public class App extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+       // stage.setMaximized(true);
         stage.setTitle("E-karya");
     }
 
