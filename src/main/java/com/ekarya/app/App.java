@@ -16,7 +16,7 @@ public class App extends Application {
         stage.setTitle("E-karya");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {    
         launch(args);
     }
 }
