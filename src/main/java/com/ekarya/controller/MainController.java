@@ -67,6 +67,7 @@ public class MainController {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/propretyDesc.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
+        
     }
 
 }

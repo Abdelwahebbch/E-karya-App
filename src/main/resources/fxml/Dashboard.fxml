@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="600" minHeight="600" prefHeight="600" prefWidth="1000" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.PropertyDashboardController">
+    <!-- Top Navigation Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 10;">
+            <ImageView fitHeight="40" fitWidth="40">
+                <Image url="@logo.png" />
+            </ImageView>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <Button style="-fx-background-color: transparent;" text="Déconnexion" />
+        </HBox>
+    </top>
+    
+    <center>
+        <BorderPane>
+            <!-- Left Panel -->
+            <left>
+                <VBox prefWidth="250" spacing="10" style="-fx-padding: 10;">
+                    <!-- Properties List Title -->
+                    <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Mes propriétés" />
+                    
+                    <!-- Properties List -->
+                    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="propertiesContainer" spacing="10">
+                            <!-- Property buttons will be added dynamically -->
+                            <Button maxWidth="Infinity" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-alignment: center-left; -fx-padding: 10;">
+                                <graphic>
+                                    <HBox spacing="10">
+                                        <ImageView fitHeight="50" fitWidth="50" preserveRatio="true">
+                                            <Image url="@placeholder.png" />
+                                        </ImageView>
+                                        <VBox>
+                                            <Text style="-fx-font-weight: bold;" text="Appartement Paris" />
+                                            <Text style="-fx-font-size: 12;" text="104 € par nuit" />
+                                        </VBox>
+                                    </HBox>
+                                </graphic>
+                            </Button>
+                            
+                            <Button maxWidth="Infinity" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-alignment: center-left; -fx-padding: 10;">
+                                <graphic>
+                                    <HBox spacing="10">
+                                        <ImageView fitHeight="50" fitWidth="50" preserveRatio="true">
+                                            <Image url="@placeholder.png" />
+                                        </ImageView>
+                                        <VBox>
+                                            <Text style="-fx-font-weight: bold;" text="Villa Marseille" />
+                                            <Text style="-fx-font-size: 12;" text="150 € par nuit" />
+                                        </VBox>
+                                    </HBox>
+                                </graphic>
+                            </Button>
+                        </VBox>
+                    </ScrollPane>
+                    
+                    <!-- Add Property Button -->
+                    <Button fx:id="addPropertyButton" maxWidth="Infinity" onAction="#handleAddProperty" style="-fx-background-color: #FF385C; -fx-text-fill: white;" text="Ajouter une propriété" />
+                </VBox>
+            </left>
+            
+            <!-- Center Panel -->
+            <center>
+                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+                    <VBox spacing="20" style="-fx-padding: 20;">
+                        <!-- Property Details Header -->
+                        <Text fx:id="propertyTitle" style="-fx-font-size: 24; -fx-font-weight: bold;" text="Détails de la propriété" />
+                        
+                        <!-- Property Images Section -->
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #ddd; -fx-padding: 15;">
+                            <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Photos du logement" />
+                            
+                            <GridPane hgap="10" vgap="10">
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="50" />
+                                    <ColumnConstraints percentWidth="25" />
+                                    <ColumnConstraints percentWidth="25" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints percentHeight="50" />
+                                    <RowConstraints percentHeight="50" />
+                                </rowConstraints>
+                                
+                                <!-- Main Image -->
+                                <ImageView fx:id="mainImageView" fitHeight="250" fitWidth="400" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="2">
+                                    <Image url="@placeholder.png" />
+                                </ImageView>
+                                
+                                <!-- Additional Images -->
+                                <ImageView fx:id="image1View" fitHeight="120" fitWidth="195" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                    <Image url="@placeholder.png" />
+                                </ImageView>
+                                
+                                <ImageView fx:id="image2View" fitHeight="120" fitWidth="195" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                    <Image url="@placeholder.png" />
+                                </ImageView>
+                                
+                                <ImageView fx:id="image3View" fitHeight="120" fitWidth="195" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Image url="@placeholder.png" />
+                                </ImageView>
+                                
+                                <ImageView fx:id="image4View" fitHeight="120" fitWidth="195" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                    <Image url="@placeholder.png" />
+                                </ImageView>
+                            </GridPane>
+                        </VBox>
+                        
+                        <!-- Property Information Section -->
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #ddd; -fx-padding: 15;">
+                            <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Informations générales" />
+                            
+                            <GridPane hgap="20" vgap="10">
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="30" />
+                                    <ColumnConstraints percentWidth="70" />
+                                </columnConstraints>
+                                
+                                <Label text="Titre:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <Text fx:id="titleText" text="Appartement cosy au cœur de Paris" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                
+                                <Label text="Emplacement:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                <Text fx:id="locationText" text="Paris, Île-de-France, France" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                
+                                <Label text="Prix par nuit:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                <Text fx:id="priceText" text="104 €" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                
+                                <Label text="Voyageurs:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                <Text fx:id="guestsText" text="4 voyageurs" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                
+                                <Label text="Chambres:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                                <Text fx:id="bedroomsText" text="2 chambres" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                
+                                <Label text="Lits:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                                <Text fx:id="bedsText" text="3 lits" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                
+                                <Label text="Salles de bain:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                                <Text fx:id="bathroomsText" text="1 salle de bain" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                            </GridPane>
+                        </VBox>
+                        
+                        <!-- Property Description Section -->
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #ddd; -fx-padding: 15;">
+                            <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Description" />
+                            
+                            <Text fx:id="descriptionText" wrappingWidth="400" text="Découvrez ce charmant appartement situé au cœur de Paris. Parfaitement situé pour explorer la ville, cet espace confortable offre tout le nécessaire pour un séjour agréable. Profitez de la cuisine équipée, du salon lumineux et de la chambre cosy. À quelques pas des principales attractions et des transports en commun." />
+                        </VBox>
+                        
+                        <!-- Action Buttons -->
+                        <HBox alignment="CENTER_RIGHT" spacing="10">
+                            <Button fx:id="editButton" onAction="#handleEditProperty" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Modifier" />
+                            <Button fx:id="deleteButton" onAction="#handleDeleteProperty" style="-fx-background-color: #f44336; -fx-text-fill: white;" text="Supprimer" />
+                        </HBox>
+                    </VBox>
+                </ScrollPane>
+            </center>
+            
+            <!-- Right Panel -->
+            <right>
+                <VBox prefWidth="250" spacing="10" style="-fx-padding: 10;">
+                    <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Notifications" />
+                    
+                    <!-- Notifications List -->
+                    <ListView fx:id="notificationsList" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
+                        <!-- Notifications will be added dynamically -->
+                    </ListView>
+                </VBox>
+            </right>
+        </BorderPane>
+    </center>
+</BorderPane>
