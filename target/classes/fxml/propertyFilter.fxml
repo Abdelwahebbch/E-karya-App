@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="500" maxWidth="600" minHeight="400" minWidth="500" spacing="10" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd;" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.PropertyFilterController">
+    <!-- Header -->
+    <HBox alignment="CENTER" spacing="20" style="-fx-padding: 15;">
+        <Region HBox.hgrow="ALWAYS" />
+        <Text style="-fx-font-size: 20; -fx-font-weight: bold;" text="Filtres" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="closeButton" style="-fx-background-color: transparent;" text="✕" />
+    </HBox>
+    
+    <Separator />
+    
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <!-- Price Range Section -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 10;">
+                <Text style="-fx-font-size: 16; -fx-font-weight: bold;" text="Fourchette de prix" />
+                
+                <VBox spacing="5">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="Prix minimum:" />
+                        <Text fx:id="minPriceText" text="0 €" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label text="Prix maximum:" />
+                        <Text fx:id="maxPriceText" text="1000 €" />
+                    </HBox>
+                    <Slider fx:id="minPriceSlider" blockIncrement="10.0" max="1000.0" />
+                    <Slider fx:id="maxPriceSlider" blockIncrement="10.0" max="1000.0" value="1000.0" />
+                </VBox>
+            </VBox>
+            
+            <!-- Property Details Section -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 10;">
+                <Text style="-fx-font-size: 16; -fx-font-weight: bold;" text="Caractéristiques du logement" />
+                
+                <HBox spacing="15">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Chambres" />
+                        <ComboBox fx:id="bedroomsCombo" prefWidth="150" promptText="Nombre min" />
+                    </VBox>
+                    
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Lits" />
+                        <ComboBox fx:id="bedsCombo" prefWidth="150" promptText="Nombre min" />
+                    </VBox>
+                    
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Salles de bain" />
+                        <ComboBox fx:id="bathroomsCombo" prefWidth="150" promptText="Nombre min" />
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Property Type Section -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 10;">
+                <Text style="-fx-font-size: 16; -fx-font-weight: bold;" text="Type de logement" />
+                
+                <HBox spacing="10">
+                    <Button fx:id="typeApartmentButton" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 20;" text="Appartement" />
+                    <Button fx:id="typeHouseButton" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 20;" text="Maison" />
+                    <Button fx:id="typeVillaButton" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 20;" text="Villa" />
+                    <Button fx:id="typeChaletButton" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 20;" text="Chalet" />
+                </HBox>
+            </VBox>
+            
+            
+            <!-- Action Buttons -->
+            <HBox alignment="CENTER" spacing="20" style="-fx-padding: 10;">
+                <Button fx:id="resetButton" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5;" text="Réinitialiser" />
+                <Button fx:id="applyButton" style="-fx-background-color: #FF385C; -fx-text-fill: white; -fx-border-radius: 5;" text="Appliquer les filtres" />
+            </HBox>
+        </VBox>
+    </ScrollPane>
+</VBox>

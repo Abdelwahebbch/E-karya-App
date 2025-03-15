@@ -78,14 +78,17 @@
             </HBox>
         </VBox>
     </HBox>
-   <HBox spacing="20" style="-fx-padding: 10;">
+   <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 10 20;">
       <children>
-         <Button style="-fx-background-color: transparent;" text="Chambres" />
-         <Button style="-fx-background-color: transparent;" text="Iconiques" />
-         <Button style="-fx-background-color: transparent;" text="Chambres d'hôtes" />
-         <Button style="-fx-background-color: transparent;" text="Bord de mer" />
-         <Button style="-fx-background-color: transparent;" text="Châteaux" />
-         <Button style="-fx-background-color: transparent;" text="Moulins à vent" />
+         <Region HBox.hgrow="ALWAYS" />
+         <Button fx:id="filterButton" onAction="#handleFilterClick" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 20; -fx-background-radius: 20;">
+            <graphic>
+               <HBox alignment="CENTER" spacing="5">
+                  <SVGPath content="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" fill="transparent" stroke="BLACK" strokeWidth="1.5" />
+                  <Text style="-fx-font-size: 14px;" text="Filtres" />
+               </HBox>
+            </graphic>
+         </Button>
       </children>
    </HBox>
 

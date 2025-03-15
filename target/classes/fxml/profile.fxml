@@ -89,11 +89,8 @@
                                     <ColumnConstraints percentWidth="50" />
                                 </columnConstraints>
                                 
-                                <Label text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                <TextField fx:id="firstName" promptText="First Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                
-                                <Label text="Last Name:" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                                <TextField fx:id="lastName" promptText="Last Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Label text="Full Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <TextField fx:id="fullName" promptText="Full Name" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                                 
                                 <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                                 <TextField fx:id="email" promptText="Email" GridPane.columnIndex="0" GridPane.rowIndex="3" />
@@ -103,9 +100,6 @@
                                 
                                 <Label text="Date of Birth:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                                 <DatePicker fx:id="dateOfBirth" promptText="Date of Birth" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                                
-                                <Label text="Gender:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                <ComboBox fx:id="gender" promptText="Select Gender" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                 
                                 <Label text="Bio:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="6" />
                                 <TextArea fx:id="bio" prefHeight="100" promptText="Tell us about yourself" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7" />
