@@ -1,0 +1,30 @@
+.card {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    -fx-background-radius: 5;
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.description {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+}
+
+.button {
+    -fx-background-color: #000000;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20 10 20;
+}
+
+.button:hover {
+    -fx-background-color: #000000;
+}
+
+.text-field, .password-field {
+    -fx-pref-width: 200px;
+}
