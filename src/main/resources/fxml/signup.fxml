@@ -2,15 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10" styleClass="card" stylesheets="@signin.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.SignUpController">
+<VBox alignment="CENTER" spacing="10" styleClass="card" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.SignUpController">
     
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
@@ -19,6 +21,9 @@
     <Label styleClass="title" text="Sign Up" />
     <Label styleClass="description" text="Create your account to get started." />
 
+    <!-- Error message label - will be hidden by default and shown when errors occur -->
+    <Label fx:id="errorLabel" styleClass="error-label" text="" visible="false" />
+
     <GridPane hgap="10" vgap="10">
         <Label text="Full Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <TextField fx:id="fullNameField" promptText="exemple exemple" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -26,12 +31,11 @@
         <Label text="Email" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <TextField fx:id="emailField" promptText="exemple@example.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-        <Label text="Password" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label text="Phone Number" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="phoneField" promptText="+216 12345678" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-        <Label text="Phone Number" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <TextField fx:id="phoneField" promptText="+216 12345678" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="Password" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <columnConstraints>
          <ColumnConstraints />
          <ColumnConstraints />
@@ -45,5 +49,12 @@
       </rowConstraints>
     </GridPane>
 
-    <Button maxWidth="Infinity" onAction="#handleSignUp" text="Sign Up" />
+    <HBox alignment="CENTER_RIGHT" />
+
+    <Button maxWidth="Infinity" onAction="#handleSignUp" text="Sign Up" textFill="#f714d1" />
+    
+    <HBox alignment="CENTER" spacing="5">
+        <Label text="Already have an account?" />
+        <Hyperlink onAction="#navigateToSignIn" text="Sign In" />
+    </HBox>
 </VBox>
