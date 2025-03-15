@@ -67,7 +67,7 @@ public class SignInController {
     }
     
     // Example method for navigation after successful login
-    private void navigateToDashboard(ActionEvent event) {
+   /* private void navigateToDashboard(ActionEvent event) {
         try {
             Parent dashboardRoot = FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
             Scene dashboardScene = new Scene(dashboardRoot);
@@ -77,5 +77,5 @@ public class SignInController {
         } catch (IOException e) {
             showError("Error navigating to dashboard: " + e.getMessage());
         }
-    }
+    }*/
 }
