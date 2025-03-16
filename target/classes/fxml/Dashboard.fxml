@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -26,7 +25,7 @@
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <Button style="-fx-background-color: transparent;" text="Déconnexion" />
+            <Button onMouseClicked="#handleCloseButton" style="-fx-background-color: transparent;" text="Déconnexion" />
         </HBox>
     </top>
     
@@ -153,6 +152,15 @@
                                 
                                 <Label text="Salles de bain:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
                                 <Text fx:id="bathroomsText" text="1 salle de bain" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <rowConstraints>
+                           <RowConstraints />
+                           <RowConstraints />
+                           <RowConstraints />
+                           <RowConstraints />
+                           <RowConstraints />
+                           <RowConstraints />
+                           <RowConstraints />
+                        </rowConstraints>
                             </GridPane>
                         </VBox>
                         
@@ -160,7 +168,7 @@
                         <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #ddd; -fx-padding: 15;">
                             <Text style="-fx-font-size: 18; -fx-font-weight: bold;" text="Description" />
                             
-                            <Text fx:id="descriptionText" wrappingWidth="400" text="Découvrez ce charmant appartement situé au cœur de Paris. Parfaitement situé pour explorer la ville, cet espace confortable offre tout le nécessaire pour un séjour agréable. Profitez de la cuisine équipée, du salon lumineux et de la chambre cosy. À quelques pas des principales attractions et des transports en commun." />
+                            <Text fx:id="descriptionText" text="Découvrez ce charmant appartement situé au cœur de Paris. Parfaitement situé pour explorer la ville, cet espace confortable offre tout le nécessaire pour un séjour agréable. Profitez de la cuisine équipée, du salon lumineux et de la chambre cosy. À quelques pas des principales attractions et des transports en commun." wrappingWidth="400" />
                         </VBox>
                         
                         <!-- Action Buttons -->

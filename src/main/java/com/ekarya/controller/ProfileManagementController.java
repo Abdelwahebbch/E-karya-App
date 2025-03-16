@@ -2,13 +2,15 @@ package com.ekarya.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class ProfileManagementController {
 
@@ -17,6 +19,9 @@ public class ProfileManagementController {
 
     @FXML
     private TextArea bio;
+
+    @FXML
+    private Text bioText;
 
     @FXML
     private PasswordField confirmPassword;
@@ -34,16 +39,7 @@ public class ProfileManagementController {
     private Text emailText;
 
     @FXML
-    private TextField firstName;
-
-    @FXML
-    private ComboBox<?> gender;
-
-    @FXML
-    private Text lastLoginText;
-
-    @FXML
-    private TextField lastName;
+    private TextField fullName;
 
     @FXML
     private Text memberSinceText;
@@ -65,6 +61,16 @@ public class ProfileManagementController {
 
     @FXML
     private Text usernameText;
+
+    @FXML
+    void handleCloseButton(MouseEvent event) {
+        // Get the current stage from the event source
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        // Close the stage
+        stage.close();
+    }
 
     @FXML
     void handleRefreshAccount(ActionEvent event) {
