@@ -117,4 +117,27 @@ public class PropertyDashboardController {
         stage.close();
     }
 
+
+    @FXML
+    void LoadProprety(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/propretyDesc.fxml"));
+            Parent root = loader.load();
+
+            Stage filterStage = new Stage();
+            filterStage.setTitle("Filtres");
+
+            Scene scene = new Scene(root);
+            filterStage.setScene(scene);
+
+            filterStage.centerOnScreen();
+            filterStage.showAndWait();
+
+        } catch (IOException e) {
+            System.err.println("Error loading filter interface: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 }

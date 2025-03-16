@@ -16,8 +16,7 @@ public class App extends Application {
         // Parent root = FXMLLoader.load(getClass().getResource("/fxml/profile.fxml"));
         // Parent root =
         // FXMLLoader.load(getClass().getResource("/fxml/propretyFilter.fxml"));
-        // Parent root =
-        // FXMLLoader.load(getClass().getResource("/fxml/propretyDesc.fxml"));
+         //Parent root = FXMLLoader.load(getClass().getResource("/fxml/propretyDesc.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

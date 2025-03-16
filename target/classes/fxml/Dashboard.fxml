@@ -41,7 +41,7 @@
                     <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
                         <VBox fx:id="propertiesContainer" spacing="10">
                             <!-- Property buttons will be added dynamically -->
-                            <Button maxWidth="Infinity" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-alignment: center-left; -fx-padding: 10;">
+                            <Button maxWidth="Infinity" onAction="#LoadProprety" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-alignment: center-left; -fx-padding: 10;">
                                 <graphic>
                                     <HBox spacing="10">
                                         <ImageView fitHeight="50" fitWidth="50" preserveRatio="true">
@@ -55,7 +55,7 @@
                                 </graphic>
                             </Button>
                             
-                            <Button maxWidth="Infinity" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-alignment: center-left; -fx-padding: 10;">
+                            <Button maxWidth="Infinity" onAction="#LoadProprety" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-alignment: center-left; -fx-padding: 10;">
                                 <graphic>
                                     <HBox spacing="10">
                                         <ImageView fitHeight="50" fitWidth="50" preserveRatio="true">

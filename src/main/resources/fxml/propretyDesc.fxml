@@ -26,7 +26,7 @@
 
         <Region HBox.hgrow="ALWAYS" />
 
-        <Button onMouseClicked="#backToHomePage" style="-fx-background-color: transparent;" text="Retour" />
+        <Button onMouseClicked="#handleCloseButton" style="-fx-background-color: transparent;" text="Retour" />
     </HBox>
 
     <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
