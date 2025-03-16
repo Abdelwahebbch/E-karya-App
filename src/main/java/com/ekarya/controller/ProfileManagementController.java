@@ -14,77 +14,39 @@ import javafx.stage.Stage;
 
 public class ProfileManagementController {
 
-    @FXML
-    private Text accountTypeText;
-
-    @FXML
-    private TextArea bio;
-
-    @FXML
-    private Text bioText;
-
-    @FXML
-    private PasswordField confirmPassword;
-
-    @FXML
-    private PasswordField currentPassword;
-
-    @FXML
-    private DatePicker dateOfBirth;
-
-    @FXML
-    private TextField email;
-
-    @FXML
-    private Text emailText;
-
-    @FXML
-    private TextField fullName;
-
-    @FXML
-    private Text memberSinceText;
-
-    @FXML
-    private PasswordField newPassword;
-
-    @FXML
-    private TextField phoneNumber;
-
-    @FXML
-    private Button refreshAccountButton;
-
-    @FXML
-    private Button saveChangesButton;
-
-    @FXML
-    private Button updatePasswordButton;
-
-    @FXML
-    private Text usernameText;
+    @FXML private Text accountTypeText;
+    @FXML private TextArea bio;
+    @FXML private Text bioText;
+    @FXML private PasswordField confirmPassword;
+    @FXML private PasswordField currentPassword;
+    @FXML private DatePicker dateOfBirth;
+    @FXML private TextField email;
+    @FXML private Text emailText;
+    @FXML private TextField fullName;
+    @FXML private Text memberSinceText;
+    @FXML private PasswordField newPassword;
+    @FXML private TextField phoneNumber;
+    @FXML private Button refreshAccountButton;
+    @FXML private Button saveChangesButton;
+    @FXML private Button updatePasswordButton;
+    @FXML private Text usernameText;
 
     @FXML
     void handleCloseButton(MouseEvent event) {
-        // Get the current stage from the event source
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
-
-        // Close the stage
         stage.close();
     }
 
     @FXML
     void handleRefreshAccount(ActionEvent event) {
-
     }
 
     @FXML
     void handleSaveChanges(ActionEvent event) {
-
     }
 
     @FXML
     void handleUpdatePassword(ActionEvent event) {
-
     }
-
 }

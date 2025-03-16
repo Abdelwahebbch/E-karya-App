@@ -9,14 +9,9 @@ import javafx.stage.Stage;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        // Parent root = FXMLLoader.load(getClass().getResource("/fxml/addHome.fxml"));
-        // Parent root =
-        // FXMLLoader.load(getClass().getResource("/fxml/DashBoard.fxml"));
+
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/HomePage.fxml"));
-        // Parent root = FXMLLoader.load(getClass().getResource("/fxml/profile.fxml"));
-        // Parent root =
-        // FXMLLoader.load(getClass().getResource("/fxml/propretyFilter.fxml"));
-         //Parent root = FXMLLoader.load(getClass().getResource("/fxml/propretyDesc.fxml"));
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

@@ -18,126 +18,67 @@ import javafx.stage.Stage;
 
 public class PropertyDashboardController {
 
-    @FXML
-    private Button addPropertyButton;
-
-    @FXML
-    private Text bathroomsText;
-
-    @FXML
-    private Text bedroomsText;
-
-    @FXML
-    private Text bedsText;
-
-    @FXML
-    private Button deleteButton;
-
-    @FXML
-    private Text descriptionText;
-
-    @FXML
-    private Button editButton;
-
-    @FXML
-    private Text guestsText;
-
-    @FXML
-    private ImageView image1View;
-
-    @FXML
-    private ImageView image2View;
-
-    @FXML
-    private ImageView image3View;
-
-    @FXML
-    private ImageView image4View;
-
-    @FXML
-    private Text locationText;
-
-    @FXML
-    private ImageView mainImageView;
-
-    @FXML
-    private ListView<?> notificationsList;
-
-    @FXML
-    private Text priceText;
-
-    @FXML
-    private VBox propertiesContainer;
-
-    @FXML
-    private Text propertyTitle;
-
-    @FXML
-    private Text titleText;
+    @FXML private Button addPropertyButton;
+    @FXML private Text bathroomsText;
+    @FXML private Text bedroomsText;
+    @FXML private Text bedsText;
+    @FXML private Button deleteButton;
+    @FXML private Text descriptionText;
+    @FXML private Button editButton;
+    @FXML private Text guestsText;
+    @FXML private ImageView image1View;
+    @FXML private ImageView image2View;
+    @FXML private ImageView image3View;
+    @FXML private ImageView image4View;
+    @FXML private Text locationText;
+    @FXML private ImageView mainImageView;
+    @FXML private ListView<?> notificationsList;
+    @FXML private Text priceText;
+    @FXML private VBox propertiesContainer;
+    @FXML private Text propertyTitle;
+    @FXML private Text titleText;
 
     @FXML
     void handleAddProperty(ActionEvent event) {
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addHome.fxml"));
-            Parent root = loader.load();
-
-            Stage filterStage = new Stage();
-            filterStage.setTitle("Filtres");
-
-            Scene scene = new Scene(root);
-            filterStage.setScene(scene);
-
-            filterStage.centerOnScreen();
-            filterStage.showAndWait();
-
-        } catch (IOException e) {
-            System.err.println("Error loading filter interface: " + e.getMessage());
-            e.printStackTrace();
-        }
+        loadView("/fxml/addHome.fxml", "Add Property");
     }
 
     @FXML
     void handleDeleteProperty(ActionEvent event) {
-
     }
 
     @FXML
     void handleEditProperty(ActionEvent event) {
-
     }
 
     @FXML
     void handleCloseButton(MouseEvent event) {
-        // Get the current stage from the event source
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
-
-        // Close the stage
         stage.close();
     }
 
-
     @FXML
     void LoadProprety(ActionEvent event) {
+        loadView("/fxml/propretyDesc.fxml", "Property Details");
+    }
+    
+    private void loadView(String fxmlPath, String title) {
         try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/propretyDesc.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
-            Stage filterStage = new Stage();
-            filterStage.setTitle("Filtres");
-
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            
             Scene scene = new Scene(root);
-            filterStage.setScene(scene);
-
-            filterStage.centerOnScreen();
-            filterStage.showAndWait();
-
+            stage.setScene(scene);
+            
+            stage.centerOnScreen();
+            stage.showAndWait();
         } catch (IOException e) {
-            System.err.println("Error loading filter interface: " + e.getMessage());
+            System.err.println("Error loading " + title + " view: " + e.getMessage());
             e.printStackTrace();
         }
     }
-
 }
