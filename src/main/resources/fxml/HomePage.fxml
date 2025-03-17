@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -9,6 +10,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -16,89 +18,118 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="600" minHeight="600" prefHeight="600" spacing="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.MainController">
-    <!-- Top Navigation Bar -->
-    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 10;" stylesheets="@../styles/homePage.css">
-        <ImageView fitHeight="40" fitWidth="40">
-            <Image url="@images.jpg" />
-        </ImageView>
+<VBox maxHeight="600" minHeight="600" prefHeight="600" spacing="0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.MainController">
+    <!-- Modern Top Navigation Bar -->
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 12 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 4); -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;">
+        <HBox alignment="CENTER" spacing="8">
+            <Circle fill="#000000" radius="16" />
+            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 20; -fx-font-weight: 700; -fx-fill: #000000;" text="E-Karya" />
+        </HBox>
 
         <Region HBox.hgrow="ALWAYS" />
-        <MenuButton text="Profile">
+        
+        <!-- Menu Button -->
+        <MenuButton style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 24; -fx-background-radius: 24; -fx-padding: 8 16; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 1);">
+            <graphic>
+                <HBox alignment="CENTER" spacing="8">
+                    <SVGPath content="M4 6h16M4 12h16M4 18h16" fill="transparent" stroke="#000000" strokeWidth="2" />
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #000000;" text="Menu" />
+                </HBox>
+            </graphic>
             <items>
-                <MenuItem text="Settings" />
-                <MenuItem text="Logout" />
+                <MenuItem style="-fx-font-family: 'Montserrat';" text="Accueil" />
+                <MenuItem style="-fx-font-family: 'Montserrat';" text="Favoris" />
+                <MenuItem style="-fx-font-family: 'Montserrat';" text="Messages" />
+                <MenuItem style="-fx-font-family: 'Montserrat';" text="Mon compte" />
+                <MenuItem style="-fx-font-family: 'Montserrat';" text="Mes réservations" />
+                <MenuItem style="-fx-font-family: 'Montserrat';" text="Paramètres" />
+                <MenuItem style="-fx-font-family: 'Montserrat';" text="Déconnexion" />
             </items>
         </MenuButton>
     </HBox>
 
-    <!-- Search Section -->
-    <HBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
-        <VBox style="-fx-background-color: white; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #ddd; -fx-padding: 5 15;">
-            <HBox alignment="CENTER" spacing="15">
-                <VBox spacing="5">
-                    <Label text="Destination" />
-                    <TextField prefWidth="200" promptText="Rechercher une destination" />
+    <!-- Stylish Search Section -->
+    <HBox alignment="CENTER" spacing="0" style="-fx-padding: 0; -fx-background-color: linear-gradient(to right, #f5f5f5, #ffffff, #f5f5f5);">
+        <VBox alignment="CENTER" style="-fx-padding: 24 24 32 24;">
+            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 28; -fx-font-weight: 800; -fx-fill: #000000;" text="Découvrez votre prochain chez-vous" />
+            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 16; -fx-fill: #555555; -fx-padding: 8 0 24 0;" text="Des logements uniques, des expériences authentiques" />
+            
+            <HBox alignment="CENTER" spacing="10" style="-fx-padding: 0 0 0 0;">
+                <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 8 8 8 16; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0, 0, 4);">
+                    <HBox alignment="CENTER" spacing="16">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000; -fx-font-size: 12;" text="Destination" />
+                            <TextField prefWidth="150" promptText="Où allez-vous ?" style="-fx-background-color: transparent; -fx-padding: 4 0; -fx-font-family: 'Montserrat'; -fx-font-size: 13;" />
+                        </VBox>
+
+                        <Separator orientation="VERTICAL" style="-fx-background-color: #E0E0E0;" />
+
+                        <VBox spacing="4">
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000; -fx-font-size: 12;" text="Arrivée" />
+                            <DatePicker prefWidth="120" promptText="Date" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-size: 13;" />
+                        </VBox>
+
+                        <Separator orientation="VERTICAL" style="-fx-background-color: #E0E0E0;" />
+
+                        <VBox spacing="4">
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000; -fx-font-size: 12;" text="Départ" />
+                            <DatePicker prefWidth="120" promptText="Date" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-size: 13;" />
+                        </VBox>
+
+                        <Separator orientation="VERTICAL" style="-fx-background-color: #E0E0E0;" />
+
+                        <VBox spacing="4">
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000; -fx-font-size: 12;" text="Voyageurs" />
+                            <ComboBox prefWidth="100" promptText="Ajouter" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-size: 13;" />
+                        </VBox>
+
+                        <!-- Search Button -->
+                        <Button fx:id="searchButton" style="-fx-background-color: #000000; -fx-background-radius: 8; -fx-padding: 8 16; -fx-cursor: hand;">
+                            <graphic>
+                                <HBox alignment="CENTER" spacing="8">
+                                    <SVGPath content="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                                    <Text fill="WHITE" style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 13;" text="Rechercher" />
+                                </HBox>
+                            </graphic>
+                            <effect>
+                                <DropShadow height="8.0" radius="3.5" width="8.0">
+                                    <color>
+                                        <javafx.scene.paint.Color opacity="0.3" />
+                                    </color>
+                                </DropShadow>
+                            </effect>
+                        </Button>
+                    </HBox>
                 </VBox>
-
-                <Separator orientation="VERTICAL" />
-
-                <VBox spacing="5">
-                    <Label text="Arrivée" />
-                    <DatePicker promptText="Quand ?" />
-                </VBox>
-
-                <Separator orientation="VERTICAL" />
-
-                <VBox spacing="5">
-                    <Label text="Départ" />
-                    <DatePicker promptText="Quand ?" />
-                </VBox>
-
-                <Separator orientation="VERTICAL" />
-
-                <VBox spacing="5">
-                    <Label text="Voyageurs" />
-                    <ComboBox promptText="Ajouter des voyageurs" />
-                </VBox>
-
-                <!-- Enhanced Search Button with SVG icon -->
-                <Button fx:id="searchButton" styleClass="search-button">
-                    <graphic>
-                        <HBox alignment="CENTER" spacing="5">
-                            <SVGPath content="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19ZM11 19L21 21L19 11" fill="transparent" stroke="WHITE" strokeWidth="2" />
-                            <Text fill="WHITE" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Rechercher" />
-                        </HBox>
-                    </graphic>
-                </Button>
             </HBox>
         </VBox>
     </HBox>
-   <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 10 20;">
-      <children>
-         <Region HBox.hgrow="ALWAYS" />
-         <Button fx:id="filterButton" onAction="#handleFilterClick" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 20; -fx-background-radius: 20;">
-            <graphic>
-               <HBox alignment="CENTER" spacing="5">
-                  <SVGPath content="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" fill="transparent" stroke="BLACK" strokeWidth="1.5" />
-                  <Text style="-fx-font-size: 14px;" text="Filtres" />
-               </HBox>
-            </graphic>
-         </Button>
-      </children>
-   </HBox>
 
-    <!-- Listings Grid -->
-    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
-        <GridPane hgap="20" style="-fx-padding: 20;" vgap="20">
+    <!-- Filter Section -->
+    <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 12 24; -fx-background-color: white; -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;">
+        <Button fx:id="filterButton" onAction="#handleFilterClick" style="-fx-background-color: white; -fx-border-color: #000000; -fx-border-radius: 24; -fx-background-radius: 24; -fx-padding: 8 16; -fx-cursor: hand;">
+            <graphic>
+                <HBox alignment="CENTER" spacing="8">
+                    <SVGPath content="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" fill="transparent" stroke="#000000" strokeWidth="1.5" />
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-font-weight: 600; -fx-fill: #000000;" text="Filtres" />
+                </HBox>
+            </graphic>
+        </Button>
+    </HBox>
+
+    <!-- Listings Grid with 3 columns -->
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-padding: 0; -fx-background-insets: 0;" VBox.vgrow="ALWAYS">
+        <GridPane hgap="20" style="-fx-padding: 20;" vgap="24">
             <columnConstraints>
-                <ColumnConstraints percentWidth="33" />
-                <ColumnConstraints percentWidth="33" />
-                <ColumnConstraints percentWidth="33" />
+                <ColumnConstraints percentWidth="33.33" />
+                <ColumnConstraints percentWidth="33.33" />
+                <ColumnConstraints percentWidth="33.33" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints />
@@ -106,18 +137,201 @@
             </rowConstraints>
 
             <!-- Listing Card 1 -->
-            <VBox onMouseClicked="#handleListingClick" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd; -fx-cursor: hand;" styleClass="clickable-listing" userData="listing_1" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                <ImageView fitHeight="200" fitWidth="300" onMouseClicked="#handleListingClick" preserveRatio="true">
-                    <Image url="@placeholder.jpg" />
-                </ImageView>
-                <VBox spacing="5" style="-fx-padding: 10;">
-                    <HBox spacing="10">
-                        <Text style="-fx-font-weight: bold;" text="Levallois-Perret, France" />
-                        <Text text="★ 4,96" />
+            <VBox onMouseClicked="#handleListingClick" style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2); -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 1; -fx-border-radius: 12;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <StackPane>
+                    <ImageView fitHeight="220" fitWidth="300" preserveRatio="true" style="-fx-background-radius: 12 12 0 0;">
+                        <Image url="@placeholder.jpg" />
+                    </ImageView>
+                    <Button style="-fx-background-color: transparent; -fx-cursor: hand;" StackPane.alignment="TOP_RIGHT">
+                        <graphic>
+                            <SVGPath content="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                        </graphic>
+                        <padding>
+                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                        </padding>
+                    </Button>
+                </StackPane>
+                <VBox spacing="8" style="-fx-padding: 16;">
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="Levallois-Perret, France" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <HBox alignment="CENTER">
+                            <Text style="-fx-fill: #000000; -fx-font-weight: bold;" text="★" />
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text=" 4,96" />
+                        </HBox>
                     </HBox>
-                    <Text text="Séjournez chez Annie" />
-                    <Text text="1-6 mars" />
-                    <Text style="-fx-font-weight: bold;" text="104 € par nuit" />
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="Séjournez chez Annie" />
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="1-6 mars" />
+                    <HBox alignment="CENTER_LEFT" spacing="4" style="-fx-padding: 8 0 0 0;">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="104 €" />
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="par nuit" />
+                    </HBox>
+                </VBox>
+            </VBox>
+            
+            <!-- Listing Card 2 -->
+            <VBox onMouseClicked="#handleListingClick" style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2); -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 1; -fx-border-radius: 12;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <StackPane>
+                    <ImageView fitHeight="220" fitWidth="300" preserveRatio="true" style="-fx-background-radius: 12 12 0 0;">
+                        <Image url="@placeholder.jpg" />
+                    </ImageView>
+                    <Button style="-fx-background-color: transparent; -fx-cursor: hand;" StackPane.alignment="TOP_RIGHT">
+                        <graphic>
+                            <SVGPath content="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                        </graphic>
+                        <padding>
+                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                        </padding>
+                    </Button>
+                </StackPane>
+                <VBox spacing="8" style="-fx-padding: 16;">
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="Paris, France" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <HBox alignment="CENTER">
+                            <Text style="-fx-fill: #000000; -fx-font-weight: bold;" text="★" />
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text=" 4,89" />
+                        </HBox>
+                    </HBox>
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="Appartement entier" />
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="10-15 mars" />
+                    <HBox alignment="CENTER_LEFT" spacing="4" style="-fx-padding: 8 0 0 0;">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="125 €" />
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="par nuit" />
+                    </HBox>
+                </VBox>
+            </VBox>
+            
+            <!-- Listing Card 3 -->
+            <VBox onMouseClicked="#handleListingClick" style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2); -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 1; -fx-border-radius: 12;" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <StackPane>
+                    <ImageView fitHeight="220" fitWidth="300" preserveRatio="true" style="-fx-background-radius: 12 12 0 0;">
+                        <Image url="@placeholder.jpg" />
+                    </ImageView>
+                    <Button style="-fx-background-color: transparent; -fx-cursor: hand;" StackPane.alignment="TOP_RIGHT">
+                        <graphic>
+                            <SVGPath content="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                        </graphic>
+                        <padding>
+                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                        </padding>
+                    </Button>
+                </StackPane>
+                <VBox spacing="8" style="-fx-padding: 16;">
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="Nice, France" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <HBox alignment="CENTER">
+                            <Text style="-fx-fill: #000000; -fx-font-weight: bold;" text="★" />
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text=" 4,92" />
+                        </HBox>
+                    </HBox>
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="Vue sur la mer" />
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="5-12 avril" />
+                    <HBox alignment="CENTER_LEFT" spacing="4" style="-fx-padding: 8 0 0 0;">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="145 €" />
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="par nuit" />
+                    </HBox>
+                </VBox>
+            </VBox>
+            
+            <!-- Second Row -->
+            <!-- Listing Card 4 -->
+            <VBox onMouseClicked="#handleListingClick" style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2); -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 1; -fx-border-radius: 12;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <StackPane>
+                    <ImageView fitHeight="220" fitWidth="300" preserveRatio="true" style="-fx-background-radius: 12 12 0 0;">
+                        <Image url="@placeholder.jpg" />
+                    </ImageView>
+                    <Button style="-fx-background-color: transparent; -fx-cursor: hand;" StackPane.alignment="TOP_RIGHT">
+                        <graphic>
+                            <SVGPath content="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                        </graphic>
+                        <padding>
+                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                        </padding>
+                    </Button>
+                </StackPane>
+                <VBox spacing="8" style="-fx-padding: 16;">
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="Lyon, France" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <HBox alignment="CENTER">
+                            <Text style="-fx-fill: #000000; -fx-font-weight: bold;" text="★" />
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text=" 4,85" />
+                        </HBox>
+                    </HBox>
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="Loft entier" />
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="15-20 mars" />
+                    <HBox alignment="CENTER_LEFT" spacing="4" style="-fx-padding: 8 0 0 0;">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="95 €" />
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="par nuit" />
+                    </HBox>
+                </VBox>
+            </VBox>
+            
+            <!-- Listing Card 5 -->
+            <VBox onMouseClicked="#handleListingClick" style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2); -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 1; -fx-border-radius: 12;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <StackPane>
+                    <ImageView fitHeight="220" fitWidth="300" preserveRatio="true" style="-fx-background-radius: 12 12 0 0;">
+                        <Image url="@placeholder.jpg" />
+                    </ImageView>
+                    <Button style="-fx-background-color: transparent; -fx-cursor: hand;" StackPane.alignment="TOP_RIGHT">
+                        <graphic>
+                            <SVGPath content="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                        </graphic>
+                        <padding>
+                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                        </padding>
+                    </Button>
+                </StackPane>
+                <VBox spacing="8" style="-fx-padding: 16;">
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="Bordeaux, France" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <HBox alignment="CENTER">
+                            <Text style="-fx-fill: #000000; -fx-font-weight: bold;" text="★" />
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text=" 4,91" />
+                        </HBox>
+                    </HBox>
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="Maison entière" />
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="20-27 mars" />
+                    <HBox alignment="CENTER_LEFT" spacing="4" style="-fx-padding: 8 0 0 0;">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="135 €" />
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="par nuit" />
+                    </HBox>
+                </VBox>
+            </VBox>
+            
+            <!-- Listing Card 6 -->
+            <VBox onMouseClicked="#handleListingClick" style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2); -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 1; -fx-border-radius: 12;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <StackPane>
+                    <ImageView fitHeight="220" fitWidth="300" preserveRatio="true" style="-fx-background-radius: 12 12 0 0;">
+                        <Image url="@placeholder.jpg" />
+                    </ImageView>
+                    <Button style="-fx-background-color: transparent; -fx-cursor: hand;" StackPane.alignment="TOP_RIGHT">
+                        <graphic>
+                            <SVGPath content="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                        </graphic>
+                        <padding>
+                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                        </padding>
+                    </Button>
+                </StackPane>
+                <VBox spacing="8" style="-fx-padding: 16;">
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="Strasbourg, France" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <HBox alignment="CENTER">
+                            <Text style="-fx-fill: #000000; -fx-font-weight: bold;" text="★" />
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text=" 4,88" />
+                        </HBox>
+                    </HBox>
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="Appartement cosy" />
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="1-8 avril" />
+                    <HBox alignment="CENTER_LEFT" spacing="4" style="-fx-padding: 8 0 0 0;">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="110 €" />
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="par nuit" />
+                    </HBox>
                 </VBox>
             </VBox>
         </GridPane>
