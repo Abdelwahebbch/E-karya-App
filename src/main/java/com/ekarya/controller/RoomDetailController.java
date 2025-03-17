@@ -16,12 +16,13 @@ public class RoomDetailController {
     @FXML
     private ComboBox<?> nbVoyage;
 
-        @FXML
-    public void backToHomePage(MouseEvent event) throws IOException{ 
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/HomePage.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        
-    }
+    @FXML
+    void handleCloseButton(MouseEvent event) {
+        // Get the current stage from the event source
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
 
+        // Close the stage
+        stage.close();
+    }
 }
