@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10" styleClass="card" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.SignUpController">
+<VBox alignment="CENTER" spacing="10" styleClass="card" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.RegisterController">
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>

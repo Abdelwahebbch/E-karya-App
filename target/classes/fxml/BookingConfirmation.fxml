@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="600" minHeight="600" prefHeight="600" spacing="10" 
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.ekarya.controller.BookingConfirmationController">
+    
+    <!-- Top Navigation Bar -->
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 10;">
+        <ImageView fitHeight="40" fitWidth="40">
+            <Image url="@logo.png" />
+        </ImageView>
+        
+        <Button fx:id="homeButton" onAction="#handleHome" style="-fx-background-color: transparent;" text="Return to Home" />
+    </HBox>
+    
+    <VBox alignment="CENTER" spacing="20" style="-fx-padding: 40;">
+        <ImageView fitHeight="100" fitWidth="100">
+            <Image url="@confirmation.png" />
+        </ImageView>
+        
+        <Text style="-fx-font-size: 24; -fx-font-weight: bold;" text="Booking Confirmed!" />
+        <Text style="-fx-font-size: 16; -fx-text-alignment: center;" text="Thank you for your booking. We've sent a confirmation email with all the details." wrappingWidth="400" />
+        
+        <VBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: #f8f8f8; -fx-padding: 20; -fx-background-radius: 10;">
+            <Text style="-fx-font-weight: bold;" text="Booking Details" />
+            <Text fx:id="propertyNameText" text="Appartement cosy au cœur de Paris" />
+            <Text fx:id="datesText" text="Check-in: Mar 1, 2025 | Check-out: Mar 6, 2025" />
+            <Text fx:id="guestsText" text="Guests: 2 adults" />
+            <Text fx:id="totalPriceText" text="Total Price: 594 €" />
+        </VBox>
+        
+        <HBox spacing="20">
+            <Button fx:id="viewBookingsButton" onAction="#handleViewBookings" style="-fx-background-color: #FF385C; -fx-text-fill: white;" text="View My Bookings" />
+            <Button fx:id="homeButton2" onAction="#handleHome" style="-fx-background-color: transparent; -fx-border-color: #FF385C;" text="Return to Home" />
+        </HBox>
+    </VBox>
+</VBox>

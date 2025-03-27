@@ -1,8 +1,10 @@
 module com.ekarya {
     requires javafx.controls;
     requires javafx.fxml;
-    requires transitive javafx.graphics;
+    
+    opens com.ekarya.app to javafx.fxml;
+    opens com.ekarya.controller to javafx.fxml;
     
     exports com.ekarya.app;
-    opens com.ekarya.controller to javafx.fxml;
+    exports com.ekarya.controller;
 }

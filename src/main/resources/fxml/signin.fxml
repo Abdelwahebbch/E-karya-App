@@ -13,6 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" spacing="10" styleClass="card"  xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.SignInController">
+<FXMLLoader fx:controller="com.ekarya.controllers.SigninController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
 
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />

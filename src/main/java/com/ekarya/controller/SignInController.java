@@ -1,81 +1,71 @@
 package com.ekarya.controller;
 
-import java.io.IOException;
-
+import com.ekarya.app.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.text.Text;
 
-public class SignInController {
-
+public class SignInController extends BaseController {
+    
     @FXML
     private TextField emailField;
-
+    
     @FXML
     private PasswordField passwordField;
     
     @FXML
-    private Label errorLabel;
-
+    private Button loginButton;
+    
     @FXML
-    void handleSignIn(ActionEvent event) {
-        // Get the values from the fields
+    private Button registerButton;
+    
+    @FXML
+    private Text errorText;
+    
+    @FXML
+    private void handleSignIn(ActionEvent event) {
         String email = emailField.getText();
         String password = passwordField.getText();
         
-        // Validate the input
-        if (email.isEmpty() || password.isEmpty()) {
-            showError("Email and password are required");
+        // Validate input
+        if (email == null || email.trim().isEmpty()) {
+            showError("Please enter your email");
             return;
         }
         
-        // TODO: Add your sign-in logic here
-        // For example, authenticate the user against your database
+        if (password == null || password.trim().isEmpty()) {
+            showError("Please enter your password");
+            return;
+        }
         
-        // For now, just show a success message
-        // You can navigate to a dashboard or home page after successful login
-        // Example:
-        // navigateToDashboard(event);
+        // In a real application, you would authenticate the user here
+        // For now, just navigate to the home page
+        
+        // Clear any previous error
+        if (errorText != null) {
+            errorText.setVisible(false);
+        }
+        
+        // Navigate to home page
+        navigateTo(SceneManager.AppScene.HOME);
     }
-
+    
     @FXML
-    void handleSignUp(ActionEvent event) {
-        try {
-            Parent signUpRoot = FXMLLoader.load(getClass().getResource("/fxml/signup.fxml"));
-            Scene signUpScene = new Scene(signUpRoot);
-            Stage stage = (Stage) emailField.getScene().getWindow();
-            stage.setScene(signUpScene);
-            stage.setTitle("E-karya - Sign Up");
-        } catch (IOException e) {
-            showError("Error navigating to sign up page: " + e.getMessage());
-        }
+    private void handleRegister(ActionEvent event) {
+        // Navigate to registration page
+        navigateTo(SceneManager.AppScene.REGISTER);
     }
     
-    private void showError(String message) {
-        if (errorLabel != null) {
-            errorLabel.setText(message);
-            errorLabel.setVisible(true);
+    protected void showError(String message) {
+        if (errorText != null) {
+            errorText.setText(message);
+            errorText.setVisible(true);
         } else {
-            System.err.println("Error: " + message);
+            // Fallback to the method from BaseController
+            showError(message);
         }
     }
-    
-    // Example method for navigation after successful login
-   /* private void navigateToDashboard(ActionEvent event) {
-        try {
-            Parent dashboardRoot = FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
-            Scene dashboardScene = new Scene(dashboardRoot);
-            Stage stage = (Stage) emailField.getScene().getWindow();
-            stage.setScene(dashboardScene);
-            stage.setTitle("E-karya - Dashboard");
-        } catch (IOException e) {
-            showError("Error navigating to dashboard: " + e.getMessage());
-        }
-    }*/
 }
