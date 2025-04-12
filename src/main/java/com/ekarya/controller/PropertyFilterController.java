@@ -5,9 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class PropertyFilterController {
-    @FXML private Button closeButton;
     @FXML private Slider minPriceSlider;
     @FXML private Slider maxPriceSlider;
     @FXML private Text minPriceText;
@@ -15,12 +15,9 @@ public class PropertyFilterController {
     @FXML private ComboBox<Integer> bedroomsCombo;
     @FXML private ComboBox<Integer> bedsCombo;
     @FXML private ComboBox<Integer> bathroomsCombo;
-    @FXML private Button typeApartmentButton;
-    @FXML private Button typeHouseButton;
-    @FXML private Button typeVillaButton;
-    @FXML private Button typeChaletButton;
     @FXML private Button resetButton;
     @FXML private Button applyButton;
+    @FXML private Button closeButton; // Added for the new close button
     
     @FXML
     public void initialize() {
@@ -46,12 +43,6 @@ public class PropertyFilterController {
             maxPriceText.setText(String.format("%.0f €", maxPriceSlider.getValue()));
         });
         
-        // Set up button click handlers for property types and amenities
-        setupToggleButton(typeApartmentButton);
-        setupToggleButton(typeHouseButton);
-        setupToggleButton(typeVillaButton);
-        setupToggleButton(typeChaletButton);
-        
         // Set up reset button
         resetButton.setOnAction(e -> resetFilters());
         
@@ -59,21 +50,16 @@ public class PropertyFilterController {
         applyButton.setOnAction(e -> applyFilters());
         
         // Set up close button
-        closeButton.setOnAction(e -> closeDialog());
+        closeButton.setOnAction(e -> handleClose());
     }
     
-    private void setupToggleButton(Button button) {
-        button.setOnAction(e -> {
-            if (button.getStyle().contains("-fx-background-color: #FF385C")) {
-                // Deselect
-                button.setStyle("-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 20;");
-                button.setTextFill(javafx.scene.paint.Color.BLACK);
-            } else {
-                // Select
-                button.setStyle("-fx-background-color: #FF385C; -fx-text-fill: white; -fx-border-radius: 20;");
-                button.setTextFill(javafx.scene.paint.Color.WHITE);
-            }
-        });
+    /**
+     * Handles the close button action.
+     * Closes the filter dialog window.
+     */
+    @FXML
+    public void handleClose() {
+        closeDialog();
     }
     
     private void resetFilters() {
@@ -85,18 +71,6 @@ public class PropertyFilterController {
         bedroomsCombo.setValue(null);
         bedsCombo.setValue(null);
         bathroomsCombo.setValue(null);
-        
-        // Reset property type buttons
-        resetButtonStyle(typeApartmentButton);
-        resetButtonStyle(typeHouseButton);
-        resetButtonStyle(typeVillaButton);
-        resetButtonStyle(typeChaletButton);
-        
-    }
-    
-    private void resetButtonStyle(Button button) {
-        button.setStyle("-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 20;");
-        button.setTextFill(javafx.scene.paint.Color.BLACK);
     }
     
     private void applyFilters() {
@@ -113,7 +87,8 @@ public class PropertyFilterController {
     }
     
     private void closeDialog() {
-        // Close the dialog
-        closeButton.getScene().getWindow().hide();
+        // Close the dialog using the scene from any remaining component
+        Stage stage = (Stage) resetButton.getScene().getWindow();
+        stage.close();
     }
 }

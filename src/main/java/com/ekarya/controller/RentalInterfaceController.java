@@ -6,29 +6,30 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class PropertyDashboardController {
+public class RentalInterfaceController {
 
     @FXML
-    private VBox propertiesContainer;
+    private VBox rentedHomesContainer;
 
     @FXML
     private VBox notificationsContainer;
 
     @FXML
-    private Button addPropertyButton;
+    private Button searchPropertiesButton;
 
     @FXML
-    private Button editButton;
-
-    @FXML
-    private Button deleteButton;
+    private Button reviewButton;
 
     @FXML
     private Text propertyTitle;
@@ -72,6 +73,15 @@ public class PropertyDashboardController {
     @FXML
     private Text descriptionText;
 
+    @FXML
+    private HBox ratingStarsContainer;
+
+    @FXML
+    private TextArea commentsField;
+
+    private int currentRating = 3; // Default rating (3 stars)
+    private List<Button> ratingStars = new ArrayList<>();
+
     /**
      * Initializes the controller class. This method is automatically called
      * after the FXML file has been loaded.
@@ -79,7 +89,8 @@ public class PropertyDashboardController {
     @FXML
     private void initialize() {
         // Initialize the controller, load data, etc.
-        loadPropertyData();
+        loadRentalData();
+        setupRatingStars();
     }
 
     /**
@@ -93,7 +104,7 @@ public class PropertyDashboardController {
             Parent homePageRoot = loader.load();
             
             // Get the current stage
-            Stage stage = (Stage) addPropertyButton.getScene().getWindow();
+            Stage stage = (Stage) searchPropertiesButton.getScene().getWindow();
             
             // Set the home page scene
             Scene scene = new Scene(homePageRoot);
@@ -106,10 +117,10 @@ public class PropertyDashboardController {
     }
 
     /**
-     * Loads property details when a property is selected from the list
+     * Loads rental details when a property is selected from the list
      */
     @FXML
-    private void loadPropertyDetails(ActionEvent event) {
+    private void loadRentalDetails(ActionEvent event) {
         // Get the source button that was clicked
         Button clickedButton = (Button) event.getSource();
         
@@ -126,83 +137,104 @@ public class PropertyDashboardController {
     }
 
     /**
-     * Handles adding a new property
+     * Handles searching for more properties
      */
     @FXML
-    private void handleAddProperty(ActionEvent event) {
+    private void handleSearchProperties(ActionEvent event) {
         try {
-            // Load the add property form FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ekarya/view/AddPropertyForm.fxml"));
-            Parent addPropertyRoot = loader.load();
+            // Load the search properties form FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ekarya/view/SearchProperties.fxml"));
+            Parent searchPropertiesRoot = loader.load();
             
             // Get the current stage
-            Stage stage = (Stage) addPropertyButton.getScene().getWindow();
+            Stage stage = (Stage) searchPropertiesButton.getScene().getWindow();
             
-            // Set the add property form scene
-            Scene scene = new Scene(addPropertyRoot);
+            // Set the search properties form scene
+            Scene scene = new Scene(searchPropertiesRoot);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            System.err.println("Error loading AddPropertyForm.fxml: " + e.getMessage());
+            System.err.println("Error loading SearchProperties.fxml: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     /**
-     * Handles editing the currently selected property
+     * Handles submitting a review for the property
      */
     @FXML
-    private void handleEditProperty(ActionEvent event) {
-        try {
-            // Load the edit property form FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ekarya/view/EditPropertyForm.fxml"));
-            Parent editPropertyRoot = loader.load();
-            
-            // Get the controller and pass the current property data
-            // EditPropertyFormController controller = loader.getController();
-            // controller.setPropertyData(currentPropertyData);
-            
-            // Get the current stage
-            Stage stage = (Stage) editButton.getScene().getWindow();
-            
-            // Set the edit property form scene
-            Scene scene = new Scene(editPropertyRoot);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            System.err.println("Error loading EditPropertyForm.fxml: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Handles deleting the currently selected property
-     */
-    @FXML
-    private void handleDeleteProperty(ActionEvent event) {
+    private void handleSubmitReview(ActionEvent event) {
+        String comments = commentsField.getText();
+        
         // In a real application, you would:
-        // 1. Show a confirmation dialog
-        // 2. Delete the property from your data model or database if confirmed
-        // 3. Update the UI to reflect the deletion
+        // 1. Validate the input
+        // 2. Submit the review to your data model or database
+        // 3. Show a confirmation message
         
-        System.out.println("Delete property functionality would be implemented here");
+        System.out.println("Submitting review with rating: " + currentRating + " and comments: " + comments);
         
-        // For demonstration purposes, we'll just clear the property details
-        propertyTitle.setText("Property Details");
-        titleText.setText("");
-        locationText.setText("");
-        priceText.setText("");
-        guestsText.setText("");
-        bedroomsText.setText("");
-        bedsText.setText("");
-        bathroomsText.setText("");
-        descriptionText.setText("");
+        // Clear the comments field after submission
+        commentsField.clear();
+        
+        // Show a confirmation message (in a real app, you might use a dialog)
+        // For now, we'll just update the button text temporarily
+        reviewButton.setText("Review Submitted!");
+        
+        // Reset the button text after a delay
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+                javafx.application.Platform.runLater(() -> {
+                    reviewButton.setText("Submit Review");
+                });
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     /**
-     * Loads sample property data for demonstration purposes
+     * Sets up the rating stars with click handlers
      */
-    private void loadPropertyData() {
+    private void setupRatingStars() {
+        // Clear any existing stars
+        ratingStarsContainer.getChildren().clear();
+        ratingStars.clear();
+        
+        // Create 5 star buttons
+        for (int i = 1; i <= 5; i++) {
+            final int rating = i;
+            Button starButton = new Button("★");
+            starButton.setStyle("-fx-background-color: transparent; -fx-text-fill: " + 
+                               (i <= currentRating ? "gold" : "#cccccc") + ";");
+            
+            starButton.setOnAction(event -> {
+                setRating(rating);
+            });
+            
+            ratingStars.add(starButton);
+            ratingStarsContainer.getChildren().add(starButton);
+        }
+    }
+
+    /**
+     * Sets the rating and updates the star display
+     */
+    private void setRating(int rating) {
+        currentRating = rating;
+        
+        // Update star colors
+        for (int i = 0; i < ratingStars.size(); i++) {
+            Button star = ratingStars.get(i);
+            star.setStyle("-fx-background-color: transparent; -fx-text-fill: " + 
+                         (i < rating ? "gold" : "#cccccc") + ";");
+        }
+    }
+
+    /**
+     * Loads sample rental data for demonstration purposes
+     */
+    private void loadRentalData() {
         // In a real application, you would load this data from a database or service
         // This is just for demonstration purposes
         

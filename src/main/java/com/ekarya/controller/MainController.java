@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -88,9 +89,34 @@ public class MainController {
     }
 
     @FXML
-    void ToDashBoard(ActionEvent event) {
-        loadView("/fxml/Dashboard.fxml", "Dashboard");
+    void ToDashBoard(ActionEvent event)
+    {
+            MenuItem menuItem = (MenuItem) event.getSource();
+            Scene scene = menuItem.getParentPopup().getOwnerWindow().getScene();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Dashboard.fxml"));
+                Parent root = loader.load();
+                scene.setRoot(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
+    
+    @FXML
+    void ToBookings(ActionEvent event)
+    {
+            MenuItem menuItem = (MenuItem) event.getSource();
+            Scene scene = menuItem.getParentPopup().getOwnerWindow().getScene();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rentall.fxml"));
+                Parent root = loader.load();
+                scene.setRoot(root);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+
+    
 
     @FXML
     void ToProfile(ActionEvent event) {
