@@ -67,6 +67,7 @@ public class RoomDetailController {
             Scene scene = new Scene(homePageRoot);
             stage.setScene(scene);
             stage.show();
+            stage.setFullScreen(true);
         } catch (IOException e) {
             System.err.println("Error loading HomePage.fxml: " + e.getMessage());
             e.printStackTrace();

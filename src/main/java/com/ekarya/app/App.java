@@ -16,6 +16,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
         stage.setTitle("E-karya");
+        stage.setFullScreen(true);
 
     }
 
