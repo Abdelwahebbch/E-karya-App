@@ -137,7 +137,7 @@ public class PropertyDashboardController {
     @FXML
     private void loadPropertyDetails(ActionEvent event) {
         // Get the source button that was clicked
-        Button clickedButton = (Button) event.getSource();
+        //Button clickedButton = (Button) event.getSource();
         
         // Extract property information from the button or its data
         // This is a simplified example - in a real app, you would get the property ID
