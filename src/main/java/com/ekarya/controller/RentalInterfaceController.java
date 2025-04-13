@@ -99,12 +99,15 @@ public class RentalInterfaceController {
     @FXML
     private void handleBackToHome(ActionEvent event) {
         try {
+            // Get the source of the event instead of using searchPropertiesButton
+            Button sourceButton = (Button) event.getSource();
+            
             // Load the home page FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomePage.fxml"));
             Parent homePageRoot = loader.load();
             
-            // Get the current stage
-            Stage stage = (Stage) searchPropertiesButton.getScene().getWindow();
+            // Get the current stage using the source button
+            Stage stage = (Stage) sourceButton.getScene().getWindow();
             
             // Set the home page scene
             Scene scene = new Scene(homePageRoot);
@@ -137,28 +140,7 @@ public class RentalInterfaceController {
         // and update all the fields with the property's information
     }
 
-    /**
-     * Handles searching for more properties
-     */
-    @FXML
-    private void handleSearchProperties(ActionEvent event) {
-        try {
-            // Load the search properties form FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ekarya/view/SearchProperties.fxml"));
-            Parent searchPropertiesRoot = loader.load();
-            
-            // Get the current stage
-            Stage stage = (Stage) searchPropertiesButton.getScene().getWindow();
-            
-            // Set the search properties form scene
-            Scene scene = new Scene(searchPropertiesRoot);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            System.err.println("Error loading SearchProperties.fxml: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+
 
     /**
      * Handles submitting a review for the property

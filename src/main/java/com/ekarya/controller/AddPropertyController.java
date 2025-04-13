@@ -1,7 +1,13 @@
 package com.ekarya.controller;
 
+import java.io.IOException;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -69,14 +75,25 @@ public class AddPropertyController {
     @FXML
     private TextField titleField;
 
-    @FXML
-    void handleCloseButton(MouseEvent event) {
-        // Get the current stage from the event source
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-
-        // Close the stage
-        stage.close();
+        @FXML
+    private void handleBackToDashboard(ActionEvent event) {
+        try {
+            // Load the home page FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Dashboard.fxml"));
+            Parent homePageRoot = loader.load();
+            
+            // Get the current stage
+            Stage stage = (Stage) submitButton.getScene().getWindow();
+            
+            // Set the home page scene
+            Scene scene = new Scene(homePageRoot);
+            stage.setScene(scene);
+            stage.show();
+            stage.setFullScreen(true);
+        } catch (IOException e) {
+            System.err.println("Error loading Dashboard.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }

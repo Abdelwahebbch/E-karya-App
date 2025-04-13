@@ -79,7 +79,7 @@
                 </ScrollPane>
                 
                 <!-- Add Property Button -->
-                <Button fx:id="addPropertyButton" maxWidth="Infinity" onAction="#handleAddProperty" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 12 16;">
+                <Button fx:id="addPropertyButton" maxWidth="Infinity" onAction="#ToAddHome" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 12 16;">
                     <graphic>
                         <HBox alignment="CENTER" spacing="8">
                             <SVGPath content="M12 4v16m8-8H4" fill="transparent" stroke="WHITE" strokeWidth="2" />

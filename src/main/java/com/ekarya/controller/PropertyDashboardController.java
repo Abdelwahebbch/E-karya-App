@@ -107,6 +107,31 @@ public class PropertyDashboardController {
     }
 
     /**
+     * Switches the interface to the home page
+     * This method can be called from anywhere to navigate to the home page
+     */
+    @FXML
+    public void ToAddHome() {
+        try {
+            // Load the home page FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addHome.fxml"));
+            Parent homePageRoot = loader.load();
+            
+            // Get the current stage
+            Stage stage = (Stage) addPropertyButton.getScene().getWindow();
+            
+            // Set the home page scene
+            Scene scene = new Scene(homePageRoot);
+            stage.setScene(scene);
+            stage.show();
+            stage.setFullScreen(true);
+        } catch (IOException e) {
+            System.err.println("Error loading HomePage.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Loads property details when a property is selected from the list
      */
     @FXML

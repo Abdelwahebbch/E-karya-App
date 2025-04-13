@@ -43,7 +43,7 @@
         <left>
             <VBox prefWidth="250" spacing="10" style="-fx-background-color: #FFFFFF; -fx-padding: 20;">
                 <!-- Properties List Title -->
-                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: 800; -fx-fill: #000000;" text="My Rentals" />
+                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: 800; -fx-fill: #000000;" text="My Bookings" />
                 
                 <!-- Properties List -->
                 <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
@@ -78,16 +78,6 @@
                         </Button>
                     </VBox>
                 </ScrollPane>
-                
-                <!-- Search for more properties Button -->
-                <Button fx:id="searchPropertiesButton" maxWidth="Infinity" onAction="#handleSearchProperties" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 12 16;">
-                    <graphic>
-                        <HBox alignment="CENTER" spacing="8">
-                            <SVGPath content="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="transparent" stroke="WHITE" strokeWidth="2" />
-                            <Text fill="WHITE" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Search for Properties" />
-                        </HBox>
-                    </graphic>
-                </Button>
             </VBox>
         </left>
         
@@ -200,7 +190,7 @@
                     <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
                         <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Rating and Comments" />
                         
-                        <HBox spacing="10" alignment="CENTER_LEFT">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
                             <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Rating:" />
                             <HBox fx:id="ratingStarsContainer" spacing="5">
                                 <!-- Stars will be added dynamically -->
@@ -212,7 +202,7 @@
                             </HBox>
                         </HBox>
                         
-                        <TextArea fx:id="commentsField" promptText="Write your comments here..." prefHeight="100" style="-fx-border-color: #E0E0E0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-family: 'Montserrat';" />
+                        <TextArea fx:id="commentsField" prefHeight="100" promptText="Write your comments here..." style="-fx-border-color: #E0E0E0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-family: 'Montserrat';" />
                         
                         <!-- Submit Review Button -->
                         <HBox alignment="CENTER_RIGHT">
