@@ -79,6 +79,21 @@ public class PropertyDetailController {
      */
     @FXML
     private void handleBooking(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BookingConfirmation.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) bookButton.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            stage.setFullScreen(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception appropriately, perhaps show an error dialog
+        }
+        /*  zid logique mta3 mou9arent datet w ychouf dar fer8a fl wa9t adheka w 3dad  lkareya 
+        
         // Get the selected dates and number of guests
         LocalDate checkInDate = checkInDatePicker.getValue();
         LocalDate checkOutDate = checkOutDatePicker.getValue();
@@ -133,7 +148,7 @@ public class PropertyDetailController {
         } catch (IOException e) {
             System.err.println("Error loading BookingConfirmation.fxml: " + e.getMessage());
             e.printStackTrace();
-        }
+        }*/
     }
     
     /**

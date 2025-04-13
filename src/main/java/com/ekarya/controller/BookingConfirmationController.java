@@ -1,5 +1,6 @@
 package com.ekarya.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -92,18 +93,23 @@ public class BookingConfirmationController {
      * Handles the action when the home button is clicked.
      */
     @FXML
-    private void handleHome() {
+    private void handleBackToHome(ActionEvent event) {
         try {
+            // Load the home page FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) homeButton.getScene().getWindow();
-            Scene scene = new Scene(root);
+            Parent homePageRoot = loader.load();
+            
+            // Get the current stage
+            Stage stage = (Stage) viewBookingsButton.getScene().getWindow();
+            
+            // Set the home page scene
+            Scene scene = new Scene(homePageRoot);
             stage.setScene(scene);
             stage.show();
+            stage.setFullScreen(true);
         } catch (IOException e) {
+            System.err.println("Error loading HomePage.fxml: " + e.getMessage());
             e.printStackTrace();
-            // Handle the exception appropriately, perhaps show an error dialog
         }
     }
 
@@ -120,6 +126,7 @@ public class BookingConfirmationController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+            stage.setFullScreen(true);
         } catch (IOException e) {
             e.printStackTrace();
             // Handle the exception appropriately, perhaps show an error dialog

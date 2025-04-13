@@ -22,9 +22,15 @@
             <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 20; -fx-font-weight: 700; -fx-fill: #000000;" text="E-Karya" />
         </HBox>
         
-        <Button fx:id="homeButton" onAction="#handleHome" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-size: 14;" text="Return to Home" />
-        
         <Region HBox.hgrow="ALWAYS" />
+        <Button onAction="#handleBackToHome" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 8 16;">
+            <graphic>
+                <HBox alignment="CENTER" spacing="8">
+                    <SVGPath content="M19 12H5M12 19l-7-7 7-7" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                    <Text fill="WHITE" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Back to Home" />
+                </HBox>
+            </graphic>
+        </Button>
     </HBox>
     
     <!-- Confirmation Content -->
@@ -64,17 +70,12 @@
                   text="Total Price: 594 €" />
         </VBox>
         
-        <!-- Action Buttons -->
-        <HBox alignment="CENTER" spacing="16" style="-fx-padding: 16 0 0 0;">
+        <!-- Action Button (Centered) -->
+        <VBox alignment="CENTER" style="-fx-padding: 16 0 0 0;">
             <Button fx:id="viewBookingsButton" onAction="#handleViewBookings" 
                     style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-font-weight: 600; -fx-padding: 12 24; -fx-background-radius: 8;">
                 <text>View My Bookings</text>
             </Button>
-            
-            <Button fx:id="homeButton2" onAction="#handleHome" 
-                    style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-text-fill: #000000; -fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-font-weight: 600; -fx-padding: 12 24; -fx-background-radius: 8; -fx-border-radius: 8;">
-                <text>Return to Home</text>
-            </Button>
-        </HBox>
+        </VBox>
     </VBox>
 </VBox>
