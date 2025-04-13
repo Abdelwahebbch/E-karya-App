@@ -40,6 +40,9 @@ public class MainController extends BaseController implements Initializable {
     private MenuButton profileMenu;
     
     @FXML
+    private MenuItem profileMenuItem;
+    
+    @FXML
     private MenuItem settingsMenuItem;
     
     @FXML
@@ -352,6 +355,26 @@ public class MainController extends BaseController implements Initializable {
     }
     
     /**
+     * Handles profile menu item click
+     */
+    @FXML
+    public void handleProfile(ActionEvent event) {
+        System.out.println("Profile button clicked"); // Add this for debugging
+        try {
+            // For testing, show an alert first
+            showAlert("Navigation", "Attempting to navigate to profile page...");
+            
+            // Then try to navigate
+            navigateTo(SceneManager.AppScene.USER_PROFILE);
+        } catch (Exception e) {
+            System.err.println("Error loading user profile: " + e.getMessage());
+            e.printStackTrace();
+            showError("Could not open user profile: " + e.getMessage());
+        }
+    }
+    
+    
+    /**
      * Handles settings menu item click
      */
     @FXML
@@ -370,6 +393,7 @@ public class MainController extends BaseController implements Initializable {
         // Navigate to login screen
         navigateTo(SceneManager.AppScene.LOGIN);
     }
+    
     
     /**
      * Inner class to represent a property listing

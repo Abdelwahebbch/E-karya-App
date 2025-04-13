@@ -1,109 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="600" minHeight="600" prefHeight="600" spacing="10" 
-      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="com.ekarya.controller.UserProfileController">
-    
-    <!-- Top Navigation Bar -->
-    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 10;">
-        <ImageView fitHeight="40" fitWidth="40">
-            <Image url="@logo.png" />
-        </ImageView>
-        
-        <Button fx:id="homeButton" onAction="#handleHome" style="-fx-background-color: transparent;" text="Return to Home" />
-    </HBox>
-    
-    <HBox spacing="20" style="-fx-padding: 20;">
-        <!-- Profile Image and Basic Info -->
-        <VBox alignment="TOP_CENTER" spacing="15" style="-fx-min-width: 200;">
-            <ImageView fitHeight="150" fitWidth="150" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
-                <Image url="@user-avatar.png" />
-            </ImageView>
-            
-            <Text fx:id="userNameText" style="-fx-font-size: 18; -fx-font-weight: bold;" text="John Doe" />
-            <Text fx:id="userEmailText" text="john.doe@example.com" />
-            <Text fx:id="memberSinceText" text="Member since: Jan 2023" />
-            
-            <Button fx:id="editProfileButton" onAction="#handleEditProfile" style="-fx-background-color: transparent; -fx-border-color: #ddd;" text="Edit Profile" />
-        </VBox>
-        
-        <!-- Tabs for different sections -->
-        <TabPane style="-fx-min-width: 400;" tabClosingPolicy="UNAVAILABLE">
-            <Tab text="My Bookings">
-                <VBox spacing="10" style="-fx-padding: 10;">
-                    <Text style="-fx-font-size: 16; -fx-font-weight: bold;" text="Your Bookings" />
-                    
-                    <!-- This would be a ListView or similar in a real app -->
-                    <VBox style="-fx-background-color: #f8f8f8; -fx-padding: 10; -fx-background-radius: 5;">
-                        <Text style="-fx-font-weight: bold;" text="Appartement cosy au cœur de Paris" />
-                        <Text text="Mar 1 - Mar 6, 2025" />
-                        <Text text="Status: Confirmed" />
-                        <Button onAction="#handleViewBookingDetails" style="-fx-background-color: transparent; -fx-text-fill: #FF385C;" text="View Details" />
-                    </VBox>
-                    
-                    <VBox style="-fx-background-color: #f8f8f8; -fx-padding: 10; -fx-background-radius: 5;">
-                        <Text style="-fx-font-weight: bold;" text="Luxury Villa in Nice" />
-                        <Text text="Apr 15 - Apr 20, 2025" />
-                        <Text text="Status: Pending" />
-                        <Button onAction="#handleViewBookingDetails" style="-fx-background-color: transparent; -fx-text-fill: #FF385C;" text="View Details" />
-                    </VBox>
-                </VBox>
-            </Tab>
-            
-            <Tab text="My Listings">
-                <VBox spacing="10" style="-fx-padding: 10;">
-                    <Text style="-fx-font-size: 16; -fx-font-weight: bold;" text="Your Properties" />
-                    
-                    <Button onAction="#handleAddNewListing" style="-fx-background-color: #FF385C; -fx-text-fill: white;" text="Add New Property" />
-                    
-                    <!-- This would be a ListView or similar in a real app -->
-                    <VBox style="-fx-background-color: #f8f8f8; -fx-padding: 10; -fx-background-radius: 5;">
-                        <Text style="-fx-font-weight: bold;" text="Modern Apartment in Lyon" />
-                        <Text text="Status: Active" />
-                        <HBox spacing="10">
-                            <Button onAction="#handleEditListing" style="-fx-background-color: transparent; -fx-text-fill: #FF385C;" text="Edit" />
-                            <Button onAction="#handleViewBookings" style="-fx-background-color: transparent; -fx-text-fill: #FF385C;" text="View Bookings" />
-                        </HBox>
-                    </VBox>
-                </VBox>
-            </Tab>
-            
-            <Tab text="Account Settings">
-                <VBox spacing="15" style="-fx-padding: 10;">
-                    <Text style="-fx-font-size: 16; -fx-font-weight: bold;" text="Account Settings" />
-                    
-                    <VBox spacing="5">
-                        <Text text="Email" />
-                        <TextField fx:id="emailSettingField" text="john.doe@example.com" />
-                    </VBox>
-                    
-                    <VBox spacing="5">
-                        <Text text="Phone Number" />
-                        <TextField fx:id="phoneSettingField" text="+33 6 12 34 56 78" />
-                    </VBox>
-                    
-                    <VBox spacing="5">
-                        <Text text="Language" />
-                        <TextField fx:id="languageSettingField" text="English" />
-                    </VBox>
-                    
-                    <Button onAction="#handleSaveSettings" style="-fx-background-color: #FF385C; -fx-text-fill: white;" text="Save Changes" />
-                    
-                    <Button onAction="#handleChangePassword" style="-fx-background-color: transparent; -fx-border-color: #ddd;" text="Change Password" />
-                    
-                    <Button onAction="#handleLogout" style="-fx-background-color: transparent; -fx-border-color: #ddd;" text="Logout" />
-                </VBox>
-            </Tab>
-        </TabPane>
-    </HBox>
-</VBox>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.UserProfileController">
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 12 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 4); -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;">
+         <children>
+            <HBox alignment="CENTER" spacing="8">
+               <children>
+                  <Circle fill="BLACK" radius="16.0" />
+                  <Label style="-fx-font-family: 'Montserrat'; -fx-font-size: 20; -fx-font-weight: 700;" text="E-Karya" />
+               </children>
+            </HBox>
+            <Button fx:id="backButton" onAction="#handleBack" style="-fx-background-color: transparent;" text="Back to Home" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Circle fill="#e0e0e0" radius="60.0" stroke="#cccccc" strokeWidth="1.0" />
+            <Label text="User Profile">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #e0e0e0; -fx-padding: 20;">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label prefWidth="100.0" text="Name:" />
+                        <Label text="John Doe" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label prefWidth="100.0" text="Email:" />
+                        <Label text="john.doe@example.com" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label prefWidth="100.0" text="Phone:" />
+                        <Label text="+33 6 12 34 56 78" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label prefWidth="100.0" text="Address:" />
+                        <Label text="123 Rue de Paris, 75001 Paris, France" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button mnemonicParsing="false" style="-fx-background-color: black; -fx-text-fill: white;" text="Edit Profile" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

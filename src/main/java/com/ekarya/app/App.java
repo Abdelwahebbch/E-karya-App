@@ -13,7 +13,7 @@ public class App extends Application {
             
             // Switch to the login scene (or whichever scene you want to start with)
             // You can change this to any scene you want to start with
-            SceneManager.getInstance().switchToScene(SceneManager.AppScene.HOME, false);
+            SceneManager.getInstance().switchToScene(SceneManager.AppScene.LOGIN, false);
             
             // Show the stage
             stage.show();
