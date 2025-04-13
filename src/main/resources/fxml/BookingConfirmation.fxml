@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="600" minHeight="600" prefHeight="600" spacing="0" style="-fx-background-color: #FFFFFF;" 
+      xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.ekarya.controller.BookingConfirmationController">
+      
+    <!-- Modern Top Navigation Bar -->
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 12 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 4); -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;">
+        <HBox alignment="CENTER" spacing="8">
+            <Circle fill="#000000" radius="16" />
+            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 20; -fx-font-weight: 700; -fx-fill: #000000;" text="E-Karya" />
+        </HBox>
+        
+        <Button fx:id="homeButton" onAction="#handleHome" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-size: 14;" text="Return to Home" />
+        
+        <Region HBox.hgrow="ALWAYS" />
+    </HBox>
+    
+    <!-- Confirmation Content -->
+    <VBox alignment="CENTER" spacing="24" style="-fx-padding: 40 24;">
+        <!-- Confirmation Icon -->
+        <Circle fill="#E8F5E9" radius="50">
+            <VBox.margin>
+                <Insets bottom="10" />
+            </VBox.margin>
+        </Circle>
+        
+        <SVGPath content="M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4 12 14.01l-3-3" 
+                 fill="transparent" stroke="#4CAF50" strokeWidth="2.5" 
+                 translateX="-50" translateY="-90" />
+        
+        <!-- Confirmation Message -->
+        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 28; -fx-font-weight: 800; -fx-fill: #000000;" text="Booking Confirmed!" />
+        
+        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 16; -fx-fill: #555555; -fx-text-alignment: center;" 
+              text="Thank you for your booking. We've sent a confirmation email with all the details." 
+              wrappingWidth="400" />
+        
+        <!-- Booking Details Card -->
+        <VBox alignment="CENTER_LEFT" spacing="12" style="-fx-background-color: #f8f8f8; -fx-padding: 24; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
+            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 16; -fx-font-weight: 700; -fx-fill: #000000;" text="Booking Details" />
+            
+            <Text fx:id="propertyNameText" style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #000000;" 
+                  text="Appartement cosy au cœur de Paris" />
+                  
+            <Text fx:id="datesText" style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #555555;" 
+                  text="Check-in: Mar 1, 2025 | Check-out: Mar 6, 2025" />
+                  
+            <Text fx:id="guestsText" style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #555555;" 
+                  text="Guests: 2 adults" />
+                  
+            <Text fx:id="totalPriceText" style="-fx-font-family: 'Montserrat'; -fx-font-weight: 700; -fx-font-size: 14; -fx-fill: #000000;" 
+                  text="Total Price: 594 €" />
+        </VBox>
+        
+        <!-- Action Buttons -->
+        <HBox alignment="CENTER" spacing="16" style="-fx-padding: 16 0 0 0;">
+            <Button fx:id="viewBookingsButton" onAction="#handleViewBookings" 
+                    style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-font-weight: 600; -fx-padding: 12 24; -fx-background-radius: 8;">
+                <text>View My Bookings</text>
+            </Button>
+            
+            <Button fx:id="homeButton2" onAction="#handleHome" 
+                    style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-text-fill: #000000; -fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-font-weight: 600; -fx-padding: 12 24; -fx-background-radius: 8; -fx-border-radius: 8;">
+                <text>Return to Home</text>
+            </Button>
+        </HBox>
+    </VBox>
+</VBox>
