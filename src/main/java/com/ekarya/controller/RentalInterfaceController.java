@@ -103,7 +103,7 @@ public class RentalInterfaceController {
             Button sourceButton = (Button) event.getSource();
             
             // Load the home page FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
             Parent homePageRoot = loader.load();
             
             // Get the current stage using the source button

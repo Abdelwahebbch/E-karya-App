@@ -51,7 +51,7 @@ public class MainController {
     @FXML
     public void handleListingClick(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/propretyDesc.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/PropertyDetail.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setFullScreen(true);
@@ -64,7 +64,7 @@ public class MainController {
     private void handleFilterClick() {
         try {
             // Load the filter FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/propertyFilter.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropertyFilter.fxml"));
             Parent root = loader.load();
 
             // Create a new stage for the filter dialog
@@ -95,7 +95,7 @@ public class MainController {
             MenuItem menuItem = (MenuItem) event.getSource();
             Scene scene = menuItem.getParentPopup().getOwnerWindow().getScene();
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Dashboard.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropretyDashboard.fxml"));
                 Parent root = loader.load();
                 scene.setRoot(root);
             } catch (IOException e) {
@@ -109,7 +109,7 @@ public class MainController {
             MenuItem menuItem = (MenuItem) event.getSource();
             Scene scene = menuItem.getParentPopup().getOwnerWindow().getScene();
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rentall.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RentalInterface.fxml"));
                 Parent root = loader.load();
                 scene.setRoot(root);
             } catch (IOException e) {
@@ -121,7 +121,7 @@ public class MainController {
 
     @FXML
     void ToProfile(ActionEvent event) {
-        loadView("/fxml/profile.fxml", "Profile");
+        loadView("/fxml/ProfileManager.fxml", "Profile");
     }
     
     // Helper methods

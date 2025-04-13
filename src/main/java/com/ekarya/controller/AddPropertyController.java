@@ -79,7 +79,7 @@ public class AddPropertyController {
     private void handleBackToDashboard(ActionEvent event) {
         try {
             // Load the home page FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Dashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropretyDashboard.fxml"));
             Parent homePageRoot = loader.load();
             
             // Get the current stage

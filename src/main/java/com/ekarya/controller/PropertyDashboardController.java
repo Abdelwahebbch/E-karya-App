@@ -89,7 +89,7 @@ public class PropertyDashboardController {
     private void handleBackToHome(ActionEvent event) {
         try {
             // Load the home page FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
             Parent homePageRoot = loader.load();
             
             // Get the current stage
@@ -114,7 +114,7 @@ public class PropertyDashboardController {
     public void ToAddHome() {
         try {
             // Load the home page FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addHome.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddProprety.fxml"));
             Parent homePageRoot = loader.load();
             
             // Get the current stage

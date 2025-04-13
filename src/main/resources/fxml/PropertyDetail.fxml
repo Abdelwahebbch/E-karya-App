@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="600" minHeight="600" prefHeight="600" spacing="0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.RoomDetailController">
+<VBox maxHeight="600" minHeight="600" prefHeight="600" spacing="0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.PropertyDetailController">
     <!-- Modern Top Navigation Bar -->
     <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 12 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 4); -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;">
         <HBox alignment="CENTER" spacing="8">
