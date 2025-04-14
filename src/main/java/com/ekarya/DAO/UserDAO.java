@@ -10,10 +10,10 @@ import com.ekarya.Models.User;
 import com.ekarya.utile.DatabaseConnection;
 
 public class UserDAO {
-    private final DatabaseConnection dbConnection;
+  //  private final DatabaseConnection dbConnection;
 
     public UserDAO() {
-        this.dbConnection = new DatabaseConnection();
+       // this.dbConnection = new DatabaseConnection();
     }
 
     public User createUser(String fullName, String phoneNumber, String email, String password) {
@@ -27,7 +27,7 @@ public class UserDAO {
         String query = "INSERT INTO users (id, fullname, phone_number, email, password) " +
                 "VALUES (user_id_seq.NEXTVAL, ?, ?, ?, ?)";
 
-        try (Connection conn = dbConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, fullName);
@@ -61,7 +61,7 @@ public class UserDAO {
         // SQL syntax error: "when" should be "where"
         String query = "SELECT email, password, ID FROM users WHERE email = ? AND password = ?";
 
-        try (Connection conn = dbConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, email);
