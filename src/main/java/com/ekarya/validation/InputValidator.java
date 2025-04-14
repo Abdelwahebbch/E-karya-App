@@ -7,7 +7,11 @@ public class InputValidator
 {
     public static boolean isValidFullName(String fullName)
     {
-        String fullNamePattern="^(9[0-9]|5[0-9]|2[0-9])([0-9]{6})$";
+        if (fullName == null || fullName.isEmpty()) 
+        {
+            return false;
+        }
+        String fullNamePattern="^[A-Z][a-z]+(?: [A-Z][a-z]+)+$";
         Pattern pattern = Pattern.compile(fullNamePattern);
         Matcher matcher = pattern.matcher(fullName);
         if (matcher.matches()) 
@@ -37,7 +41,7 @@ public class InputValidator
     }
     public static boolean isValidPassword(String password)
     {
-        String passwordPattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[@$!%*?&])[A-Za-z\\\\d@$!%*?&]{8,}$";
+        String passwordPattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
         Pattern pattern = Pattern.compile(passwordPattern);
         Matcher matcher = pattern.matcher(password);
         if (matcher.matches()) 

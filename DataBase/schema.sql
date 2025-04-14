@@ -7,6 +7,11 @@ create table users (
    birthday     date,
    bio          varchar(2000)
 );
+CREATE SEQUENCE user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
 
 -- create table properties (
 --    id                int primary key,
