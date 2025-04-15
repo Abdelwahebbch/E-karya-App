@@ -2,6 +2,9 @@ package com.ekarya.controller;
 
 import java.io.IOException;
 
+import com.ekarya.DAO.UserDAO;
+import com.ekarya.Models.User;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,29 +22,44 @@ public class SignInController {
 
     @FXML
     private PasswordField passwordField;
-    
+
     @FXML
     private Label errorLabel;
 
     @FXML
-    void handleSignIn(ActionEvent event) {
-        // Get the values from the fields
+    private void handleSignIn(ActionEvent event) {
         String email = emailField.getText();
         String password = passwordField.getText();
-        
-        // Validate the input
+        UserDAO userDAO = new UserDAO();
+
         if (email.isEmpty() || password.isEmpty()) {
-            showError("Email and password are required");
+            errorLabel.setText("Email and password cannot be empty");
             return;
         }
-        
-        // TODO: Add your sign-in logic here
-        // For example, authenticate the user against your database
-        
-        // For now, just show a success message
-        // You can navigate to a dashboard or home page after successful login
-        // Example:
-        // navigateToDashboard(event);
+
+        User user = userDAO.VerifUser(email, password);
+
+        if (user != null) {
+            try {
+                // Load the main scene
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+                Parent mainRoot = loader.load();
+                Stage stage = (Stage) emailField.getScene().getWindow();
+
+                // Set the new scene
+                Scene mainScene = new Scene(mainRoot);
+                stage.setScene(mainScene);
+                stage.setTitle("Main Application");
+                stage.setFullScreen(true);
+                stage.show();
+
+            } catch (IOException e) {
+                errorLabel.setText("Error loading main scene: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            showError("Invalid username or password ! ");
+        }
     }
 
     @FXML
@@ -56,7 +74,7 @@ public class SignInController {
             showError("Error navigating to sign up page: " + e.getMessage());
         }
     }
-    
+
     private void showError(String message) {
         if (errorLabel != null) {
             errorLabel.setText(message);
@@ -65,17 +83,20 @@ public class SignInController {
             System.err.println("Error: " + message);
         }
     }
-    
+
     // Example method for navigation after successful login
-   /* private void navigateToDashboard(ActionEvent event) {
-        try {
-            Parent dashboardRoot = FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
-            Scene dashboardScene = new Scene(dashboardRoot);
-            Stage stage = (Stage) emailField.getScene().getWindow();
-            stage.setScene(dashboardScene);
-            stage.setTitle("E-karya - Dashboard");
-        } catch (IOException e) {
-            showError("Error navigating to dashboard: " + e.getMessage());
-        }
-    }*/
+    /*
+     * private void navigateToDashboard(ActionEvent event) {
+     * try {
+     * Parent dashboardRoot =
+     * FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
+     * Scene dashboardScene = new Scene(dashboardRoot);
+     * Stage stage = (Stage) emailField.getScene().getWindow();
+     * stage.setScene(dashboardScene);
+     * stage.setTitle("E-karya - Dashboard");
+     * } catch (IOException e) {
+     * showError("Error navigating to dashboard: " + e.getMessage());
+     * }
+     * }
+     */
 }

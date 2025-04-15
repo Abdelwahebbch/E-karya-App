@@ -36,7 +36,7 @@
         <MenuItem onAction="#ToProfile" text="Profile" />
         <MenuItem onAction="#ToDashBoard" text="Dashboard" />
         <MenuItem onAction="#ToBookings" text="My Bookings" />
-            <MenuItem text="Logout" />
+            <MenuItem onAction="#handelLogOut" text="Logout" />
         </items>
     </MenuButton>
 </HBox>
