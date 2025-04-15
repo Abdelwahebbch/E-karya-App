@@ -21,6 +21,10 @@ public class InputValidator
     }
     public static boolean isValidEmail(String email)
     {
+        if (email == null || email.isEmpty()) 
+        {
+            return false;
+        }
         String emailPattern="^[A-Za-z0-9_.-]+@[A-Za-z0-9.-]+$";
         Pattern pattern = Pattern.compile(emailPattern);
         Matcher matcher = pattern.matcher(email);
@@ -31,6 +35,10 @@ public class InputValidator
     }
     public static boolean isValidPhoneNumber(String phoneNumber)
     {
+        if (phoneNumber == null || phoneNumber.isEmpty()) 
+        {
+            return false;
+        }
         String phoneNumberPattern="^(9[0-9]|5[0-9]|2[0-9])([0-9]{6})$";
         Pattern pattern = Pattern.compile(phoneNumberPattern);
         Matcher matcher = pattern.matcher(phoneNumber);
@@ -41,6 +49,10 @@ public class InputValidator
     }
     public static boolean isValidPassword(String password)
     {
+        if (password == null || password.isEmpty()) 
+        {
+            return false;
+        }
         String passwordPattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
         Pattern pattern = Pattern.compile(passwordPattern);
         Matcher matcher = pattern.matcher(password);
