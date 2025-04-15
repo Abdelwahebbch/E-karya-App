@@ -54,7 +54,6 @@ public class MainController {
     // Event handlers
     public void initData(User user) {
         this.currentUser = user;
-
     }
 
     @FXML

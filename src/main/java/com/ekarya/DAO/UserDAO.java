@@ -1,6 +1,7 @@
 package com.ekarya.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,10 +11,10 @@ import com.ekarya.Models.User;
 import com.ekarya.utile.DatabaseConnection;
 
 public class UserDAO {
-  //  private final DatabaseConnection dbConnection;
+    // private final DatabaseConnection dbConnection;
 
     public UserDAO() {
-       // this.dbConnection = new DatabaseConnection();
+        // this.dbConnection = new DatabaseConnection();
     }
 
     public User createUser(String fullName, String phoneNumber, String email, String password) {
@@ -51,14 +52,13 @@ public class UserDAO {
             }
         } catch (SQLException e) {
             System.err.println("Error creating user: " + e.getMessage());
-            return null; // Return null if there's an exception
+            return null;
         }
 
-        return u; // Return the user with the generated ID
+        return u;
     }
 
-    public User VerifUser(String email, String password) 
-    {
+    public User VerifUser(String email, String password) {
         String query = "SELECT * FROM users WHERE email = ? AND password = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -85,8 +85,53 @@ public class UserDAO {
             }
         } catch (SQLException e) {
             System.err.println("Error in the verifying process: " + e.getMessage());
-            return null; 
+            return null;
         }
     }
 
+    public User editUser(int id, String fullName, String email, String phoneNumber, Date birthDate, String bio) {
+        String updateQuery = "UPDATE users SET fullname = ?, email = ?, phone_number = ?, birthday = ?, bio = ? WHERE id = ?";
+        String selectQuery = "SELECT * FROM users WHERE id = ?";
+    
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
+             PreparedStatement selectStmt = conn.prepareStatement(selectQuery)) {
+    
+
+            updateStmt.setString(1, fullName);
+            updateStmt.setString(2, email);
+            updateStmt.setString(3, phoneNumber);
+            updateStmt.setDate(4, birthDate);
+            updateStmt.setString(5, bio);
+            updateStmt.setInt(6, id);
+    
+
+            int rowsUpdated = updateStmt.executeUpdate();
+    
+            if (rowsUpdated > 0) {
+                // If update was successful, fetch the updated user
+                selectStmt.setInt(1, id);
+                ResultSet selectResultSet = selectStmt.executeQuery();
+    
+                if (selectResultSet.next()) {
+                    User u = new User();
+                    u.setId(selectResultSet.getInt("id"));
+                    u.setFullname(selectResultSet.getString("fullname"));
+                    u.setPhoneNumber(selectResultSet.getString("phone_number"));
+                    u.setEmail(selectResultSet.getString("email"));
+                    u.setBirthday(selectResultSet.getDate("birthday"));
+                    u.setBio(selectResultSet.getString("bio"));
+                    u.setPassword(selectResultSet.getString("password")); 
+                    return u;
+                }
+            }
+    
+            return null;
+    
+        } catch (SQLException e) {
+            System.err.println("Error editing user: " + e.getMessage());
+            return null;
+        }
+    }
+    
 }

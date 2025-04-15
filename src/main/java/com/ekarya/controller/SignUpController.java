@@ -59,17 +59,17 @@ public class SignUpController {
             User user = userDAO.createUser(fullName, phoneNumber, email, password);
             if (user != null) {
                 try {
-                    // Load the main scene
+
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
                     Parent mainRoot = loader.load();
                     
                     MainController mainController = loader.getController();
                     mainController.initData(user);
      
-                    // Get current stage
+
                     Stage stage = (Stage) fullNameField.getScene().getWindow();
 
-                    // Set the new scene
+
                     Scene mainScene = new Scene(mainRoot);
                     stage.setScene(mainScene);
                     stage.setTitle("Main Application");

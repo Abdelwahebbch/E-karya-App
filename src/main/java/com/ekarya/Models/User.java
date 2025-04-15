@@ -1,6 +1,6 @@
 package com.ekarya.Models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class User {
     private int id;
