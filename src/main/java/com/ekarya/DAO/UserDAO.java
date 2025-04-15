@@ -133,5 +133,34 @@ public class UserDAO {
             return null;
         }
     }
+    public boolean changePassword(int userId, String currentPassword, String newPassword) {
+        String verifyQuery = "SELECT * FROM users WHERE id = ? AND password = ?";
+        String updateQuery = "UPDATE users SET password = ? WHERE id = ?";
+        
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement verifyStmt = conn.prepareStatement(verifyQuery);
+             PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
+    
+            // Verify if the current password matches
+            verifyStmt.setInt(1, userId);
+            verifyStmt.setString(2, currentPassword);
+            
+            ResultSet resultSet = verifyStmt.executeQuery();
+            if (resultSet.next()) {
+                // If current password is correct, update to the new password
+                updateStmt.setString(1, newPassword);
+                updateStmt.setInt(2, userId);
+                
+                int rowsUpdated = updateStmt.executeUpdate();
+                return rowsUpdated > 0; // Return true if password update was successful
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error changing password: " + e.getMessage());
+        }
+        
+        return false; // Return false if current password did not match or any other issue
+    }
+    
     
 }

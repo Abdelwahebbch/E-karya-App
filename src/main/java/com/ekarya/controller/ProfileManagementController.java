@@ -170,6 +170,40 @@ public class ProfileManagementController {
     }
 
     @FXML
-    void handleUpdatePassword(ActionEvent event) {
+void handleUpdatePassword(ActionEvent event) {
+    String currentPass = currentPassword.getText();
+    String newPass = newPassword.getText();
+    String confirmPass = confirmPassword.getText();
+
+    if (currentPass.isEmpty() || newPass.isEmpty() || confirmPass.isEmpty()) {
+        errorLabel.setText("Please fill in all password fields.");
+        errorLabel.setTextFill(javafx.scene.paint.Color.RED);
+        return;
     }
+
+    if (!newPass.equals(confirmPass)) {
+        errorLabel.setText("New password and confirm password do not match.");
+        errorLabel.setTextFill(javafx.scene.paint.Color.RED);
+        return;
+    }
+
+    UserDAO userDAO = new UserDAO();
+    boolean success = userDAO.changePassword(currentUser.getId(), currentPass, newPass);
+
+    if (success) {
+        errorLabel.setText("Password changed successfully!");
+        errorLabel.setTextFill(javafx.scene.paint.Color.GREEN);
+        clearPasswordFields();
+    } else {
+        errorLabel.setText("Current password is incorrect or an error occurred.");
+        errorLabel.setTextFill(javafx.scene.paint.Color.RED);
+    }
+}
+
+private void clearPasswordFields() {
+    currentPassword.clear();
+    newPassword.clear();
+    confirmPassword.clear();
+}
+
 }
