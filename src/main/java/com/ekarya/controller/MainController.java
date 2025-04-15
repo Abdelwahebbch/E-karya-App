@@ -3,6 +3,7 @@ package com.ekarya.controller;
 import java.io.IOException;
 import java.util.Optional;
 
+import com.ekarya.Models.User;
 import com.ekarya.utile.DatabaseConnection;
 
 //import javafx.application.Platform;
@@ -25,6 +26,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class MainController {
+
+    User currentUser = new User();
 
     // FXML injected fields
     @FXML
@@ -49,6 +52,11 @@ public class MainController {
     private ComboBox<?> travelersCombo;
 
     // Event handlers
+    public void initData(User user) {
+        this.currentUser = user;
+
+    }
+
     @FXML
     void handleCategorySelect(ActionEvent event) {
         // TODO: Implement category selection logic
@@ -132,27 +140,22 @@ public class MainController {
     }
 
     @FXML
-    void ToProfile(ActionEvent event) {
-        loadView("/fxml/ProfileManager.fxml", "Profile");
-    }
+    void ToProfile(ActionEvent event) throws IOException {
 
-    // Helper methods
-    private void loadView(String fxmlPath, String title) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent root = loader.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProfileManager.fxml"));
+        Parent root = loader.load();
+        ProfileManagementController profilcontroller = loader.getController();
+        profilcontroller.initData(currentUser);
 
-            Stage stage = new Stage();
-            stage.setTitle(title);
+        Stage stage = new Stage();
+        stage.setTitle("Profile");
 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
 
-            stage.centerOnScreen();
-            stage.showAndWait();
-        } catch (IOException e) {
-            handleException("Error loading " + title + " view", e);
-        }
+        stage.centerOnScreen();
+        stage.showAndWait();
+
     }
 
     private void handleException(String message, Exception e) {

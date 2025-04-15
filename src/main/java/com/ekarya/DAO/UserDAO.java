@@ -57,9 +57,9 @@ public class UserDAO {
         return u; // Return the user with the generated ID
     }
 
-    public User VerifUser(String email, String password) {
-        // SQL syntax error: "when" should be "where"
-        String query = "SELECT email, password, ID FROM users WHERE email = ? AND password = ?";
+    public User VerifUser(String email, String password) 
+    {
+        String query = "SELECT id, fullname, phone_number, email, password FROM users WHERE email = ? AND password = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -71,9 +71,11 @@ public class UserDAO {
             if (resultSet.next()) {
                 // ResultSet has at least one row, user exists
                 User u = new User();
+                u.setFullname(resultSet.getString("fullname"));
+                u.setPhoneNumber(resultSet.getString("phone_number"));
                 u.setEmail(email);
                 u.setPassword(password);
-                u.setId(resultSet.getInt("ID"));
+                u.setId(resultSet.getInt("id"));
                 return u;
             } else {
 

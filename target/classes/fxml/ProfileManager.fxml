@@ -53,13 +53,13 @@
                     </rowConstraints>
                     
                     <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Full Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <Text fx:id="usernameText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="johndoe123" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Text fx:id="fullnameText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="johndoe123" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     
                     <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                     <Text fx:id="emailText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="john.doe@example.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     
                     <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Phone Number" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <Text fx:id="accountTypeText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="12345678" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Text fx:id="phoneNumberText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="12345678" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     
                     <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Date of Birth" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                     <Text fx:id="memberSinceText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="January 15, 2023" GridPane.columnIndex="1" GridPane.rowIndex="3" />

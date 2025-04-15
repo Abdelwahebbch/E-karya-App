@@ -46,6 +46,9 @@ public class SignInController {
                 Parent mainRoot = loader.load();
                 Stage stage = (Stage) emailField.getScene().getWindow();
 
+                MainController mainController = loader.getController();
+                mainController.initData(user);
+
                 // Set the new scene
                 Scene mainScene = new Scene(mainRoot);
                 stage.setScene(mainScene);
