@@ -62,12 +62,10 @@ public class SignUpController {
                     // Load the main scene
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
                     Parent mainRoot = loader.load();
-
-                    // Get the controller and pass the user data
-                    // Uncomment and implement if you need to pass user data to the main controller
-                    // MainController mainController = loader.getController();
-                    // mainController.initData(user);
-
+                    
+                    MainController mainController = loader.getController();
+                    mainController.initData(user);
+     
                     // Get current stage
                     Stage stage = (Stage) fullNameField.getScene().getWindow();
 

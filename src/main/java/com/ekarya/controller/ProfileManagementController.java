@@ -24,17 +24,16 @@ public class ProfileManagementController {
     @FXML private PasswordField confirmPassword;
     @FXML private PasswordField currentPassword;
     @FXML private DatePicker dateOfBirth;
-    @FXML private TextField email;
+    @FXML private TextField emailField;
     @FXML private Text emailText;
-    @FXML private TextField fullName;
-    @FXML private Text memberSinceText;
+    @FXML private TextField fullNameField;
+    @FXML private Text dateOfBirthText;
     @FXML private PasswordField newPassword;
-    @FXML private TextField phoneNumber;
+    @FXML private TextField phoneField;
     @FXML private Button refreshAccountButton;
     @FXML private Button saveChangesButton;
     @FXML private Button updatePasswordButton;
-    @FXML 
-    private Text fullnameText;
+    @FXML private Text fullnameText;
 
     public void initData(User user) 
     {
@@ -44,9 +43,18 @@ public class ProfileManagementController {
             fullnameText.setText(user.getFullname()); 
             emailText.setText(user.getEmail());
             phoneNumberText.setText(user.getPhoneNumber());
+            bioText.setText(user.getBio());
+
             //TO DO: nzidou bio wel birth date w t3awed l 5edma mn signup
 
         }
+    }
+    @FXML
+    void handleSaveChanges(ActionEvent event) 
+    {
+        String fullName = fullNameField.getText();
+        String email = emailField.getText();
+        String phoneNumber = phoneField.getText();
     }
 
     @FXML
@@ -58,10 +66,6 @@ public class ProfileManagementController {
 
     @FXML
     void handleRefreshAccount(ActionEvent event) {
-    }
-
-    @FXML
-    void handleSaveChanges(ActionEvent event) {
     }
 
     @FXML

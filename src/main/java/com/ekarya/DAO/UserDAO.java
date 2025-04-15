@@ -59,7 +59,7 @@ public class UserDAO {
 
     public User VerifUser(String email, String password) 
     {
-        String query = "SELECT id, fullname, phone_number, email, password FROM users WHERE email = ? AND password = ?";
+        String query = "SELECT * FROM users WHERE email = ? AND password = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -74,6 +74,8 @@ public class UserDAO {
                 u.setFullname(resultSet.getString("fullname"));
                 u.setPhoneNumber(resultSet.getString("phone_number"));
                 u.setEmail(email);
+                u.setBirthday(resultSet.getDate("birthday"));
+                u.setBio(resultSet.getString("bio"));
                 u.setPassword(password);
                 u.setId(resultSet.getInt("id"));
                 return u;

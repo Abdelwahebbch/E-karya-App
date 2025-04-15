@@ -53,19 +53,19 @@
                     </rowConstraints>
                     
                     <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Full Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <Text fx:id="fullnameText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="johndoe123" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Text fx:id="fullnameText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     
                     <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <Text fx:id="emailText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="john.doe@example.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Text fx:id="emailText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     
                     <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Phone Number" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <Text fx:id="phoneNumberText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="12345678" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Text fx:id="phoneNumberText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     
                     <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Date of Birth" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <Text fx:id="memberSinceText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="January 15, 2023" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Text fx:id="dateOfBirthText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     
                     <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Bio:" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-                    <Text fx:id="bioText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="Software developer with 5 years of experience in Java and JavaFX applications." wrappingWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <Text fx:id="bioText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" wrappingWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 </GridPane>
                 
                 <HBox alignment="CENTER_RIGHT">
@@ -98,13 +98,13 @@
                                 </rowConstraints>
                                 
                                 <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Full Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                <TextField fx:id="fullName" promptText="Full Name" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                                <TextField fx:id="fullNameField" promptText="Full Name" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                                 
                                 <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                <TextField fx:id="email" promptText="Email" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                <TextField fx:id="emailField" promptText="Email" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                                 
                                 <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Phone Number:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                <TextField fx:id="phoneNumber" promptText="Phone Number" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                <TextField fx:id="phoneField" promptText="Phone Number" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                 
                                 <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Date of Birth:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                                 <DatePicker fx:id="dateOfBirth" promptText="Date of Birth" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" GridPane.columnIndex="0" GridPane.rowIndex="5" />
