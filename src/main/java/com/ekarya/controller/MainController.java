@@ -141,19 +141,17 @@ public class MainController {
     @FXML
     void ToProfile(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProfileManager.fxml"));
-        Parent root = loader.load();
-        ProfileManagementController profilcontroller = loader.getController();
-        profilcontroller.initData(currentUser);
-
-        Stage stage = new Stage();
-        stage.setTitle("Profile");
-
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-
-        stage.centerOnScreen();
-        stage.showAndWait();
+        MenuItem menuItem = (MenuItem) event.getSource();
+        Scene scene = menuItem.getParentPopup().getOwnerWindow().getScene();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProfileManager.fxml"));
+            Parent root = loader.load();
+            ProfileManagementController profilcontroller = loader.getController();
+            profilcontroller.initData(currentUser);
+            scene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

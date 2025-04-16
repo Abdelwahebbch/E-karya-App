@@ -64,6 +64,27 @@ public class ProfileManagementController {
     private Label errorLabel;
     @FXML private Label passwordErrorLabel;
 
+    @FXML
+    private void handleBackToHome(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+            Parent mainRoot = loader.load();
+            
+            MainController mainController = loader.getController();
+            mainController.initData(currentUser);
+            
+            Stage stage = (Stage) saveChangesButton.getScene().getWindow();
+            
+            Scene scene = new Scene(mainRoot);
+            stage.setScene(scene);
+            stage.show();
+            stage.setFullScreen(true);
+        } catch (IOException e) {
+            System.err.println("Error loading HomePage.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     public void initData(User user) {
         this.currentUser = user;
         if (user != null) {
@@ -72,7 +93,7 @@ public class ProfileManagementController {
             phoneNumberText.setText(user.getPhoneNumber());
             bioText.setText(user.getBio());
 
-            // TO DO: nzidou bio wel birth date w t3awed l 5edma mn signup
+            // TO DO: nzidou bio wel birth date 
 
         }
     }
@@ -135,33 +156,28 @@ public class ProfileManagementController {
                 phoneField.clear();
                 dateOfBirth.setValue(null);
                 bioField.clear();
+                currentPassword.clear();
+                newPassword.clear();
+                confirmPassword.clear();
     }
 
     @FXML
     void handleRefreshAccount(ActionEvent event) {
         try {
-            // Get the current stage
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Load the same FXML file again
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProfileManager.fxml"));
             Parent root = loader.load();
 
-            // Get the controller and initialize with updated user data
             ProfileManagementController controller = loader.getController();
 
-            // Update currentUser with the newly edited user data
-
-            // Initialize the controller with updated user data
             controller.initData(currentUser);
 
-            // Create a new scene with the refreshed content
             Scene scene = new Scene(root);
 
-            // Set the scene to the current stage
             currentStage.setScene(scene);
+            currentStage.setFullScreen(true);
 
-            // Show success message
             errorLabel.setText("Profile updated successfully!");
             errorLabel.setTextFill(javafx.scene.paint.Color.GREEN);
         } catch (IOException e) {
@@ -203,6 +219,7 @@ public class ProfileManagementController {
         if (isChanged) {
             errorLabel.setText("Password updated successfully!");
             errorLabel.setTextFill(javafx.scene.paint.Color.GREEN);
+            currentUser.setPassword(confirmPass);
     
             currentPassword.clear();
             newPassword.clear();
@@ -212,13 +229,5 @@ public class ProfileManagementController {
             errorLabel.setTextFill(javafx.scene.paint.Color.RED);
         }
     }
-    
-
-private void clearPasswordFields() 
-{
-    currentPassword.clear();
-    newPassword.clear();
-    confirmPassword.clear();
-}
 
 }

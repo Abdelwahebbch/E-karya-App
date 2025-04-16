@@ -82,9 +82,6 @@ public class PropertyDashboardController {
         loadPropertyData();
     }
 
-    /**
-     * Handles the back button action to navigate back to the home page
-     */
     @FXML
     private void handleBackToHome(ActionEvent event) {
         try {
