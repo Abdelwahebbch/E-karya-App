@@ -52,8 +52,7 @@ public class SignUpController {
             showError("Phone number must be 8 digits and start with 9X, 5X, or 2X.");
             return;
         } else if (!InputValidator.isValidPassword(password)) {
-            showError(
-                    "Password must be at least 8 characters long, include upper and lower case letters, a number, and a special character.");
+            showError("Password must be at least 8 characters long, include upper and lower case letters, a number, and a special character.");
             return;
         } else {
             User user = userDAO.createUser(fullName, phoneNumber, email, password);

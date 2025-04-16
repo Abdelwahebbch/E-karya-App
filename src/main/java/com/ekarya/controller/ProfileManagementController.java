@@ -62,6 +62,7 @@ public class ProfileManagementController {
     private Text fullnameText;
     @FXML
     private Label errorLabel;
+    @FXML private Label passwordErrorLabel;
 
     public void initData(User user) {
         this.currentUser = user;
@@ -171,22 +172,30 @@ public class ProfileManagementController {
 
     @FXML
     void handleUpdatePassword(ActionEvent event) {
-        System.out.println("Update Password button clicked");
+
         String currentPass = currentPassword.getText();
         String newPass = newPassword.getText();
         String confirmPass = confirmPassword.getText();
     
         if (currentPass.isEmpty() || newPass.isEmpty() || confirmPass.isEmpty()) {
-            errorLabel.setText("All password fields must be filled.");
-            errorLabel.setTextFill(javafx.scene.paint.Color.RED);
+            passwordErrorLabel.setText("All password fields must be filled.");
+            passwordErrorLabel.setTextFill(javafx.scene.paint.Color.RED);
             return;
         }
-    
-        if (!newPass.equals(confirmPass)) {
-            errorLabel.setText("New passwords do not match.");
-            errorLabel.setTextFill(javafx.scene.paint.Color.RED);
+        if (!InputValidator.isValidPassword(newPass))
+        {
+            passwordErrorLabel.setText("Password must be at least 8 characters long, include upper and lower case letters, a number, and a special character.");
+            passwordErrorLabel.setTextFill(javafx.scene.paint.Color.RED);
+            return;
+            
+        }
+        if (!newPass.equals(confirmPass)) 
+        {
+            passwordErrorLabel.setText("New passwords do not match.");
+            passwordErrorLabel.setTextFill(javafx.scene.paint.Color.RED);
             return;
         }
+
     
         UserDAO userDAO = new UserDAO();
         boolean isChanged = userDAO.changePassword(currentUser.getId(), currentPass, newPass);
@@ -205,7 +214,8 @@ public class ProfileManagementController {
     }
     
 
-private void clearPasswordFields() {
+private void clearPasswordFields() 
+{
     currentPassword.clear();
     newPassword.clear();
     confirmPassword.clear();

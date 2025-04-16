@@ -155,6 +155,10 @@
                                     
                                     <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Confirm New Password:" GridPane.rowIndex="4" />
                                     <PasswordField fx:id="confirmPassword" promptText="Confirm New Password" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" GridPane.rowIndex="5" />
+                                
+                                    <Label fx:id="passwordErrorLabel" alignment="CENTER" style="-fx-font-family: 'Montserrat'; -fx-text-fill: #555555;" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+
+                                
                                 </GridPane>
                                 
                                 <HBox alignment="CENTER_RIGHT" spacing="10">
