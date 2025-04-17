@@ -92,6 +92,7 @@ public class ProfileManagementController {
             emailText.setText(user.getEmail());
             phoneNumberText.setText(user.getPhoneNumber());
             bioText.setText(user.getBio());
+            dateOfBirthText.setText(InputValidator.convertSqlDateToString(user.getBirthday()));
 
             // TO DO: nzidou bio wel birth date 
 
