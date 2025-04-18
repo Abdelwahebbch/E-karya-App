@@ -1,0 +1,58 @@
+eKarya/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   ├── com/
+│   │   │   │   └── ekarya/
+│   │   │   │       ├── app/
+│   │   │   │       │   └── Main.java
+│   │   │   │       ├── controller/
+│   │   │   │       │   ├── LoginController.java
+│   │   │   │       │   ├── PropertyListController.java
+│   │   │   │       │   └── ...
+│   │   │   │       ├── model/
+│   │   │   │       │   ├── User.java
+│   │   │   │       │   ├── Property.java
+│   │   │   │       │   └── ...
+│   │   │   │       ├── service/
+│   │   │   │       │   ├── UserService.java
+│   │   │   │       │   ├── PropertyService.java
+│   │   │   │       │   └── ...
+│   │   │   │       └── util/
+│   │   │   │           ├── DatabaseConnection.java
+│   │   │   │           └── ...
+│   │   │   └── module-info.java
+│   │   └── resources/
+│   │       ├── fxml/
+│   │       │   ├── login.fxml
+│   │       │   ├── propertyList.fxml
+│   │       │   └── ...
+│   │       ├── css/
+│   │       │   └── styles.css
+│   │       └── images/
+│   │           └── logo.png
+│   └── test/
+│       └── java/
+│           └── com/
+│               └── ekarya/
+│                   ├── service/
+│                   │   ├── UserServiceTest.java
+│                   │   └── ...
+│                   └── util/
+│                       └── DatabaseConnectionTest.java
+├── lib/
+│   └── (external libraries, if any)
+├── database/
+│   ├── schema.sql
+│   ├── initial_data.sql
+│   └── procedures/
+│       ├── create_user.sql
+│       ├── find_properties.sql
+│       └── ...
+├── docs/
+│   ├── api_documentation.md
+│   └── user_manual.md
+├── .gitignore
+├── README.md
+└── pom.xml
