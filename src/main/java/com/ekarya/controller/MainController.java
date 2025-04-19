@@ -157,12 +157,6 @@ public class MainController {
 
     }
 
-    private void handleException(String message, Exception e) {
-        System.err.println(message + ": " + e.getMessage());
-        e.printStackTrace();
-        // TODO: Consider adding a user-friendly error dialog here
-    }
-
     @FXML
     void handelLogOut(ActionEvent event) {
         try {
@@ -194,5 +188,11 @@ public class MainController {
             errorAlert.setContentText("An error occurred while trying to logout: " + e.getMessage());
             errorAlert.showAndWait();
         }
+    }
+
+    private void handleException(String message, Exception e) {
+        System.err.println(message + ": " + e.getMessage());
+        e.printStackTrace();
+
     }
 }

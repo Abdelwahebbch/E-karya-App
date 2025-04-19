@@ -129,11 +129,11 @@ public class ProfileManagementController {
 
     @FXML
     void handleCloseButton(MouseEvent event) {
-                fullNameField.clear();
-                emailField.clear();
-                phoneField.clear();
-                dateOfBirth.setValue(null);
-                bioField.clear();
+        fullNameField.clear();
+        emailField.clear();
+        phoneField.clear();
+        dateOfBirth.setValue(null);
+        bioField.clear();
     }
 
     @FXML
@@ -153,7 +153,6 @@ public class ProfileManagementController {
 
             // Initialize the controller with updated user data
             controller.initData(currentUser);
-
             // Create a new scene with the refreshed content
             Scene scene = new Scene(root);
 
@@ -175,26 +174,26 @@ public class ProfileManagementController {
         String currentPass = currentPassword.getText();
         String newPass = newPassword.getText();
         String confirmPass = confirmPassword.getText();
-    
+
         if (currentPass.isEmpty() || newPass.isEmpty() || confirmPass.isEmpty()) {
             errorLabel.setText("All password fields must be filled.");
             errorLabel.setTextFill(javafx.scene.paint.Color.RED);
             return;
         }
-    
+
         if (!newPass.equals(confirmPass)) {
             errorLabel.setText("New passwords do not match.");
             errorLabel.setTextFill(javafx.scene.paint.Color.RED);
             return;
         }
-    
+
         UserDAO userDAO = new UserDAO();
         boolean isChanged = userDAO.changePassword(currentUser.getId(), currentPass, newPass);
-    
+
         if (isChanged) {
             errorLabel.setText("Password updated successfully!");
             errorLabel.setTextFill(javafx.scene.paint.Color.GREEN);
-    
+
             currentPassword.clear();
             newPassword.clear();
             confirmPassword.clear();
@@ -203,12 +202,11 @@ public class ProfileManagementController {
             errorLabel.setTextFill(javafx.scene.paint.Color.RED);
         }
     }
-    
 
-private void clearPasswordFields() {
-    currentPassword.clear();
-    newPassword.clear();
-    confirmPassword.clear();
-}
+    private void clearPasswordFields() {
+        currentPassword.clear();
+        newPassword.clear();
+        confirmPassword.clear();
+    }
 
 }

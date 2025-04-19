@@ -159,7 +159,7 @@
 
             <!-- Submit Button -->
             <HBox alignment="CENTER_RIGHT" spacing="10">
-                <Button fx:id="submitButton" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 12 24;" text="Publish Listing">
+                <Button fx:id="submitButton" onAction="#createPropertyButton" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 12 24;" text="Publish Listing">
                     <graphic>
                         <HBox alignment="CENTER" spacing="8">
                             <SVGPath content="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" fill="transparent" stroke="WHITE" strokeWidth="2" />

@@ -1,30 +1,25 @@
-create table users (
-   id           int primary key,
-   fullname     varchar(100) not null,
-   email        varchar(100) not null unique,
-   phone_number varchar(20),
-   password     varchar(255) not null,
-   birthday     date,
-   bio          varchar(2000)
-);
-CREATE SEQUENCE user_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NOCACHE
-    NOCYCLE;
-
--- create table properties (
---    id                int primary key,
---    title             varchar(100) not null,
---    location          varchar(100) not null,
---    description       varchar(1000),
---    max_guests        int not null,
---    max_beds          int not null,
---    max_bedrooms      int not null,
---    price_per_night   decimal(10,2) not null,
---    rating            decimal(3,2),
---    number_of_ratings int default 0
+-- create table users (
+--    id           int primary key,
+--    fullname     varchar(100) not null,
+--    email        varchar(100) not null unique,
+--    phone_number varchar(20),
+--    password     varchar(255) not null,
+--    birthday     date,
+--    bio          varchar(2000)
 -- );
+-- create sequence user_id_seq start with 1 increment by 1 nocache nocycle;
+
+create table properties (
+   id              int primary key,
+   title           varchar2(100) not null,
+   location        varchar2(100) not null,
+   price_per_night decimal(10,2) not null,
+   max_guests      int not null,
+   max_beds        int not null,
+   max_bedrooms    int not null,
+   max_bathrooms   int not null,
+   description     varchar2(1000) not null
+);
 -- create table rent_proposals (
 --    id               int primary key,
 --    user_id          int not null,

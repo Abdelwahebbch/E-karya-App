@@ -46,9 +46,9 @@
                 
                 <!-- Properties List -->
                 <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
-                    <VBox fx:id="propertiesContainer" spacing="12">
+                    <VBox fx:id="propertiesContainer" spacing="10">
                         <!-- Property buttons will be added dynamically -->
-                        <Button maxWidth="Infinity" onAction="#loadPropertyDetails" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-alignment: center-left; -fx-padding: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
+                        <Button maxWidth="Infinity" onAction="#loadPropertyData" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-alignment: center-left; -fx-padding: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
                             <graphic>
                                 <HBox spacing="10">
                                     <ImageView fitHeight="50" fitWidth="50" preserveRatio="true" style="-fx-background-radius: 8;">
@@ -79,7 +79,7 @@
                 </ScrollPane>
                 
                 <!-- Add Property Button -->
-                <Button fx:id="addPropertyButton" maxWidth="Infinity" onAction="#ToAddHome" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 12 16;">
+                <Button maxWidth="Infinity" onAction="#handleAddPropertyButton" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 12 16;">
                     <graphic>
                         <HBox alignment="CENTER" spacing="8">
                             <SVGPath content="M12 4v16m8-8H4" fill="transparent" stroke="WHITE" strokeWidth="2" />

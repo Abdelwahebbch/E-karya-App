@@ -73,16 +73,21 @@ public class AddPropertyController {
     @FXML
     private TextField titleField;
 
-        @FXML
-    private void handleBackToDashboard(ActionEvent event) {
+    @FXML
+    void createPropertyButton(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleBackToDashboard(ActionEvent event) {
         try {
             // Load the home page FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropretyDashboard.fxml"));
             Parent homePageRoot = loader.load();
-            
+
             // Get the current stage
             Stage stage = (Stage) submitButton.getScene().getWindow();
-            
+
             // Set the home page scene
             Scene scene = new Scene(homePageRoot);
             stage.setScene(scene);
