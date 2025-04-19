@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ekarya.Models.User;
+
 public class RentalInterfaceController {
 
     @FXML
@@ -81,6 +83,7 @@ public class RentalInterfaceController {
 
     private int currentRating = 3; // Default rating (3 stars)
     private List<Button> ratingStars = new ArrayList<>();
+    private User currentUser;
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -175,7 +178,11 @@ public class RentalInterfaceController {
             }
         }).start();
     }
-
+    // Add to RentalInterfaceController
+    public void initData(User user) {
+        this.currentUser = user;
+        // Initialize rental interface with user data
+    }
     /**
      * Sets up the rating stars with click handlers
      */

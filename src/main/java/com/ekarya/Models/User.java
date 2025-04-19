@@ -31,7 +31,7 @@ public class User {
         this.birthday = birthday;
         this.bio = bio;
     }
-
+    
     public int getId() {
         return id;
     }

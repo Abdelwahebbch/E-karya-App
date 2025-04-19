@@ -16,7 +16,43 @@
     -fx-font-size: 14px;
     -fx-cursor: hand;
   }
-  
+  .property-card {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+    -fx-cursor: hand;
+}
+
+.property-card:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 15, 0, 0, 8);
+    -fx-background-color: #f9f9f9;
+}
+
+.property-title {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-padding: 5 0 2 0;
+}
+
+.property-address {
+    -fx-font-size: 12;
+    -fx-text-fill: #666666;
+    -fx-padding: 0 0 2 0;
+}
+
+.property-price {
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2a9d8f;
+    -fx-padding: 2 0 2 0;
+}
+
+.property-details {
+    -fx-font-size: 12;
+    -fx-text-fill: #666666;
+}
   .nav-button:hover {
     -fx-background-color: #f7f7f7;
   }

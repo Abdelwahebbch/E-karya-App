@@ -21,6 +21,88 @@ create table properties (
    max_bathrooms   int not null,
    description     varchar2(1000) not null
 );
+DECLARE
+  seq_exists NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO seq_exists FROM user_sequences WHERE sequence_name = 'HOUSES_SEQ';
+  IF seq_exists = 0 THEN
+    EXECUTE IMMEDIATE 'CREATE SEQUENCE houses_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE';
+  END IF;
+END;
+/
+
+-- Create sequence for images table if it doesn't exist
+DECLARE
+  seq_exists NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO seq_exists FROM user_sequences WHERE sequence_name = 'IMAGES_SEQ';
+  IF seq_exists = 0 THEN
+    EXECUTE IMMEDIATE 'CREATE SEQUENCE images_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE';
+  END IF;
+END;
+/
+
+-- Create houses table if it doesn't exist
+DECLARE
+  table_exists NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO table_exists FROM user_tables WHERE table_name = 'HOUSES';
+  IF table_exists = 0 THEN
+    EXECUTE IMMEDIATE 'CREATE TABLE houses (
+      id NUMBER DEFAULT houses_seq.NEXTVAL PRIMARY KEY,
+      title VARCHAR2(255) NOT NULL,
+      description CLOB,
+      location VARCHAR2(255) NOT NULL,
+      price NUMBER(10,2) NOT NULL,
+      bedrooms NUMBER(2) NOT NULL,
+      bathrooms NUMBER(2) NOT NULL,
+      beds NUMBER(2) NOT NULL,
+      max_guests NUMBER(2) NOT NULL
+    )';
+  END IF;
+END;
+/
+
+-- Create images table if it doesn't exist
+DECLARE
+  table_exists NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO table_exists FROM user_tables WHERE table_name = 'IMAGES';
+  IF table_exists = 0 THEN
+    EXECUTE IMMEDIATE 'CREATE TABLE images (
+      id NUMBER DEFAULT images_seq.NEXTVAL PRIMARY KEY,
+      house_id NUMBER NOT NULL,
+      url VARCHAR2(255) NOT NULL,
+      caption VARCHAR2(255),
+      is_primary NUMBER(1) DEFAULT 0,
+      CONSTRAINT fk_house_id FOREIGN KEY (house_id) REFERENCES houses(id) ON DELETE CASCADE
+    )';
+  END IF;
+END;
+/
+
+-- Create index for faster image lookups if it doesn't exist
+DECLARE
+  index_exists NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO index_exists FROM user_indexes WHERE index_name = 'IDX_IMAGES_HOUSE_ID';
+  IF index_exists = 0 THEN
+    EXECUTE IMMEDIATE 'CREATE INDEX idx_images_house_id ON images(house_id)';
+  END IF;
+END;
+/
+
+
+-- Check if sequences exist
+SELECT sequence_name, min_value, max_value, increment_by, last_number
+FROM user_sequences
+WHERE sequence_name IN ('HOUSES_SEQ', 'IMAGES_SEQ');
+
+-- Check if tables exist with correct structure
+SELECT table_name, column_name, data_type, data_length, nullable
+FROM user_tab_columns
+WHERE table_name IN ('HOUSES', 'IMAGES')
+ORDER BY table_name, column_id;
 -- create table rent_proposals (
 --    id               int primary key,
 --    user_id          int not null,
