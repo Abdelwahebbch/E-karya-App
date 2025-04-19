@@ -20,6 +20,30 @@ public class SignInController {
     @FXML
     private PasswordField passwordField;
     
+    public TextField getEmailField() {
+        return emailField;
+    }
+
+    public void setEmailField(TextField emailField) {
+        this.emailField = emailField;
+    }
+
+    public PasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public void setPasswordField(PasswordField passwordField) {
+        this.passwordField = passwordField;
+    }
+
+    public Label getErrorLabel() {
+        return errorLabel;
+    }
+
+    public void setErrorLabel(Label errorLabel) {
+        this.errorLabel = errorLabel;
+    }
+
     @FXML
     private Label errorLabel;
 
