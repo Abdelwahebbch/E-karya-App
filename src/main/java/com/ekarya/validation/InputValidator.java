@@ -49,7 +49,7 @@ public class InputValidator {
         if (password == null || password.isEmpty()) {
             return false;
         }
-        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,16}$";
         Pattern pattern = Pattern.compile(passwordPattern);
         Matcher matcher = pattern.matcher(password);
         if (matcher.matches())
@@ -59,7 +59,12 @@ public class InputValidator {
     }
 
     public static String convertSqlDateToString(Date sqlDate) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        return formatter.format(sqlDate);
+        if(sqlDate != null)
+        {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            return formatter.format(sqlDate);
+        }
+        return null;
+
     }
 }
