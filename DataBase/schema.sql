@@ -7,8 +7,9 @@
 --    birthday     date,
 --    bio          varchar(2000)
 -- );
--- create sequence user_id_seq start with 1 increment by 1 nocache nocycle;
 
+-- create sequence user_id_seq start with 1 increment by 1 nocache nocycle;
+create sequence property_id_seq start with 1000 increment by 1 nocache nocycle;
 create table properties (
    id              int primary key,
    title           varchar2(100) not null,

@@ -1,38 +1,24 @@
 package com.ekarya.Models;
 
-public class Property {
+import java.io.File;
+import java.util.List;
 
-    private int id;
+/**
+ * Data class to hold all the property information
+ */
+public class Property {
     private String title;
     private String location;
-    private double price_per_night;
-    private int max_guests;
-    private int max_beds;
-    private int max_bedrooms;
-    private int max_bathrooms;
     private String description;
+    private int guests;
+    private int bedrooms;
+    private int beds;
+    private int bathrooms;
+    private double price;
+    private File mainImage;
+    private List<File> additionalImages;
 
-    public Property(int id, String title, String location, double price_per_night, int max_guests, int max_beds,
-            int max_bedrooms, int max_bathrooms, String description) {
-        this.id = id;
-        this.title = title;
-        this.location = location;
-        this.price_per_night = price_per_night;
-        this.max_guests = max_guests;
-        this.max_beds = max_beds;
-        this.max_bedrooms = max_bedrooms;
-        this.max_bathrooms = max_bathrooms;
-        this.description = description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    // Getters and setters
     public String getTitle() {
         return title;
     }
@@ -49,46 +35,6 @@ public class Property {
         this.location = location;
     }
 
-    public double getPrice_per_night() {
-        return price_per_night;
-    }
-
-    public void setPrice_per_night(double price_per_night) {
-        this.price_per_night = price_per_night;
-    }
-
-    public int getMax_guests() {
-        return max_guests;
-    }
-
-    public void setMax_guests(int max_guests) {
-        this.max_guests = max_guests;
-    }
-
-    public int getMax_beds() {
-        return max_beds;
-    }
-
-    public void setMax_beds(int max_beds) {
-        this.max_beds = max_beds;
-    }
-
-    public int getMax_bedrooms() {
-        return max_bedrooms;
-    }
-
-    public void setMax_bedrooms(int max_bedrooms) {
-        this.max_bedrooms = max_bedrooms;
-    }
-
-    public int getMax_bathrooms() {
-        return max_bathrooms;
-    }
-
-    public void setMax_bathrooms(int max_bathrooms) {
-        this.max_bathrooms = max_bathrooms;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -97,14 +43,75 @@ public class Property {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getImageUrl'");
+    public int getGuests() {
+        return guests;
     }
 
-    public String getPrice() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPrice'");
+    public void setGuests(int guests) {
+        this.guests = guests;
     }
 
+    public int getBedrooms() {
+        return bedrooms;
+    }
+
+    public void setBedrooms(int bedrooms) {
+        this.bedrooms = bedrooms;
+    }
+
+    public int getBeds() {
+        return beds;
+    }
+
+    public void setBeds(int beds) {
+        this.beds = beds;
+    }
+
+    public int getBathrooms() {
+        return bathrooms;
+    }
+
+    public void setBathrooms(int bathrooms) {
+        this.bathrooms = bathrooms;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public File getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(File mainImage) {
+        this.mainImage = mainImage;
+    }
+
+    public List<File> getAdditionalImages() {
+        return additionalImages;
+    }
+
+    public void setAdditionalImages(List<File> additionalImages) {
+        this.additionalImages = additionalImages;
+    }
+
+    @Override
+    public String toString() {
+        return "PropertyData{" +
+                "title='" + title + '\'' +
+                ", location='" + location + '\'' +
+                ", description='" + description + '\'' +
+                ", guests=" + guests +
+                ", bedrooms=" + bedrooms +
+                ", beds=" + beds +
+                ", bathrooms=" + bathrooms +
+                ", price=" + price +
+                ", mainImage=" + (mainImage != null ? mainImage.getName() : "none") +
+                ", additionalImages=" + (additionalImages != null ? additionalImages.size() : 0) +
+                '}';
+    }
 }

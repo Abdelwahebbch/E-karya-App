@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 import com.ekarya.utile.DatabaseConnection;
 
@@ -92,11 +93,10 @@ public class UserDAO {
     public User editUser(int id, String fullName, String email, String phoneNumber, Date birthDate, String bio) {
         String updateQuery = "UPDATE users SET fullname = ?, email = ?, phone_number = ?, birthday = ?, bio = ? WHERE id = ?";
         String selectQuery = "SELECT * FROM users WHERE id = ?";
-    
+
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
-             PreparedStatement selectStmt = conn.prepareStatement(selectQuery)) {
-    
+                PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
+                PreparedStatement selectStmt = conn.prepareStatement(selectQuery)) {
 
             updateStmt.setString(1, fullName);
             updateStmt.setString(2, email);
@@ -104,15 +104,14 @@ public class UserDAO {
             updateStmt.setDate(4, birthDate);
             updateStmt.setString(5, bio);
             updateStmt.setInt(6, id);
-    
 
             int rowsUpdated = updateStmt.executeUpdate();
-    
+
             if (rowsUpdated > 0) {
                 // If update was successful, fetch the updated user
                 selectStmt.setInt(1, id);
                 ResultSet selectResultSet = selectStmt.executeQuery();
-    
+
                 if (selectResultSet.next()) {
                     User u = new User();
                     u.setId(selectResultSet.getInt("id"));
@@ -121,48 +120,77 @@ public class UserDAO {
                     u.setEmail(selectResultSet.getString("email"));
                     u.setBirthday(selectResultSet.getDate("birthday"));
                     u.setBio(selectResultSet.getString("bio"));
-                    u.setPassword(selectResultSet.getString("password")); 
+                    u.setPassword(selectResultSet.getString("password"));
                     return u;
                 }
             }
-    
+
             return null;
-    
+
         } catch (SQLException e) {
             System.err.println("Error editing user: " + e.getMessage());
             return null;
         }
     }
+
     public boolean changePassword(int userId, String currentPassword, String newPassword) {
         String verifyQuery = "SELECT * FROM users WHERE id = ? AND password = ?";
         String updateQuery = "UPDATE users SET password = ? WHERE id = ?";
-        
+
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement verifyStmt = conn.prepareStatement(verifyQuery);
-             PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
-    
+                PreparedStatement verifyStmt = conn.prepareStatement(verifyQuery);
+                PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
+
             // Verify if the current password matches
             verifyStmt.setInt(1, userId);
             verifyStmt.setString(2, currentPassword);
-            
+
             ResultSet resultSet = verifyStmt.executeQuery();
             if (resultSet.next()) {
                 // If current password is correct, update to the new password
                 updateStmt.setString(1, newPassword);
                 updateStmt.setInt(2, userId);
-                
+
                 int rowsUpdated = updateStmt.executeUpdate();
                 return rowsUpdated > 0; // Return true if password update was successful
             }
-            
+
         } catch (SQLException e) {
             System.err.println("Error changing password: " + e.getMessage());
         }
-        
+
         return false; // Return false if current password did not match or any other issue
     }
-    
 
-    
-    
+    public static boolean savePropertyDataToDataBase(Property p) {
+
+        String query = "INSERT INTO properties (id, title, location, price_per_night, max_guests,max_beds,max_bedrooms,max_bathrooms,description) "
+                +
+                "VALUES (property_id_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, p.getTitle());
+            stmt.setString(2, p.getLocation());
+            stmt.setLong(3, (long) p.getPrice());
+            stmt.setInt(4, p.getGuests());
+            stmt.setInt(5, p.getBeds());
+            stmt.setInt(6, p.getBedrooms());
+            stmt.setInt(7, p.getBathrooms());
+            stmt.setString(8, p.getDescription());
+
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error creating user: " + e.getMessage());
+            return false;
+        }
+
+    }
 }

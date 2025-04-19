@@ -31,6 +31,14 @@
         <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Profile Management" />
 
         <Region HBox.hgrow="ALWAYS" />
+        <Button onAction="#handleBackToHome" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 8 16;">
+            <graphic>
+                <HBox alignment="CENTER" spacing="8">
+                    <SVGPath content="M19 12H5M12 19l-7-7 7-7" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                    <Text fill="WHITE" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Back to Home" />
+                </HBox>
+            </graphic>
+        </Button>
     </HBox>
 
     <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
@@ -155,9 +163,14 @@
                                     
                                     <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Confirm New Password:" GridPane.rowIndex="4" />
                                     <PasswordField fx:id="confirmPassword" promptText="Confirm New Password" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" GridPane.rowIndex="5" />
+                                
+                                    <Label fx:id="passwordErrorLabel" alignment="CENTER" style="-fx-font-family: 'Montserrat'; -fx-text-fill: #555555;" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+
+                                
                                 </GridPane>
                                 
                                 <HBox alignment="CENTER_RIGHT" spacing="10">
+                                    <Button onMouseClicked="#handleCloseButton" style="-fx-background-color: white; -fx-border-color: #000000; -fx-border-radius: 24; -fx-background-radius: 24; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-padding: 8 16;" text="Cancel" />
                                     <Button fx:id="updatePasswordButton" onAction="#handleUpdatePassword" style="-fx-background-color: #333333; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 8 16;" text="Update Password">
                                         <graphic>
                                             <HBox alignment="CENTER" spacing="8">
