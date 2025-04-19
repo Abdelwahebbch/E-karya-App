@@ -3,9 +3,12 @@ package com.ekarya.controller;
 import java.io.IOException;
 import java.util.Optional;
 
+import com.ekarya.DAO.PropertyDAO;
+import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 import com.ekarya.utile.DatabaseConnection;
 
+import javafx.application.Application;
 //import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +28,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class MainController {
+public class MainController  {
 
     User currentUser = new User();
 
@@ -56,20 +59,7 @@ public class MainController {
         this.currentUser = user;
     }
 
-    @FXML
-    void handleCategorySelect(ActionEvent event) {
-        // TODO: Implement category selection logic
-    }
-
-    @FXML
-    void handleFavoriteClick(ActionEvent event) {
-        // TODO: Implement favorite functionality
-    }
-
-    @FXML
-    void handleSearch(ActionEvent event) {
-        // TODO: Implement search functionality
-    }
+   
 
     @FXML
     public void handleListingClick(MouseEvent event) {
@@ -117,7 +107,7 @@ public class MainController {
         MenuItem menuItem = (MenuItem) event.getSource();
         Scene scene = menuItem.getParentPopup().getOwnerWindow().getScene();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropretyDashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropertyDashboard.fxml"));
             Parent root = loader.load();
             scene.setRoot(root);
         } catch (IOException e) {
@@ -157,13 +147,17 @@ public class MainController {
 
     @FXML
     void handelLogOut(ActionEvent event) {
+        for (Property property : PropertyDAO.properties) {
+            PropertyDAO.saveProperty(property);
+        }
+        System.out.println("All properties saved before exit.");
         try {
             DatabaseConnection.closeConnection();
 
             Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
             confirmDialog.setTitle("Logout Confirmation");
             confirmDialog.setHeaderText("Are you sure you want to logout?");
-            confirmDialog.setContentText("Any unsaved changes will be lost.");
+            //confirmDialog.setContentText("Any unsaved changes will be lost.");
 
             Optional<ButtonType> result = confirmDialog.showAndWait();
 
@@ -193,4 +187,5 @@ public class MainController {
         e.printStackTrace();
 
     }
+
 }

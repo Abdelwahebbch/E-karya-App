@@ -1,6 +1,7 @@
 package com.ekarya.controller;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.ekarya.DAO.PropertyDAO;
 import com.ekarya.Models.Property;
@@ -12,14 +13,35 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class PropertyDashboardController {
 
+    public Property currentProperty;
+    
     @FXML
-    private Text bathroomsText;
+    private VBox propertiesContainer;
+
+    @FXML
+    private VBox notificationsContainer;
+
+    @FXML
+    private Text propertyTitle;
+
+    @FXML
+    private Text titleText;
+
+    @FXML
+    private Text locationText;
+
+    @FXML
+    private Text priceText;
+
+    @FXML
+    private Text guestsText;
 
     @FXML
     private Text bedroomsText;
@@ -28,16 +50,13 @@ public class PropertyDashboardController {
     private Text bedsText;
 
     @FXML
-    private Button deleteButton;
+    private Text bathroomsText;
 
     @FXML
     private Text descriptionText;
 
     @FXML
-    private Button editButton;
-
-    @FXML
-    private Text guestsText;
+    private ImageView mainImageView;
 
     @FXML
     private ImageView image1View;
@@ -52,41 +71,39 @@ public class PropertyDashboardController {
     private ImageView image4View;
 
     @FXML
-    private Text locationText;
+    private Button editButton;
 
     @FXML
-    private ImageView mainImageView;
+    private Button deleteButton;
 
     @FXML
-    private VBox notificationsContainer;
+    public void initialize() {
+        PropertyDAO.loadAllProperties();
+        refreshPropertyList();
+    }
 
-    @FXML
-    private Text priceText;
+    private void refreshPropertyList() {
+        propertiesContainer.getChildren().clear();
+        for (Property p : PropertyDAO.properties) {
+            addPropertyToList(p);
+        }
+    }
 
-    @FXML
-    private VBox propertiesContainer;
-
-    @FXML
-    private Text propertyTitle;
-
-    @FXML
-    private Text titleText;
+    public void addPropertyToList(Property property) {
+        Button propertyButton = createPropertyButton(property);
+        propertiesContainer.getChildren().add(propertyButton);
+    }
 
     @FXML
     void handleAddPropertyButton(ActionEvent event) {
         try {
-            // Load the home page FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddProperty.fxml"));
-            Parent homePageRoot = loader.load();
+            Parent addPropertyRoot = loader.load();
 
-            // Get the current stage
             Stage stage = (Stage) titleText.getScene().getWindow();
-
-            // Set the home page scene
-            Scene scene = new Scene(homePageRoot);
-            stage.setScene(scene);
-            stage.show();
+            stage.setScene(new Scene(addPropertyRoot));
             stage.setFullScreen(true);
+            stage.show();
         } catch (IOException e) {
             System.err.println("Error loading AddProperty.fxml: " + e.getMessage());
             e.printStackTrace();
@@ -96,18 +113,13 @@ public class PropertyDashboardController {
     @FXML
     void handleBackToHome(ActionEvent event) {
         try {
-            // Load the home page FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
-            Parent homePageRoot = loader.load();
+            Parent mainRoot = loader.load();
 
-            // Get the current stage
             Stage stage = (Stage) titleText.getScene().getWindow();
-
-            // Set the home page scene
-            Scene scene = new Scene(homePageRoot);
-            stage.setScene(scene);
-            stage.show();
+            stage.setScene(new Scene(mainRoot));
             stage.setFullScreen(true);
+            stage.show();
         } catch (IOException e) {
             System.err.println("Error loading Main.fxml: " + e.getMessage());
             e.printStackTrace();
@@ -116,24 +128,55 @@ public class PropertyDashboardController {
 
     @FXML
     void handleDeleteProperty(ActionEvent event) {
-
+        // TODO be implemented
     }
 
     @FXML
     void handleEditProperty(ActionEvent event) {
-
+        // TODO be implemented
     }
 
-    @FXML
-    void loadPropertyData(ActionEvent event) {
-        for (Property p : PropertyDAO.properties) {
-
+    public void loadPropertyData(String id) {
+        for (Property p : PropertyDAO.getProperties()) {
+            if (p.getId().equals(id)) {
+                currentProperty = p;
+                loadPropertyDetails();
+                break;
+            }
         }
     }
 
-    @FXML
-    void loadPropertyDetails(ActionEvent event) {
-
+    private void loadPropertyDetails() {
+        if (currentProperty != null) {
+            locationText.setText(currentProperty.getLocation());
+            descriptionText.setText(currentProperty.getDescription());
+            titleText.setText(currentProperty.getTitle());
+            bathroomsText.setText(String.valueOf(currentProperty.getBathrooms()));
+            bedroomsText.setText(String.valueOf(currentProperty.getBedrooms()));
+            bedsText.setText(String.valueOf(currentProperty.getBeds()));
+            guestsText.setText(String.valueOf(currentProperty.getGuests()));
+        }
     }
 
+    private Button createPropertyButton(Property property) {
+        Button propertyButton = new Button();
+        propertyButton.setId("PropertyBtn_" + property.getId());
+        propertyButton.setMaxWidth(Double.MAX_VALUE);
+        propertyButton.setOnAction(event -> loadPropertyData(property.getId()));
+        propertyButton.setStyle("-fx-background-color: white; -fx-border-color: #E0E0E0;");
+
+        Text propertyNameText = new Text(property.getTitle());
+        propertyNameText.setStyle("-fx-font-family: 'Montserrat';");
+
+        Text priceText = new Text(property.getPrice() + " € per night");
+        priceText.setStyle("-fx-font-family: 'Montserrat';");
+
+        VBox textVBox = new VBox(propertyNameText, priceText);
+        HBox hbox = new HBox(10, textVBox);
+        propertyButton.setGraphic(hbox);
+
+        return propertyButton;
+    }
+
+    
 }
