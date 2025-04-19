@@ -1,10 +1,6 @@
 package com.ekarya.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.ekarya.Models.Property;
 import com.ekarya.DAO.UserDAO;
 import javafx.event.ActionEvent;
@@ -82,22 +78,15 @@ public class AddPropertyController {
         Property data = collectPropertyData();
         try {
             if (data != null && UserDAO.savePropertyDataToDataBase(data)) {
-                // Process the collected data
-                // For example, save to database, send to server, etc.
-                System.out.println("Collected property data: " + data);
-
-                // Show success message
+              //  System.out.println("Collected property data: " + data);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("Property listing created successfully!");
                 alert.showAndWait();
-
-                // Navigate back to dashboard or clear form
                 handleBackToDashboard(event);
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

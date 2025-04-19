@@ -7,6 +7,7 @@ import java.util.List;
  * Data class to hold all the property information
  */
 public class Property {
+    private String id;
     private String title;
     private String location;
     private String description;
@@ -17,6 +18,34 @@ public class Property {
     private double price;
     private File mainImage;
     private List<File> additionalImages;
+
+    public Property(String id, String title, String location, String description, int guests, int bedrooms, int beds,
+            int bathrooms, double price/* , File mainImage, List<File> additionalImages */) {
+        this.id = id;
+        this.title = title;
+        this.location = location;
+        this.description = description;
+        this.guests = guests;
+        this.bedrooms = bedrooms;
+        this.beds = beds;
+        this.bathrooms = bathrooms;
+        this.price = price;
+        // this.mainImage = mainImage;
+        // this.additionalImages = additionalImages;
+    }
+
+    public Property() {
+        this.id = null;
+        this.title = null;
+        this.location = null;
+        this.description = null;
+        this.guests = 0;
+        this.bedrooms = 0;
+        this.beds = 0;
+        this.bathrooms = 0;
+        this.price = 0;
+        // TODO Auto-generated constructor stub
+    }
 
     // Getters and setters
     public String getTitle() {

@@ -2,6 +2,9 @@ package com.ekarya.controller;
 
 import java.io.IOException;
 
+import com.ekarya.DAO.PropertyDAO;
+import com.ekarya.Models.Property;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -123,7 +126,9 @@ public class PropertyDashboardController {
 
     @FXML
     void loadPropertyData(ActionEvent event) {
+        for (Property p : PropertyDAO.properties) {
 
+        }
     }
 
     @FXML
