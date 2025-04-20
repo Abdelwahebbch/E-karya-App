@@ -2,9 +2,9 @@ package com.ekarya.controller;
 
 import java.io.IOException;
 
-
 import com.ekarya.DAO.PropertyDAO;
 import com.ekarya.Models.Property;
+import com.ekarya.Models.User;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,9 +19,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class PropertyDashboardController {
+    User currentUser = new User();
 
     public Property currentProperty;
-    
+
     @FXML
     private VBox propertiesContainer;
 
@@ -77,7 +78,8 @@ public class PropertyDashboardController {
     private Button deleteButton;
 
     @FXML
-    public void initialize() {
+    public void initialize(User user) {
+        this.currentUser=user;
         PropertyDAO.loadAllProperties();
         refreshPropertyList();
     }
@@ -99,6 +101,8 @@ public class PropertyDashboardController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddProperty.fxml"));
             Parent addPropertyRoot = loader.load();
+            AddPropertyController addPropertyController = loader.getController();
+            addPropertyController.initialize(currentUser);
 
             Stage stage = (Stage) titleText.getScene().getWindow();
             stage.setScene(new Scene(addPropertyRoot));
@@ -164,28 +168,28 @@ public class PropertyDashboardController {
         propertyButton.setMaxWidth(Double.MAX_VALUE);
         propertyButton.setOnAction(event -> loadPropertyData(property.getId()));
         propertyButton.setStyle("""
-            -fx-background-color: white;
-            -fx-border-color: #E0E0E0;
-            -fx-border-radius: 12;
-            -fx-background-radius: 12;
-            -fx-alignment: center-left;
-            -fx-padding: 10;
-            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);
-        """);
-        
+                    -fx-background-color: white;
+                    -fx-border-color: #E0E0E0;
+                    -fx-border-radius: 12;
+                    -fx-background-radius: 12;
+                    -fx-alignment: center-left;
+                    -fx-padding: 10;
+                    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);
+                """);
+
         Text propertyNameText = new Text(property.getTitle());
-        propertyNameText.setStyle("-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;");
-        
+        propertyNameText.setStyle(
+                "-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;");
+
         Text priceText = new Text(property.getPrice() + " TND per night");
         priceText.setStyle("-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;");
-        
+
         VBox textVBox = new VBox(propertyNameText, priceText);
         HBox hbox = new HBox(10, textVBox);
         propertyButton.setGraphic(hbox);
-        
+
         return propertyButton;
-        
+
     }
 
-    
 }

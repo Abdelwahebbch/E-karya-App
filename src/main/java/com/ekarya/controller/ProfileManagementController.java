@@ -94,8 +94,6 @@ public class ProfileManagementController {
             bioText.setText(user.getBio());
             dateOfBirthText.setText(InputValidator.convertSqlDateToString(user.getBirthday()));
 
-            // TO DO: nzidou bio wel birth date 
-
         }
     }
 

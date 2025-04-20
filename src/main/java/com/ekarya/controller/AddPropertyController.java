@@ -3,6 +3,7 @@ package com.ekarya.controller;
 import java.io.IOException;
 
 import com.ekarya.Models.Property;
+import com.ekarya.Models.User;
 import com.ekarya.DAO.PropertyDAO;
 import com.ekarya.DAO.UserDAO;
 
@@ -19,6 +20,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class AddPropertyController {
+
+    private User currentUser = new User();
 
     @FXML
     private TextField titleField;
@@ -52,6 +55,11 @@ public class AddPropertyController {
     private Button submitButton;
 
     @FXML
+    public void initialize(User user) {
+        this.currentUser = user;
+    }
+
+    @FXML
     void createPropertyButton(ActionEvent event) {
         Property data = collectPropertyData();
 
@@ -59,7 +67,7 @@ public class AddPropertyController {
             return; // invalid data
 
         try {
-            if (UserDAO.savePropertyDataToDataBase(data)) {
+            if (PropertyDAO.savePropertyDataToDataBase(data)) {
                 // Success alert
                 PropertyDAO.properties.add(data);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -95,6 +103,8 @@ public class AddPropertyController {
                 property.setBathrooms(Integer.parseInt(bathroomsField.getText()));
             if (!priceField.getText().isEmpty())
                 property.setPrice(Double.parseDouble(priceField.getText()));
+            property.setLandlord_id(currentUser.getId());
+            System.out.println(currentUser.getId());
         } catch (NumberFormatException e) {
             showAlert("Invalid Input", "Please enter valid numbers for guests, bedrooms, beds, bathrooms, and price.");
             return null;
@@ -122,9 +132,11 @@ public class AddPropertyController {
     @FXML
     void handleBackToDashboard(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropertyDashboard.fxml")); // corrected
-                                                                                                        // filename
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropertyDashboard.fxml")); 
             Parent dashboardRoot = loader.load();
+
+            PropertyDashboardController propertyDashboardController= loader.getController();
+            propertyDashboardController.initialize(currentUser);
 
             Stage stage = (Stage) submitButton.getScene().getWindow();
             Scene scene = new Scene(dashboardRoot);

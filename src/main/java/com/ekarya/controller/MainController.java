@@ -107,6 +107,8 @@ public class MainController  {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropertyDashboard.fxml"));
             Parent root = loader.load();
+            PropertyDashboardController propertyDashboardController= loader.getController();
+            propertyDashboardController.initialize(currentUser);
             scene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
@@ -145,10 +147,10 @@ public class MainController  {
 
     @FXML
     void handelLogOut(ActionEvent event) {
-        for (Property property : PropertyDAO.properties) {
-            PropertyDAO.saveProperty(property);
-        }
-        System.out.println("All properties saved before exit.");
+        // for (Property property : PropertyDAO.properties) {
+        //     PropertyDAO.saveProperty(property);
+        // }
+        // System.out.println("All properties saved before exit.");
         try {
             DatabaseConnection.closeConnection();
 
