@@ -1,8 +1,10 @@
 package com.ekarya.controller;
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,8 +14,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class BookingConfirmationController {
+import com.ekarya.Models.User;
 
+public class BookingConfirmationController {
+    User currentUser = new User();
     @FXML
     private Button homeButton;
 
@@ -94,21 +98,26 @@ public class BookingConfirmationController {
      */
     @FXML
     private void handleBackToHome(ActionEvent event) {
+        Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+        Scene scene = node.getScene();
+
         try {
-            // Load the home page FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
-            Parent homePageRoot = loader.load();
-            
-            // Get the current stage
-            Stage stage = (Stage) viewBookingsButton.getScene().getWindow();
-            
-            // Set the home page scene
-            Scene scene = new Scene(homePageRoot);
-            stage.setScene(scene);
-            stage.show();
-            stage.setFullScreen(true);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+            Parent root = loader.load();
+
+            MainController controller = loader.getController();
+            controller.initData(currentUser);
+
+            // Apply fade-in transition
+            root.setOpacity(0); // Start invisible
+            scene.setRoot(root); // Set the new root
+
+            FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), root);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.play();
+
         } catch (IOException e) {
-            System.err.println("Error loading HomePage.fxml: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -117,16 +126,23 @@ public class BookingConfirmationController {
      * Handles the action when the view bookings button is clicked.
      */
     @FXML
-    private void handleViewBookings() {
+    private void handleViewBookings(ActionEvent event) {
+        Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+        Scene scene = node.getScene();
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RentalInterface.fxml"));
             Parent root = loader.load();
 
-            Stage stage = (Stage) viewBookingsButton.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-            stage.setFullScreen(true);
+            // Apply fade-in transition
+            root.setOpacity(0); // Start invisible
+            scene.setRoot(root); // Set the new root
+
+            FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), root);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.play();
+
         } catch (IOException e) {
             e.printStackTrace();
             // Handle the exception appropriately, perhaps show an error dialog

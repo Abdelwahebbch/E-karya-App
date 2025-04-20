@@ -1,8 +1,10 @@
 package com.ekarya.controller;
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,7 +19,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ekarya.Models.User;
+
 public class RentalInterfaceController {
+      User currentUser = new User();
 
     @FXML
     private VBox rentedHomesContainer;
@@ -97,28 +102,31 @@ public class RentalInterfaceController {
      * Handles the back button action to navigate back to the home page
      */
     @FXML
-    private void handleBackToHome(ActionEvent event) {
-        try {
-            // Get the source of the event instead of using searchPropertiesButton
-            Button sourceButton = (Button) event.getSource();
-            
-            // Load the home page FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
-            Parent homePageRoot = loader.load();
-            
-            // Get the current stage using the source button
-            Stage stage = (Stage) sourceButton.getScene().getWindow();
-            
-            // Set the home page scene
-            Scene scene = new Scene(homePageRoot);
-            stage.setScene(scene);
-            stage.show();
-            stage.setFullScreen(true);
-        } catch (IOException e) {
-            System.err.println("Error loading HomePage.fxml: " + e.getMessage());
-            e.printStackTrace();
-        }
+private void handleBackToHome(ActionEvent event) {
+    Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+    Scene scene = node.getScene();
+
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        Parent root = loader.load();
+
+     
+        MainController controller = loader.getController();
+         controller.initData(currentUser);
+
+        // Apply fade-in transition
+        root.setOpacity(0); // Start invisible
+        scene.setRoot(root); // Set the new root
+
+        FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), root);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+        fadeIn.play();
+
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
 
     /**
      * Loads rental details when a property is selected from the list

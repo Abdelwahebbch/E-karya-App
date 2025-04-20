@@ -1,7 +1,6 @@
 package com.ekarya.controller;
 
 import java.io.IOException;
-import java.nio.channels.NetworkChannel;
 import java.util.Optional;
 
 import com.ekarya.DAO.PropertyDAO;
@@ -9,11 +8,11 @@ import com.ekarya.Models.User;
 import com.ekarya.Models.Property;
 import com.ekarya.utile.DatabaseConnection;
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -26,14 +25,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -115,6 +111,9 @@ public class MainController {
 
     @FXML
     public void handleListingClick(MouseEvent event) {
+        Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+        Scene scene = node.getScene();
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropertyDetail.fxml"));
             Parent root = loader.load();
@@ -123,10 +122,13 @@ public class MainController {
             propertyDetailController.initData(cuProperty,currentUser);
 
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            root.setOpacity(0); // Start invisible
+            scene.setRoot(root); // Set the new root
 
-            stage.setScene(new Scene(root));
-            stage.setFullScreen(true);
+            FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), root);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.play();
         } catch (IOException e) {
             handleException("Error loading property description", e);
         }
@@ -208,10 +210,6 @@ public class MainController {
 
     @FXML
     void handelLogOut(ActionEvent event) {
-        // for (Property property : PropertyDAO.properties) {
-        // PropertyDAO.saveProperty(property);
-        // }
-        // System.out.println("All properties saved before exit.");
         try {
             DatabaseConnection.closeConnection();
 

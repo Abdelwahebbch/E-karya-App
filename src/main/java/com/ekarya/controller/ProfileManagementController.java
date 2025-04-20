@@ -2,7 +2,6 @@ package com.ekarya.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.time.Duration;
 import java.time.LocalDate;
 
 import com.ekarya.DAO.UserDAO;
@@ -19,7 +18,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;

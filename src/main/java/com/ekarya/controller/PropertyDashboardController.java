@@ -6,9 +6,11 @@ import com.ekarya.DAO.PropertyDAO;
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -99,40 +101,56 @@ public class PropertyDashboardController {
 
     @FXML
     void handleAddPropertyButton(ActionEvent event) {
+        Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+        Scene scene = node.getScene();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddProperty.fxml"));
             Parent addPropertyRoot = loader.load();
+
             AddPropertyController addPropertyController = loader.getController();
             addPropertyController.initialize(currentUser);
 
-            Stage stage = (Stage) titleText.getScene().getWindow();
-            stage.setScene(new Scene(addPropertyRoot));
-            stage.setFullScreen(true);
-            stage.show();
+             // Apply fade-in transition
+             addPropertyRoot.setOpacity(0); // Start invisible
+             scene.setRoot(addPropertyRoot); // Set the new root
+
+            FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), addPropertyRoot);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.play();
         } catch (IOException e) {
             System.err.println("Error loading AddProperty.fxml: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    @FXML
-    void handleBackToHome(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
-            Parent mainRoot = loader.load();
 
-            MainController mainController = loader.getController();
-            mainController.initData(currentUser);
+ @FXML
+private void handleBackToHome(ActionEvent event) {
+    Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+    Scene scene = node.getScene();
 
-            Stage stage = (Stage) titleText.getScene().getWindow();
-            stage.setScene(new Scene(mainRoot));
-            stage.setFullScreen(true);
-            stage.show();
-        } catch (IOException e) {
-            System.err.println("Error loading Main.fxml: " + e.getMessage());
-            e.printStackTrace();
-        }
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        Parent root = loader.load();
+
+     
+        MainController controller = loader.getController();
+         controller.initData(currentUser);
+
+        // Apply fade-in transition
+        root.setOpacity(0); // Start invisible
+        scene.setRoot(root); // Set the new root
+
+        FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), root);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+        fadeIn.play();
+
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
 
     @FXML
     void handleDeleteProperty(ActionEvent event) {

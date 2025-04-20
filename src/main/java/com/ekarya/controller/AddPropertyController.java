@@ -6,9 +6,11 @@ import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 import com.ekarya.DAO.PropertyDAO;
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -117,20 +119,30 @@ public class AddPropertyController {
 
     @FXML
     void handleBackToDashboard(ActionEvent event) {
+        Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+        Scene scene = node.getScene();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropertyDashboard.fxml"));
-            Parent dashboardRoot = loader.load();
+            Parent root = loader.load();
 
             PropertyDashboardController propertyDashboardController = loader.getController();
             propertyDashboardController.initialize(currentUser);
 
-            Stage stage = (Stage) submitButton.getScene().getWindow();
-            Scene scene = new Scene(dashboardRoot);
-            stage.setScene(scene);
-            stage.setFullScreen(true);
+            // Appliquer opacité à 0 pour début de l'animation
+            root.setOpacity(0);
+            scene.setRoot(root);
+
+
+            // Lancer animation de fondu
+            FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(1), root);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.play();
+
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Navigation Error", "Failed to load dashboard.");
         }
     }
+
 }
