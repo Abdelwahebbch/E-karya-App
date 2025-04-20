@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.ekarya.DAO.PropertyDAO;
 import com.ekarya.Models.User;
+import com.ekarya.Models.Property;
 import com.ekarya.utile.DatabaseConnection;
 
 import javafx.event.ActionEvent;
@@ -17,9 +18,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,6 +37,9 @@ import javafx.stage.StageStyle;
 public class MainController {
 
     User currentUser = new User();
+    private int column = 0;
+    private int row = 0;
+    private final int MAX_COLUMNS = 2;
 
     // FXML injected fields
     @FXML
@@ -46,15 +58,37 @@ public class MainController {
     private VBox listing4;
     @FXML
     private VBox listing5;
-    @FXML
-    private VBox listing6;
-    @FXML
-    private ComboBox<?> travelersCombo;
+    @FXML private VBox listing6;
+    @FXML private GridPane propertiesGridPane;
+    @FXML private ComboBox<?> travelersCombo;
 
     // Event handlers
     public void initData(User user) {
         this.currentUser = user;
         PropertyDAO.loadAllProperties();
+        refreshPropertyList();
+    }
+
+    public void addPropertyToGrid(Property property) {
+        Node card = createListingCard(property);
+
+        GridPane.setColumnIndex(card, column);
+        GridPane.setRowIndex(card, row);
+
+        propertiesGridPane.getChildren().add(card);
+
+        column++;
+        if (column > MAX_COLUMNS) {
+            column = 0;
+            row++;
+        }
+    }
+
+    private void refreshPropertyList() {
+        propertiesGridPane.getChildren().clear();
+        for (Property p : PropertyDAO.properties) {
+                addPropertyToGrid(p);
+        }
     }
 
     @FXML
@@ -184,6 +218,48 @@ public class MainController {
         System.err.println(message + ": " + e.getMessage());
         e.printStackTrace();
 
+    }
+
+    public VBox createListingCard(Property p) {
+        VBox card = new VBox();
+
+        // // Image
+        // ImageView imageView = new ImageView(new Image(getClass().getResource("@placeholder.jpg").toExternalForm()));
+        // imageView.setFitWidth(300);
+        // imageView.setFitHeight(220);
+        // imageView.setPreserveRatio(true);
+
+        // StackPane imagePane = new StackPane(imageView);
+
+        VBox contentBox = new VBox();
+
+        // Top Row: Location and Rating
+        HBox topRow = new HBox();
+        Label location = new Label(p.getLocation());
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        Label star = new Label("★");
+        Label rating = new Label("4,96");
+
+        HBox ratingBox = new HBox(star, rating);
+        topRow.getChildren().addAll(location, spacer, ratingBox);
+
+        // Subtitle and Date
+        Label subtitle = new Label(p.getTitle());
+        Label date = new Label("March 1-6");
+
+        // Price Row
+        HBox priceRow = new HBox();
+        Label price = new Label(p.getPrice() + "");
+        Label perNight = new Label("per night");
+        priceRow.getChildren().addAll(price, perNight);
+
+        contentBox.getChildren().addAll(topRow, subtitle, date, priceRow);
+        card.getChildren().addAll(contentBox);
+
+        return card;
     }
 
 }
