@@ -79,7 +79,7 @@ public class PropertyDashboardController {
 
     @FXML
     public void initialize(User user) {
-        this.currentUser=user;
+        this.currentUser = user;
         PropertyDAO.loadAllProperties();
         refreshPropertyList();
     }
@@ -87,7 +87,7 @@ public class PropertyDashboardController {
     private void refreshPropertyList() {
         propertiesContainer.getChildren().clear();
         for (Property p : PropertyDAO.properties) {
-            if(p.getLandlord_id()==currentUser.getId())
+            if (p.getLandlord_id() == currentUser.getId())
                 addPropertyToList(p);
         }
     }
@@ -121,7 +121,7 @@ public class PropertyDashboardController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
             Parent mainRoot = loader.load();
 
-            MainController mainController= loader.getController();
+            MainController mainController = loader.getController();
             mainController.initData(currentUser);
 
             Stage stage = (Stage) titleText.getScene().getWindow();
@@ -163,6 +163,7 @@ public class PropertyDashboardController {
             bedroomsText.setText(String.valueOf(currentProperty.getBedrooms()));
             bedsText.setText(String.valueOf(currentProperty.getBeds()));
             guestsText.setText(String.valueOf(currentProperty.getGuests()));
+            priceText.setText(currentProperty.getPrice() + "");
         }
     }
 
