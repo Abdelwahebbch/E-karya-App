@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 import com.ekarya.DAO.PropertyDAO;
-import com.ekarya.DAO.UserDAO;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -132,10 +131,10 @@ public class AddPropertyController {
     @FXML
     void handleBackToDashboard(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropertyDashboard.fxml")); 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropertyDashboard.fxml"));
             Parent dashboardRoot = loader.load();
 
-            PropertyDashboardController propertyDashboardController= loader.getController();
+            PropertyDashboardController propertyDashboardController = loader.getController();
             propertyDashboardController.initialize(currentUser);
 
             Stage stage = (Stage) submitButton.getScene().getWindow();

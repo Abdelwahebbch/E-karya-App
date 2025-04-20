@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 import com.ekarya.utile.DatabaseConnection;
 

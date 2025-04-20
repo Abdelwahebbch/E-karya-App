@@ -3,8 +3,6 @@ package com.ekarya.controller;
 import java.io.IOException;
 import java.util.Optional;
 
-import com.ekarya.DAO.PropertyDAO;
-import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 import com.ekarya.utile.DatabaseConnection;
 
