@@ -129,6 +129,7 @@ public class MainController {
             fadeIn.setFromValue(0);
             fadeIn.setToValue(1);
             fadeIn.play();
+
         } catch (IOException e) {
             handleException("Error loading property description", e);
         }

@@ -10,7 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.stage.Stage;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -22,6 +23,10 @@ import com.ekarya.Models.User;
 public class PropertyDetailController {
 
     User currentUser = new User();
+    Property currentProperty = new Property();
+    @FXML
+    private Button bookButton;
+
     @FXML
     private DatePicker checkInDatePicker;
 
@@ -29,10 +34,74 @@ public class PropertyDetailController {
     private DatePicker checkOutDatePicker;
 
     @FXML
-    private ComboBox<Integer> nbVoyage;
+    private Text descriptionField;
 
     @FXML
-    private Button bookButton;
+    private Text detailsField;
+
+    @FXML
+    private Text equationField;
+
+    @FXML
+    private Text equationResultField;
+
+    @FXML
+    private Text finalPriceField;
+
+    @FXML
+    private Text locationField;
+
+    @FXML
+    private TextField nbGuestField;
+
+    @FXML
+    private Text priceField;
+
+    @FXML
+    private Text propNameField;
+
+    @FXML
+    private Text titleField;
+
+    @FXML
+    private Text tvaField;
+
+    public void initialize() {
+        checkInDatePicker.valueProperty().addListener((obs, oldDate, newDate) -> {
+            calculateAndDisplayDays();
+        });
+
+        checkOutDatePicker.valueProperty().addListener((obs, oldDate, newDate) -> {
+            calculateAndDisplayDays();
+        });
+
+    }
+
+    private void calculateAndDisplayDays() {
+        LocalDate checkInDate = checkInDatePicker.getValue();
+        LocalDate checkOutDate = checkOutDatePicker.getValue();
+
+        if (checkInDate != null && checkOutDate != null) {
+            int numberOfDays = (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate);
+
+            if (numberOfDays < 0) {
+                System.out.println("Check-out date must be after check-in date!");
+                checkOutDatePicker.setValue(null);
+                equationField.setText("");
+                equationResultField.setText("");
+                return;
+            }
+
+            equationField.setText(currentProperty.getPrice() + " x " + numberOfDays);
+            equationResultField.setText(String.valueOf(currentProperty.getPrice() * numberOfDays));
+            tvaField.setText(String.valueOf((currentProperty.getPrice() * numberOfDays) * 0.1));
+            finalPriceField.setText(((currentProperty.getPrice() * numberOfDays) * 0.1)
+                    + (currentProperty.getPrice() * numberOfDays) + "");
+        } else {
+            equationField.setText("");
+            equationResultField.setText("");
+        }
+    }
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -57,9 +126,18 @@ public class PropertyDetailController {
     // checkOutDatePicker.valueProperty().addListener((obs, oldVal, newVal) ->
     // updatePriceCalculation());
     // }
+
     public void initData(Property p, User u) {
-        System.out.println(p);
         currentUser = u;
+        currentProperty = p;
+        descriptionField.setText(p.getDescription());
+        detailsField.setText(
+                p.getGuests() + " Guestes " + p.getBathrooms() + " Bathrooms " + p.getBedrooms() + " Bedrooms");
+        locationField.setText("• " + p.getLocation());
+        priceField.setText(p.getPrice() + " TND per night ");
+        propNameField.setText(p.getTitle());
+        titleField.setText(p.getTitle());
+
     }
 
     /**

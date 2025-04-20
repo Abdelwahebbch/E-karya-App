@@ -209,25 +209,37 @@
 -- -- This is a placeholder comment to indicate where you would insert image data
 -- -- INSERT INTO PropertyImages (property_id, image_data, file_name, mime_type, file_size, caption, display_order, is_primary, uploaded_by)
 -- -- VALUES (1, [BLOB DATA], 'beach_view.jpg', 'image/jpeg', 1048576, 'Stunning ocean view', 1, 1, 'admin');
-INSERT INTO properties (
-    id, 
-    title, 
-    location, 
-    price_per_night, 
-    max_guests, 
-    max_beds, 
-    max_bedrooms, 
-    max_bathrooms, 
-    description
-) VALUES (
-    6, 
-    'Dar Abdelwaheb', 
-    'France', 
-    99999, 
-    4, 
-    2, 
-    1, 
-    1, 
-    'A beautiful apartment !!'
-);
+INSERT INTO properties VALUES (1000, 'Cozy Apartment in Downtown', 'New York, NY', 120.00, 4, 2, 2, 1, 'Modern apartment close to subway and shopping.', 1);
+INSERT INTO properties VALUES (1001, 'Beachfront Villa', 'Malibu, CA', 450.00, 8, 4, 4, 3, 'Luxury villa with ocean views and private pool.', 2);
+INSERT INTO properties VALUES (1002, 'Mountain Retreat', 'Aspen, CO', 300.00, 6, 3, 3, 2, 'Peaceful cabin surrounded by nature.', 3);
+INSERT INTO properties VALUES (1003, 'Urban Studio', 'Chicago, IL', 95.00, 2, 1, 1, 1, 'Simple studio for solo travelers or couples.', 1);
+INSERT INTO properties VALUES (1004, 'Modern Loft', 'San Francisco, CA', 200.00, 3, 2, 1, 1, 'Stylish loft with open space and sunlight.', 2);
+INSERT INTO properties VALUES (1005, 'Countryside House', 'Nashville, TN', 150.00, 5, 3, 2, 2, 'Relaxing house near the countryside.', 3);
+INSERT INTO properties VALUES (1006, 'Lakeview Cabin', 'Lake Tahoe, NV', 220.00, 6, 3, 3, 2, 'Scenic views of the lake with cozy interiors.', 1);
+INSERT INTO properties VALUES (1007, 'Penthouse Suite', 'Miami, FL', 500.00, 6, 3, 3, 2, 'Top-floor luxury suite near beach.', 2);
+INSERT INTO properties VALUES (1008, 'Tiny Home', 'Portland, OR', 70.00, 2, 1, 1, 1, 'Eco-friendly tiny home for short stays.', 3);
+INSERT INTO properties VALUES (1009, 'Ranch Stay', 'Austin, TX', 180.00, 5, 3, 3, 2, 'Farmhouse experience in the Texas hills.', 1);
+
+INSERT INTO properties VALUES (1010, 'Desert House', 'Phoenix, AZ', 160.00, 4, 2, 2, 2, 'Modern home with desert-style decor.', 2);
+INSERT INTO properties VALUES (1011, 'Ski-in/Ski-out Chalet', 'Park City, UT', 400.00, 8, 4, 4, 3, 'Perfect for winter vacations.', 3);
+INSERT INTO properties VALUES (1012, 'Historic Bungalow', 'Savannah, GA', 140.00, 4, 2, 2, 1, 'Beautiful restored home in the historic district.', 1);
+INSERT INTO properties VALUES (1013, 'Treehouse Experience', 'Atlanta, GA', 130.00, 2, 1, 1, 1, 'Unique elevated stay among trees.', 2);
+INSERT INTO properties VALUES (1014, 'Downtown Condo', 'Seattle, WA', 190.00, 3, 2, 1, 1, 'Modern condo in the heart of the city.', 3);
+INSERT INTO properties VALUES (1015, 'Ocean Bungalow', 'Honolulu, HI', 420.00, 4, 2, 2, 2, 'Beach paradise with private access.', 1);
+INSERT INTO properties VALUES (1016, 'Studio Near Campus', 'Boston, MA', 110.00, 2, 1, 1, 1, 'Ideal for visiting students and scholars.', 2);
+INSERT INTO properties VALUES (1017, 'Luxury Farmhouse', 'Boulder, CO', 320.00, 6, 4, 3, 3, 'Modern comfort meets rustic charm.', 3);
+INSERT INTO properties VALUES (1018, 'Basement Apartment', 'Detroit, MI', 85.00, 2, 1, 1, 1, 'Affordable and newly renovated.', 1);
+INSERT INTO properties VALUES (1019, 'Modern Cabin', 'Smoky Mountains, TN', 230.00, 5, 3, 2, 2, 'Nature retreat with all modern amenities.', 2);
+
+INSERT INTO properties VALUES (1020, 'Loft with City View', 'Los Angeles, CA', 275.00, 4, 2, 2, 2, 'Panoramic views and close to everything.', 3);
+INSERT INTO properties VALUES (1021, 'Eco Lodge', 'Sedona, AZ', 210.00, 4, 2, 2, 2, 'Eco-conscious stay in the red rocks.', 1);
+INSERT INTO properties VALUES (1022, 'Family Villa', 'Orlando, FL', 240.00, 6, 3, 3, 2, 'Great for family vacations near parks.', 2);
+INSERT INTO properties VALUES (1023, 'Minimalist Flat', 'San Jose, CA', 180.00, 2, 1, 1, 1, 'Clean and simple space with smart tech.', 3);
+INSERT INTO properties VALUES (1024, 'Vintage Home', 'Philadelphia, PA', 160.00, 4, 2, 2, 2, 'Classic charm in a quiet neighborhood.', 1);
+INSERT INTO properties VALUES (1025, 'Island Escape', 'Key West, FL', 380.00, 5, 3, 3, 2, 'Relaxing island vibes with beach access.', 2);
+INSERT INTO properties VALUES (1026, 'High-Rise Apartment', 'Denver, CO', 195.00, 3, 2, 1, 1, 'Skyline views with luxury furniture.', 3);
+INSERT INTO properties VALUES (1027, 'Suburban Retreat', 'Columbus, OH', 145.00, 4, 2, 2, 1, 'Quiet place for families.', 1);
+INSERT INTO properties VALUES (1028, 'Countryside Cottage', 'Burlington, VT', 125.00, 3, 2, 2, 1, 'Cozy place with fireplace and garden.', 2);
+INSERT INTO properties VALUES (1029, 'Studio in Arts District', 'Dallas, TX', 105.00, 2, 1, 1, 1, 'Trendy studio surrounded by culture.', 3);
+
  COMMIT;
