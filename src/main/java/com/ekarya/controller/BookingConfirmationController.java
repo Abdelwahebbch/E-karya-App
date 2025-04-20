@@ -41,7 +41,7 @@ public class BookingConfirmationController {
     private int adultGuests;
     private int childGuests;
     private double totalPrice;
-    private String currency = "€";
+    private String currency = "TND";
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -63,7 +63,7 @@ public class BookingConfirmationController {
         this.adultGuests = adultGuests;
         this.childGuests = childGuests;
         this.totalPrice = totalPrice;
-        this.currency = currency != null ? currency : "€";
+        this.currency = currency != null ? currency : "TND";
 
         updateUI();
     }
@@ -149,7 +149,7 @@ public class BookingConfirmationController {
                 2,
                 0,
                 594.0,
-                "€");
+                "TND");
 
         Scene scene = new Scene(root);
         stage.setScene(scene);

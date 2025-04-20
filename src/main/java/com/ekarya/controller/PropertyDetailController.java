@@ -122,7 +122,7 @@ public class PropertyDetailController {
         System.out.println("Check-out: " + checkOutDate);
         System.out.println("Guests: " + guests);
         System.out.println("Total nights: " + nights);
-        System.out.println("Total price: €" + total);
+        System.out.println("Total price: TND" + total);
         
         // In a real application, you would:
         // 1. Save the booking to a database
