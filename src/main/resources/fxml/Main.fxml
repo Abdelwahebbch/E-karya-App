@@ -108,7 +108,7 @@
 
 <!-- Listings Grid with 3 columns -->
 <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-padding: 0; -fx-background-insets: 0;" VBox.vgrow="ALWAYS">
-    <GridPane hgap="20" style="-fx-padding: 20;" vgap="24">
+    <GridPane fx:id="propertiesGridPane" hgap="20" style="-fx-padding: 20;" vgap="24">
         <columnConstraints>
             <ColumnConstraints percentWidth="33.33" />
             <ColumnConstraints percentWidth="33.33" />
