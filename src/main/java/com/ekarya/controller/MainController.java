@@ -120,7 +120,7 @@ public class MainController {
             Parent root = loader.load();
 
             PropertyDetailController propertyDetailController = loader.getController();
-            propertyDetailController.initData(cuProperty);
+            propertyDetailController.initData(cuProperty,currentUser);
 
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -15,8 +15,10 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import com.ekarya.Models.Property;
+import com.ekarya.Models.User;
 
 public class PropertyDetailController {
+    User cUser= new User();
 
     @FXML
     private DatePicker checkInDatePicker;
@@ -51,9 +53,10 @@ public class PropertyDetailController {
     //     checkInDatePicker.valueProperty().addListener((obs, oldVal, newVal) -> updatePriceCalculation());
     //     checkOutDatePicker.valueProperty().addListener((obs, oldVal, newVal) -> updatePriceCalculation());
     // }
-    public void initData(Property p)
+    public void initData(Property p, User u)
     {
         System.out.println(p);
+        cUser=u;
     }
 
     /**
@@ -62,20 +65,18 @@ public class PropertyDetailController {
     @FXML
     private void handleBackToHome(ActionEvent event) {
         try {
-            // Load the home page FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
-            Parent homePageRoot = loader.load();
-            
-            // Get the current stage
-            Stage stage = (Stage) bookButton.getScene().getWindow();
-            
-            // Set the home page scene
-            Scene scene = new Scene(homePageRoot);
-            stage.setScene(scene);
-            stage.show();
+            Parent mainRoot = loader.load();
+
+            MainController mainController = loader.getController();
+            mainController.initData(cUser);
+
+            Stage stage = (Stage) checkInDatePicker.getScene().getWindow();
+            stage.setScene(new Scene(mainRoot));
             stage.setFullScreen(true);
+            stage.show();
         } catch (IOException e) {
-            System.err.println("Error loading HomePage.fxml: " + e.getMessage());
+            System.err.println("Error loading Main.fxml: " + e.getMessage());
             e.printStackTrace();
         }
     }
