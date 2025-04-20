@@ -87,8 +87,7 @@ public class PropertyDashboardController {
     private void refreshPropertyList() {
         propertiesContainer.getChildren().clear();
         for (Property p : PropertyDAO.properties) {
-            if(p.getLandlord_id()==currentUser.getId())
-                addPropertyToList(p);
+            addPropertyToList(p);
         }
     }
 
@@ -120,6 +119,9 @@ public class PropertyDashboardController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
             Parent mainRoot = loader.load();
+
+            MainController mainController= loader.getController();
+            mainController.initData(currentUser);
 
             Stage stage = (Stage) titleText.getScene().getWindow();
             stage.setScene(new Scene(mainRoot));
