@@ -3,6 +3,7 @@ package com.ekarya.controller;
 import java.io.IOException;
 import java.util.Optional;
 
+import com.ekarya.DAO.PropertyDAO;
 import com.ekarya.Models.User;
 import com.ekarya.utile.DatabaseConnection;
 
@@ -24,7 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class MainController  {
+public class MainController {
 
     User currentUser = new User();
 
@@ -53,9 +54,8 @@ public class MainController  {
     // Event handlers
     public void initData(User user) {
         this.currentUser = user;
+        PropertyDAO.loadAllProperties();
     }
-
-   
 
     @FXML
     public void handleListingClick(MouseEvent event) {
@@ -105,7 +105,7 @@ public class MainController  {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropertyDashboard.fxml"));
             Parent root = loader.load();
-            PropertyDashboardController propertyDashboardController= loader.getController();
+            PropertyDashboardController propertyDashboardController = loader.getController();
             propertyDashboardController.initialize(currentUser);
             scene.setRoot(root);
         } catch (IOException e) {
@@ -146,7 +146,7 @@ public class MainController  {
     @FXML
     void handelLogOut(ActionEvent event) {
         // for (Property property : PropertyDAO.properties) {
-        //     PropertyDAO.saveProperty(property);
+        // PropertyDAO.saveProperty(property);
         // }
         // System.out.println("All properties saved before exit.");
         try {
@@ -155,7 +155,7 @@ public class MainController  {
             Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
             confirmDialog.setTitle("Logout Confirmation");
             confirmDialog.setHeaderText("Are you sure you want to logout?");
-            //confirmDialog.setContentText("Any unsaved changes will be lost.");
+            // confirmDialog.setContentText("Any unsaved changes will be lost.");
 
             Optional<ButtonType> result = confirmDialog.showAndWait();
 
