@@ -87,7 +87,8 @@ public class PropertyDashboardController {
     private void refreshPropertyList() {
         propertiesContainer.getChildren().clear();
         for (Property p : PropertyDAO.properties) {
-            addPropertyToList(p);
+            if(p.getLandlord_id()==currentUser.getId())
+                addPropertyToList(p);
         }
     }
 
