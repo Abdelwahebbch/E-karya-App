@@ -2,12 +2,14 @@ package com.ekarya.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.time.Duration;
 import java.time.LocalDate;
 
 import com.ekarya.DAO.UserDAO;
 import com.ekarya.Models.User;
 import com.ekarya.validation.InputValidator;
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -62,28 +65,36 @@ public class ProfileManagementController {
     private Text fullnameText;
     @FXML
     private Label errorLabel;
-    @FXML private Label passwordErrorLabel;
-
     @FXML
-    private void handleBackToHome(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-            Parent mainRoot = loader.load();
-            
-            MainController mainController = loader.getController();
-            mainController.initData(currentUser);
-            
-            Stage stage = (Stage) saveChangesButton.getScene().getWindow();
-            
-            Scene scene = new Scene(mainRoot);
-            stage.setScene(scene);
-            stage.show();
-            stage.setFullScreen(true);
-        } catch (IOException e) {
-            System.err.println("Error loading HomePage.fxml: " + e.getMessage());
-            e.printStackTrace();
-        }
+    private Label passwordErrorLabel;
+
+ @FXML
+private void handleBackToHome(ActionEvent event) {
+    Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+    Scene scene = node.getScene();
+
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        Parent root = loader.load();
+
+     
+        MainController controller = loader.getController();
+         controller.initData(currentUser);
+
+        // Apply fade-in transition
+        root.setOpacity(0); // Start invisible
+        scene.setRoot(root); // Set the new root
+
+        FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), root);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+        fadeIn.play();
+
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
 
     public void initData(User user) {
         this.currentUser = user;
@@ -150,14 +161,14 @@ public class ProfileManagementController {
 
     @FXML
     void handleCloseButton(MouseEvent event) {
-                fullNameField.clear();
-                emailField.clear();
-                phoneField.clear();
-                dateOfBirth.setValue(null);
-                bioField.clear();
-                currentPassword.clear();
-                newPassword.clear();
-                confirmPassword.clear();
+        fullNameField.clear();
+        emailField.clear();
+        phoneField.clear();
+        dateOfBirth.setValue(null);
+        bioField.clear();
+        currentPassword.clear();
+        newPassword.clear();
+        confirmPassword.clear();
     }
 
     @FXML
@@ -197,21 +208,19 @@ public class ProfileManagementController {
             passwordErrorLabel.setTextFill(javafx.scene.paint.Color.RED);
             return;
         }
-        if (!InputValidator.isValidPassword(newPass))
-        {
-            passwordErrorLabel.setText("Password must be at least 8 characters long, include upper and lower case letters, a number, and a special character.");
+        if (!InputValidator.isValidPassword(newPass)) {
+            passwordErrorLabel.setText(
+                    "Password must be at least 8 characters long, include upper and lower case letters, a number, and a special character.");
             passwordErrorLabel.setTextFill(javafx.scene.paint.Color.RED);
             return;
-            
+
         }
-        if (!newPass.equals(confirmPass)) 
-        {
+        if (!newPass.equals(confirmPass)) {
             passwordErrorLabel.setText("New passwords do not match.");
             passwordErrorLabel.setTextFill(javafx.scene.paint.Color.RED);
             return;
         }
 
-    
         UserDAO userDAO = new UserDAO();
         boolean isChanged = userDAO.changePassword(currentUser.getId(), currentPass, newPass);
 
@@ -219,7 +228,7 @@ public class ProfileManagementController {
             errorLabel.setText("Password updated successfully!");
             errorLabel.setTextFill(javafx.scene.paint.Color.GREEN);
             currentUser.setPassword(confirmPass);
-    
+
             currentPassword.clear();
             newPassword.clear();
             confirmPassword.clear();
