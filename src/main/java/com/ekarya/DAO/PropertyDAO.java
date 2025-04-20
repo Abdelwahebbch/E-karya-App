@@ -32,7 +32,8 @@ public class PropertyDAO {
                         resultSet.getInt("max_bedrooms"),
                         resultSet.getInt("max_beds"),
                         resultSet.getInt("max_bathrooms"),
-                        resultSet.getDouble("price_per_night")));
+                        resultSet.getDouble("price_per_night"),
+                        resultSet.getString("landlord_id")));
             }
 
         } catch (SQLException e) {
