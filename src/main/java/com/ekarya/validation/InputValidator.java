@@ -59,12 +59,19 @@ public class InputValidator {
     }
 
     public static String convertSqlDateToString(Date sqlDate) {
-        if(sqlDate != null)
-        {
+        if (sqlDate != null) {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             return formatter.format(sqlDate);
         }
         return null;
+
+    }
+
+    public static boolean samePassword(String pass1, String Pass2) {
+        if (pass1.equals(Pass2)) {
+            return true;
+        }
+        return false;
 
     }
 }

@@ -16,7 +16,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
-        stage.setTitle("Hello !");
+        stage.setTitle("Hello again !");
         //stage.setFullScreen(true);
 
     }

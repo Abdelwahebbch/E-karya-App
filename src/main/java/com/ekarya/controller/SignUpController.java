@@ -26,6 +26,8 @@ public class SignUpController {
 
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private PasswordField secpass;
 
     @FXML
     private Label errorLabel;
@@ -35,8 +37,9 @@ public class SignUpController {
         String fullName = fullNameField.getText();
         String email = emailField.getText();
         String phoneNumber = phoneField.getText();
-        String password = passwordField.getText();
         UserDAO userDAO = new UserDAO();
+        String password = passwordField.getText();
+        String secPassword = secpass.getText();
 
         // Check if ANY field is empty (using OR instead of AND)
         if (fullName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || password.isEmpty()) {
@@ -48,11 +51,15 @@ public class SignUpController {
         } else if (!InputValidator.isValidEmail(email)) {
             showError("Invalid email format.");
             return;
+        } else if (!InputValidator.samePassword(password, secPassword)) {
+            showError("passwords are not the same .");
+            return;
         } else if (!InputValidator.isValidPhoneNumber(phoneNumber)) {
             showError("Phone number must be 8 digits and start with 9X, 5X, or 2X.");
             return;
         } else if (!InputValidator.isValidPassword(password)) {
-            showError("Password must be at least 8 characters long, include upper and lower case letters, a number, and a special character.");
+            showError(
+                    "Password must be at least 8 characters long, include upper and lower case letters, a number, and a special character.");
             return;
         } else {
             User user = userDAO.createUser(fullName, phoneNumber, email, password);
@@ -61,13 +68,11 @@ public class SignUpController {
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
                     Parent mainRoot = loader.load();
-                    
+
                     MainController mainController = loader.getController();
                     mainController.initData(user);
-     
 
                     Stage stage = (Stage) fullNameField.getScene().getWindow();
-
 
                     Scene mainScene = new Scene(mainRoot);
                     stage.setScene(mainScene);
