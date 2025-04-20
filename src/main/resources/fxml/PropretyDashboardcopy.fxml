@@ -48,33 +48,90 @@
                 <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
                     <VBox fx:id="propertiesContainer" spacing="10">
                         <!-- Property buttons will be added dynamically -->
-                        <Button maxWidth="Infinity" onAction="#loadPropertyData" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-alignment: center-left; -fx-padding: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
+                        <Button maxWidth="Infinity" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-alignment: center-left; -fx-padding: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
                             <graphic>
                                 <HBox spacing="10">
                                     <ImageView fitHeight="50" fitWidth="50" preserveRatio="true" style="-fx-background-radius: 8;">
                                         <Image url="@placeholder.jpg" />
                                     </ImageView>
                                     <VBox>
-                                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="Paris Apartment" />
+                                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="Property_1" />
                                         <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="104 € per night" />
                                     </VBox>
                                 </HBox>
                             </graphic>
                         </Button>
                         
-                        <Button maxWidth="Infinity" onAction="#loadPropertyDetails" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-alignment: center-left; -fx-padding: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
+                        <Button maxWidth="Infinity" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-alignment: center-left; -fx-padding: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
                             <graphic>
                                 <HBox spacing="10">
                                     <ImageView fitHeight="50" fitWidth="50" preserveRatio="true" style="-fx-background-radius: 8;">
                                         <Image url="@placeholder.jpg" />
                                     </ImageView>
                                     <VBox>
-                                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="Marseille Villa" />
+                                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="Property_2" />
                                         <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="150 € per night" />
                                     </VBox>
                                 </HBox>
                             </graphic>
                         </Button>
+                  <Button maxWidth="Infinity" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-alignment: center-left; -fx-padding: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
+                     <graphic>
+                        <HBox spacing="10">
+                           <children>
+                              <ImageView fitHeight="50" fitWidth="50" preserveRatio="true" style="-fx-background-radius: 8;">
+                                 <image>
+                                    <Image url="@placeholder.jpg" />
+                                 </image>
+                              </ImageView>
+                              <VBox>
+                                 <children>
+                                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="Property_3" />
+                                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="104 € per night" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  <Button maxWidth="Infinity" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-alignment: center-left; -fx-padding: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
+                     <graphic>
+                        <HBox spacing="10">
+                           <children>
+                              <ImageView fitHeight="50" fitWidth="50" preserveRatio="true" style="-fx-background-radius: 8;">
+                                 <image>
+                                    <Image url="@placeholder.jpg" />
+                                 </image>
+                              </ImageView>
+                              <VBox>
+                                 <children>
+                                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="Property_4" />
+                                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="104 € per night" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  <Button maxWidth="Infinity" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-alignment: center-left; -fx-padding: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
+                     <graphic>
+                        <HBox spacing="10">
+                           <children>
+                              <ImageView fitHeight="50" fitWidth="50" preserveRatio="true" style="-fx-background-radius: 8;">
+                                 <image>
+                                    <Image url="@placeholder.jpg" />
+                                 </image>
+                              </ImageView>
+                              <VBox>
+                                 <children>
+                                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="Property_5" />
+                                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="104 € per night" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
                     </VBox>
                 </ScrollPane>
                 
