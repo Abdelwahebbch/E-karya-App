@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import com.ekarya.Models.Property;
+
 public class PropertyDetailController {
 
     @FXML
@@ -32,22 +34,26 @@ public class PropertyDetailController {
      * Initializes the controller class. This method is automatically called
      * after the FXML file has been loaded.
      */
-    @FXML
-    private void initialize() {
-        // Initialize the number of guests combo box
-        for (int i = 1; i <= 10; i++) {
-            nbVoyage.getItems().add(i);
-        }
-        nbVoyage.setValue(2); // Default to 2 guests
+    // @FXML
+    // private void initialize() {
+    //     // Initialize the number of guests combo box
+    //     for (int i = 1; i <= 10; i++) {
+    //         nbVoyage.getItems().add(i);
+    //     }
+    //     nbVoyage.setValue(2); // Default to 2 guests
         
-        // Set default dates (current date and 5 days later)
-        LocalDate today = LocalDate.now();
-        checkInDatePicker.setValue(today);
-        checkOutDatePicker.setValue(today.plusDays(5));
+    //     // Set default dates (current date and 5 days later)
+    //     LocalDate today = LocalDate.now();
+    //     checkInDatePicker.setValue(today);
+    //     checkOutDatePicker.setValue(today.plusDays(5));
         
-        // Add listeners to update price calculation when dates change
-        checkInDatePicker.valueProperty().addListener((obs, oldVal, newVal) -> updatePriceCalculation());
-        checkOutDatePicker.valueProperty().addListener((obs, oldVal, newVal) -> updatePriceCalculation());
+    //     // Add listeners to update price calculation when dates change
+    //     checkInDatePicker.valueProperty().addListener((obs, oldVal, newVal) -> updatePriceCalculation());
+    //     checkOutDatePicker.valueProperty().addListener((obs, oldVal, newVal) -> updatePriceCalculation());
+    // }
+    public void initData(Property p)
+    {
+        System.out.println(p);
     }
 
     /**
