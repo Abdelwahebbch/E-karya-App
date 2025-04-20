@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="10" styleClass="card"  xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.SignInController">
+
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+
+    <Label styleClass="title" text="Sign In" />
+    <Label styleClass="description" text="Welcome back! Please enter your details." />
+    
+    <!-- Error message label - will be hidden by default and shown when errors occur -->
+    <Label fx:id="errorLabel" styleClass="error-label" text="" visible="false" />
+
+    <GridPane hgap="10" vgap="10">
+        <Label text="Email" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="emailField" promptText="exemple@example.com" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <Label text="Password" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+
+    <HBox alignment="CENTER_RIGHT" />
+
+    <Button maxWidth="Infinity" onAction="#handleSignIn" text="Sign In" textFill="#f714d1" />
+
+    <HBox alignment="CENTER" spacing="5">
+        <Label text="Don't have an account?" />
+        <Hyperlink onAction="#handleSignUp" text="Sign up" />
+    </HBox>
+</VBox>

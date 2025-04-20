@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Text?>
 
@@ -21,7 +20,11 @@
     <!-- Modern Top Navigation Bar -->
     <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 12 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 4); -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;">
         <HBox alignment="CENTER" spacing="8">
-            <Circle fill="#000000" radius="16" />
+         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../pictures/AppLogo2.png" />
+            </image>
+         </ImageView>
             <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 20; -fx-font-weight: 700; -fx-fill: #000000;" text="E-Karya" />
         </HBox>
 

@@ -47,28 +47,6 @@ public class PropertyDAO {
         return new ArrayList<>(properties); // return a copy
     }
 
-    // public static void saveProperty(Property property) {
-    //     String query = "INSERT INTO properties (id, title, location, description, guests, bedrooms, beds, bathrooms, price, landlord_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
-    //     try (Connection conn = DatabaseConnection.getConnection();
-    //          PreparedStatement stmt = conn.prepareStatement(query)) {
-    
-    //         stmt.setString(1, property.getId());
-    //         stmt.setString(2, property.getTitle());
-    //         stmt.setString(3, property.getLocation());
-    //         stmt.setString(4, property.getDescription());
-    //         stmt.setInt(5, property.getGuests());
-    //         stmt.setInt(6, property.getBedrooms());
-    //         stmt.setInt(7, property.getBeds());
-    //         stmt.setInt(8, property.getBathrooms());
-    //         stmt.setDouble(9, property.getPrice());
-    //         stmt.setInt(10, property.getLandlord_id());
-    
-    //         stmt.executeUpdate();
-    //     } catch (SQLException e) {
-    //         System.err.println("Error saving property: " + e.getMessage());
-    //     }
-    // }
     public static boolean savePropertyDataToDataBase(Property p) {
 
         String query = "INSERT INTO properties (id, title, location, price_per_night, max_guests,max_beds,max_bedrooms,max_bathrooms,description, landlord_id) "

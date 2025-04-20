@@ -86,32 +86,19 @@ public class AddPropertyController {
 
     public Property collectPropertyData() {
         Property property = new Property();
-
-        property.setTitle(titleField.getText().trim());
-        property.setLocation(locationField.getText().trim());
-        property.setDescription(descriptionArea.getText().trim());
-
         try {
-            if (!guestsField.getText().isEmpty())
-                property.setGuests(Integer.parseInt(guestsField.getText()));
-            if (!bedroomsField.getText().isEmpty())
-                property.setBedrooms(Integer.parseInt(bedroomsField.getText()));
-            if (!bedsField.getText().isEmpty())
-                property.setBeds(Integer.parseInt(bedsField.getText()));
-            if (!bathroomsField.getText().isEmpty())
-                property.setBathrooms(Integer.parseInt(bathroomsField.getText()));
-            if (!priceField.getText().isEmpty())
-                property.setPrice(Double.parseDouble(priceField.getText()));
+            property.setTitle(titleField.getText().trim());
+            property.setLocation(locationField.getText().trim());
+            property.setDescription(descriptionArea.getText().trim());
+            property.setGuests(Integer.parseInt(guestsField.getText()));
+            property.setBedrooms(Integer.parseInt(bedroomsField.getText()));
+            property.setBeds(Integer.parseInt(bedsField.getText()));
+            property.setBathrooms(Integer.parseInt(bathroomsField.getText()));
+            property.setPrice(Double.parseDouble(priceField.getText()));
             property.setLandlord_id(currentUser.getId());
             System.out.println(currentUser.getId());
         } catch (NumberFormatException e) {
             showAlert("Invalid Input", "Please enter valid numbers for guests, bedrooms, beds, bathrooms, and price.");
-            return null;
-        }
-
-        // Validate required fields
-        if (property.getTitle().isEmpty() || property.getLocation().isEmpty() || property.getDescription().isEmpty()) {
-            showAlert("Missing Information", "Please fill in all required fields.");
             return null;
         }
 
