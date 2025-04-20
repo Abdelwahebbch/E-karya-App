@@ -32,7 +32,7 @@ public class PropertyFilterController {
             if (newVal.doubleValue() > maxPriceSlider.getValue()) {
                 minPriceSlider.setValue(maxPriceSlider.getValue());
             }
-            minPriceText.setText(String.format("%.0f €", minPriceSlider.getValue()));
+            minPriceText.setText(String.format("%.0f TND", minPriceSlider.getValue()));
         });
         
         maxPriceSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
@@ -40,7 +40,7 @@ public class PropertyFilterController {
             if (newVal.doubleValue() < minPriceSlider.getValue()) {
                 maxPriceSlider.setValue(minPriceSlider.getValue());
             }
-            maxPriceText.setText(String.format("%.0f €", maxPriceSlider.getValue()));
+            maxPriceText.setText(String.format("%.0f TND", maxPriceSlider.getValue()));
         });
         
         // Set up reset button
@@ -77,7 +77,7 @@ public class PropertyFilterController {
         // Implement filter application logic here
         // This would typically gather all selected filters and pass them to a search function
         System.out.println("Applying filters:");
-        System.out.println("Price range: " + minPriceSlider.getValue() + " - " + maxPriceSlider.getValue() + " €");
+        System.out.println("Price range: " + minPriceSlider.getValue() + " - " + maxPriceSlider.getValue() + " TND");
         System.out.println("Bedrooms: " + (bedroomsCombo.getValue() != null ? bedroomsCombo.getValue() : "Any"));
         System.out.println("Beds: " + (bedsCombo.getValue() != null ? bedsCombo.getValue() : "Any"));
         System.out.println("Bathrooms: " + (bathroomsCombo.getValue() != null ? bathroomsCombo.getValue() : "Any"));

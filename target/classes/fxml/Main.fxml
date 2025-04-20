@@ -135,7 +135,7 @@
                 <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="Stay at Annie's place" />
                 <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="March 1-6" />
                 <HBox alignment="CENTER_LEFT" spacing="4" style="-fx-padding: 8 0 0 0;">
-                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="104 €" />
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="104 TND" />
                     <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="per night" />
                 </HBox>
             </VBox>

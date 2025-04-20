@@ -1,7 +1,7 @@
 package com.ekarya.controller;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
+
 
 import com.ekarya.DAO.PropertyDAO;
 import com.ekarya.Models.Property;
@@ -168,7 +168,7 @@ public class PropertyDashboardController {
         Text propertyNameText = new Text(property.getTitle());
         propertyNameText.setStyle("-fx-font-family: 'Montserrat';");
 
-        Text priceText = new Text(property.getPrice() + " € per night");
+        Text priceText = new Text(property.getPrice() + " TND per night");
         priceText.setStyle("-fx-font-family: 'Montserrat';");
 
         VBox textVBox = new VBox(propertyNameText, priceText);

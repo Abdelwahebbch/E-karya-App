@@ -8,8 +8,6 @@ import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 import com.ekarya.utile.DatabaseConnection;
 
-import javafx.application.Application;
-//import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

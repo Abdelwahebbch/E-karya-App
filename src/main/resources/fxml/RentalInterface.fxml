@@ -57,7 +57,7 @@
                                     </ImageView>
                                     <VBox>
                                         <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="Paris Apartment" />
-                                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="104 € per night" />
+                                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="104 TND per night" />
                                     </VBox>
                                 </HBox>
                             </graphic>
@@ -71,7 +71,7 @@
                                     </ImageView>
                                     <VBox>
                                         <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="Marseille Villa" />
-                                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="150 € per night" />
+                                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="150 TND per night" />
                                     </VBox>
                                 </HBox>
                             </graphic>
@@ -163,7 +163,7 @@
                             <Text fx:id="locationText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="Paris, Île-de-France, France" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                             
                             <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Price per night:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                            <Text fx:id="priceText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="104 €" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                            <Text fx:id="priceText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="104 TND" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                             
                             <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Guests:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                             <Text fx:id="guestsText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="4 guests" GridPane.columnIndex="1" GridPane.rowIndex="3" />

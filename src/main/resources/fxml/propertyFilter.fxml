@@ -37,10 +37,10 @@
                 <VBox spacing="5">
                     <HBox alignment="CENTER_LEFT" spacing="10">
                         <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Minimum Price:" />
-                        <Text fx:id="minPriceText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="0 €" />
+                        <Text fx:id="minPriceText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="0 TND" />
                         <Region HBox.hgrow="ALWAYS" />
                         <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Maximum Price:" />
-                        <Text fx:id="maxPriceText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="1000 €" />
+                        <Text fx:id="maxPriceText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="1000 TND" />
                     </HBox>
                     <Slider fx:id="minPriceSlider" blockIncrement="10.0" max="1000.0" style="-fx-control-inner-background: #E0E0E0; -fx-accent: #000000;" />
                     <Slider fx:id="maxPriceSlider" blockIncrement="10.0" max="1000.0" style="-fx-control-inner-background: #E0E0E0; -fx-accent: #000000;" value="1000.0" />
