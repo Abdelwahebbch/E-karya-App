@@ -1,7 +1,7 @@
 package com.ekarya.controller;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
+
 
 import com.ekarya.DAO.PropertyDAO;
 import com.ekarya.Models.Property;
@@ -180,19 +180,28 @@ public class PropertyDashboardController {
         propertyButton.setId("PropertyBtn_" + property.getId());
         propertyButton.setMaxWidth(Double.MAX_VALUE);
         propertyButton.setOnAction(event -> loadPropertyData(property.getId()));
-        propertyButton.setStyle("-fx-background-color: white; -fx-border-color: #E0E0E0;");
-
+        propertyButton.setStyle("""
+            -fx-background-color: white;
+            -fx-border-color: #E0E0E0;
+            -fx-border-radius: 12;
+            -fx-background-radius: 12;
+            -fx-alignment: center-left;
+            -fx-padding: 10;
+            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);
+        """);
+        
         Text propertyNameText = new Text(property.getTitle());
-        propertyNameText.setStyle("-fx-font-family: 'Montserrat';");
-
-        Text priceText = new Text(property.getPrice() + " € per night");
-        priceText.setStyle("-fx-font-family: 'Montserrat';");
-
+        propertyNameText.setStyle("-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;");
+        
+        Text priceText = new Text(property.getPrice() + " TND per night");
+        priceText.setStyle("-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;");
+        
         VBox textVBox = new VBox(propertyNameText, priceText);
         HBox hbox = new HBox(10, textVBox);
         propertyButton.setGraphic(hbox);
-
+        
         return propertyButton;
+        
     }
 
     

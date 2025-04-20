@@ -232,7 +232,7 @@ public class RentalInterfaceController {
         propertyTitle.setText("Property Details");
         titleText.setText("Cozy apartment in the heart of Paris");
         locationText.setText("Paris, Île-de-France, France");
-        priceText.setText("104 €");
+        priceText.setText("104 TND");
         guestsText.setText("4 guests");
         bedroomsText.setText("2 bedrooms");
         bedsText.setText("3 beds");

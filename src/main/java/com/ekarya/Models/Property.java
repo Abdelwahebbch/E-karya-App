@@ -16,11 +16,12 @@ public class Property {
     private int beds;
     private int bathrooms;
     private double price;
+    private String landlord_id;
     private File mainImage;
     private List<File> additionalImages;
 
     public Property(String id, String title, String location, String description, int guests, int bedrooms, int beds,
-            int bathrooms, double price/* , File mainImage, List<File> additionalImages */) {
+            int bathrooms, double price, String landlord_id/* , File mainImage, List<File> additionalImages */) {
         this.id = id;
         this.title = title;
         this.location = location;
@@ -30,11 +31,13 @@ public class Property {
         this.beds = beds;
         this.bathrooms = bathrooms;
         this.price = price;
+        this.landlord_id = landlord_id;
         // this.mainImage = mainImage;
         // this.additionalImages = additionalImages;
     }
 
     public Property() {
+        this.landlord_id = null;
         this.id = null;
         this.title = null;
         this.location = null;
@@ -126,6 +129,14 @@ public class Property {
 
     public void setAdditionalImages(List<File> additionalImages) {
         this.additionalImages = additionalImages;
+    }
+
+    public String getLandlord_id() {
+        return landlord_id;
+    }
+
+    public void setLandlord_id(String landlord_id) {
+        this.landlord_id = landlord_id;
     }
 
     @Override

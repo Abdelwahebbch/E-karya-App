@@ -41,12 +41,20 @@ public class PropertyFilterController {
             if (newVal.doubleValue() > maxPriceSlider.getValue()) {
                 minPriceSlider.setValue(maxPriceSlider.getValue());
             }
+<<<<<<< HEAD
+=======
+            minPriceText.setText(String.format("%.0f TND", minPriceSlider.getValue()));
+>>>>>>> 16484111ec47efb4c5707daedbbb1bbfeddf638c
         });
         
         maxPriceSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal.doubleValue() < minPriceSlider.getValue()) {
                 maxPriceSlider.setValue(minPriceSlider.getValue());
             }
+<<<<<<< HEAD
+=======
+            maxPriceText.setText(String.format("%.0f TND", maxPriceSlider.getValue()));
+>>>>>>> 16484111ec47efb4c5707daedbbb1bbfeddf638c
         });
     }
     
@@ -72,8 +80,32 @@ public class PropertyFilterController {
         }
     }
     
+<<<<<<< HEAD
     @FXML
     private void handleCancelButton(ActionEvent event) {
+=======
+    private void resetFilters() {
+        // Reset price sliders
+        minPriceSlider.setValue(0);
+        maxPriceSlider.setValue(1000);
+        
+        // Reset combo boxes
+        bedroomsCombo.setValue(null);
+        bedsCombo.setValue(null);
+        bathroomsCombo.setValue(null);
+    }
+    
+    private void applyFilters() {
+        // Implement filter application logic here
+        // This would typically gather all selected filters and pass them to a search function
+        System.out.println("Applying filters:");
+        System.out.println("Price range: " + minPriceSlider.getValue() + " - " + maxPriceSlider.getValue() + " TND");
+        System.out.println("Bedrooms: " + (bedroomsCombo.getValue() != null ? bedroomsCombo.getValue() : "Any"));
+        System.out.println("Beds: " + (bedsCombo.getValue() != null ? bedsCombo.getValue() : "Any"));
+        System.out.println("Bathrooms: " + (bathroomsCombo.getValue() != null ? bathroomsCombo.getValue() : "Any"));
+        
+        // Close the dialog after applying filters
+>>>>>>> 16484111ec47efb4c5707daedbbb1bbfeddf638c
         closeDialog();
     }
     
