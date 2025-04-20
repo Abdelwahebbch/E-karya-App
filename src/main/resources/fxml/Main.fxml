@@ -118,31 +118,6 @@
             <RowConstraints />
             <RowConstraints />
         </rowConstraints>
-
-        <!-- Listing Card 1 -->
-        <VBox onMouseClicked="#handleListingClick" style="-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2); -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 1; -fx-border-radius: 12;" GridPane.columnIndex="0" GridPane.rowIndex="0">
-            <StackPane>
-                <ImageView fitHeight="220" fitWidth="300" preserveRatio="true" style="-fx-background-radius: 12 12 0 0;">
-                    <Image url="@placeholder.jpg" />
-                </ImageView>
-            </StackPane>
-            <VBox spacing="8" style="-fx-padding: 16;">
-                <HBox alignment="CENTER_LEFT" spacing="8">
-                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="Levallois-Perret, France" />
-                    <Region HBox.hgrow="ALWAYS" />
-                    <HBox alignment="CENTER">
-                        <Text style="-fx-fill: #000000; -fx-font-weight: bold;" text="★" />
-                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text=" 4,96" />
-                    </HBox>
-                </HBox>
-                <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="Stay at Annie's place" />
-                <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="March 1-6" />
-                <HBox alignment="CENTER_LEFT" spacing="4" style="-fx-padding: 8 0 0 0;">
-                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 16; -fx-fill: #000000;" text="104 TND" />
-                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 14;" text="per night" />
-                </HBox>
-            </VBox>
-        </VBox>
     </GridPane>
 </ScrollPane>
 </VBox>

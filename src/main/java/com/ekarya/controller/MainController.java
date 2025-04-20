@@ -1,6 +1,8 @@
 package com.ekarya.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Optional;
 
 import com.ekarya.DAO.PropertyDAO;
@@ -13,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -25,11 +28,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -44,7 +50,7 @@ public class MainController {
     private int column = 0;
     private int row = 0;
     private final int MAX_COLUMNS = 2;
-    private Property cuProperty= new Property();
+    private Property cuProperty = new Property();
 
     // FXML injected fields
     @FXML
@@ -63,9 +69,12 @@ public class MainController {
     private VBox listing4;
     @FXML
     private VBox listing5;
-    @FXML private VBox listing6;
-    @FXML private GridPane propertiesGridPane;
-    @FXML private ComboBox<?> travelersCombo;
+    @FXML
+    private VBox listing6;
+    @FXML
+    private GridPane propertiesGridPane;
+    @FXML
+    private ComboBox<?> travelersCombo;
 
     // Event handlers
     public void initData(User user) {
@@ -89,8 +98,7 @@ public class MainController {
         }
     }
 
-    public void LoadPropertyData(String id, MouseEvent e)
-    {
+    public void LoadPropertyData(String id, MouseEvent e) {
         for (Property p : PropertyDAO.getProperties()) {
             if (p.getId().equals(id)) {
                 cuProperty = p;
@@ -99,13 +107,12 @@ public class MainController {
             }
         }
 
-
     }
 
     private void refreshPropertyList() {
         propertiesGridPane.getChildren().clear();
         for (Property p : PropertyDAO.properties) {
-                addPropertyToGrid(p);
+            addPropertyToGrid(p);
         }
     }
 
@@ -119,8 +126,7 @@ public class MainController {
             Parent root = loader.load();
 
             PropertyDetailController propertyDetailController = loader.getController();
-            propertyDetailController.initData(cuProperty,currentUser);
-
+            propertyDetailController.initData(cuProperty, currentUser);
 
             root.setOpacity(0); // Start invisible
             scene.setRoot(root); // Set the new root
@@ -253,73 +259,92 @@ public class MainController {
         card.setUserData(p);
         card.setSpacing(8);
         card.setPadding(new Insets(8));
-        card.setStyle("-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 10; -fx-background-radius: 10;");
+        card.setStyle(
+                "-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 10; -fx-background-radius: 10;");
         card.setCursor(Cursor.HAND);
         card.setEffect(new DropShadow());
-    
-        // // ---- Image ----
+
+        // ---- Image ----
         // ImageView imageView;
-        // URL imageUrl = getClass().getResource("/placeholder.jpg");
+        // URL imageUrl = getClass().getResource("/images/Team7.jpg");
         // if (imageUrl != null) {
-        //     imageView = new ImageView(new Image(imageUrl.toExternalForm()));
+        // imageView = new ImageView(new Image(imageUrl.toExternalForm()));
         // } else {
-        //     imageView = new ImageView(); // fallback
+        // imageView = new ImageView(); // fallback
         // }
         // imageView.setFitWidth(300);
         // imageView.setFitHeight(220);
         // imageView.setPreserveRatio(true);
-    
+
         // StackPane imagePane = new StackPane(imageView);
         // imagePane.setAlignment(Pos.CENTER);
-        // imagePane.setStyle("-fx-background-color: #f0f0f0; -fx-border-radius: 10 10 0 0; -fx-background-radius: 10 10 0 0;");
-    
+        // imagePane.setStyle("-fx-background-color: #f0f0f0; -fx-border-radius: 10 10 0
+        // 0; -fx-background-radius: 10 10 0 0;");
+
+        ImageView imageView;
+        try {
+            // Load image from local PC file system
+            File file = new File("C:\\Users\\azizb\\OneDrive\\Documents\\Java\\E-karya-App\\src\\main\\java\\com\\ekarya\\controller\\test21.jpg"); // ← Replace this with the actual path
+            Image image = new Image(file.toURI().toString());
+
+            imageView = new ImageView(image);
+        } catch (Exception e) {
+            // Fallback in case the image file is not found or can't be loaded
+            imageView = new ImageView();
+            System.err.println("Could not load image: " + e.getMessage());
+        }
+
+        // // Set image properties
+        imageView.setFitWidth(1000);
+        imageView.setFitHeight(220);
+        imageView.setPreserveRatio(true);
+
+        // Wrap in StackPane with style
+        StackPane imagePane = new StackPane(imageView);
+        imagePane.setAlignment(Pos.CENTER);
+        imagePane.setStyle(
+                "-fx-background-color: #f0f0f0; -fx-border-radius: 10 10 0 0; -fx-background-radius: 10 10 0 0;");
+
         VBox contentBox = new VBox(5);
         contentBox.setPadding(new Insets(8));
-    
+
         // ---- Top Row ----
         HBox topRow = new HBox();
         Label location = new Label(p.getLocation());
         location.setFont(Font.font("Arial", FontWeight.BOLD, 14));
-    
+
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-    
+
         Label star = new Label("★");
         star.setTextFill(Color.ORANGE);
         Label rating = new Label("4.96");
-    
+
         HBox ratingBox = new HBox(5, star, rating);
         topRow.getChildren().addAll(location, spacer, ratingBox);
-    
+
         // ---- Subtitle and Date ----
         Label subtitle = new Label(p.getTitle());
         subtitle.setFont(Font.font("Arial", FontWeight.NORMAL, 13));
-    
-        Label date = new Label("March 1-6");
-        date.setTextFill(Color.GRAY);
-        date.setFont(Font.font(12));
-    
+
         // ---- Price Row ----
         HBox priceRow = new HBox(5);
         Label price = new Label("TND" + p.getPrice());
         price.setFont(Font.font("Arial", FontWeight.BOLD, 13));
-    
+
         Label perNight = new Label("per night");
         perNight.setFont(Font.font(12));
         perNight.setTextFill(Color.GRAY);
-    
+
         priceRow.getChildren().addAll(price, perNight);
-    
-        contentBox.getChildren().addAll(topRow, subtitle, date, priceRow);
-        card.getChildren().addAll(contentBox);
-    
-    
+
+        contentBox.getChildren().addAll(topRow, subtitle, priceRow);
+        card.getChildren().addAll(imagePane, contentBox);
+
         // ---- Scene Switcher Call ----
-        card.setOnMouseClicked(event -> LoadPropertyData(p.getId()+"", event));
+        card.setOnMouseClicked(event -> LoadPropertyData(p.getId() + "", event));
 
         return card;
     }
-    
-
 
 }
