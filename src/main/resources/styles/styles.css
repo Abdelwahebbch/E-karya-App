@@ -1,0 +1,71 @@
+.main-container {
+    -fx-background-color: white;
+}
+
+.login-container {
+    -fx-min-width: 400px;
+    -fx-background-color: white;
+    -fx-padding: 40px;
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2b3481;
+}
+
+.subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+    -fx-padding: 0 0 20 0;
+}
+
+.input-field {
+    -fx-background-color: white;
+    -fx-border-color: #E0E0E0;
+    -fx-border-radius: 4px;
+    -fx-padding: 12px;
+    -fx-pref-height: 40px;
+}
+
+.input-field:focused {
+    -fx-border-color: #4a5bcc;
+    -fx-border-width: 2px;
+}
+
+.register-link {
+    -fx-text-fill: #4a5bcc;
+    -fx-font-size: 12px;
+    -fx-underline: true;
+}
+
+.login-button {
+    -fx-background-color: #3f51b5;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 12px;
+    -fx-pref-width: 350;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #3a4bbc;
+}
+
+.illustration-container {
+    -fx-background-color: #FDFBFA;
+    -fx-min-width: 500px;
+    -fx-alignment: center;
+}
+
+.illustration-image {
+    -fx-fit-width: 450px;
+    -fx-fit-height: 400px;
+    -fx-preserve-ratio: true;
+}
+
+/* Custom shape for the wave effect */
+.illustration-container {
+    -fx-shape: "M 0 0 L 500 0 L 500 600 Q 400 550, 300 600 L 0 600 Z";
+}

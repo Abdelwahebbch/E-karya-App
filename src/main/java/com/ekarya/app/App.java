@@ -15,7 +15,8 @@ public class App extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        stage.setTitle("E-karya");
+        stage.setResizable(false);
+        stage.setTitle("Hello !");
         //stage.setFullScreen(true);
 
     }

@@ -52,7 +52,7 @@ public class SignInController {
                 // Set the new scene
                 Scene mainScene = new Scene(mainRoot);
                 stage.setScene(mainScene);
-                stage.setTitle("Main Application");
+                stage.setTitle("Signin Now !");
                 stage.setFullScreen(true);
                 stage.show();
 
@@ -69,9 +69,11 @@ public class SignInController {
     void handleSignUp(ActionEvent event) {
         try {
             Parent signUpRoot = FXMLLoader.load(getClass().getResource("/fxml/signup.fxml"));
+            
             Scene signUpScene = new Scene(signUpRoot);
             Stage stage = (Stage) emailField.getScene().getWindow();
             stage.setScene(signUpScene);
+            stage.setResizable(false);
             stage.setTitle("E-karya - Sign Up");
         } catch (IOException e) {
             showError("Error navigating to sign up page: " + e.getMessage());

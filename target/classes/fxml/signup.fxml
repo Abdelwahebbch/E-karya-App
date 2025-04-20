@@ -1,59 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10" styleClass="card" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.SignUpController">
-    <padding>
-        <Insets bottom="20" left="20" right="20" top="20" />
-    </padding>
+<AnchorPane styleClass="main-container" stylesheets="@register-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.SignUpController">
 
-    <Label styleClass="title" text="Sign Up" />
-    <Label styleClass="description" text="Create your account to get started." />
+    <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        
+        <!-- Left Side - Registration Form -->
+        <VBox prefWidth="500.0" spacing="20" styleClass="register-container">
+            <padding>
+                <Insets bottom="40" left="40" right="40" top="40" />
+            </padding>
 
-    <!-- Error message label - will be hidden by default and shown when errors occur -->
-    <Label fx:id="errorLabel" styleClass="error-label" text="" visible="false" />
+            <Label styleClass="title" text="Create Account" />
+            <Label fx:id="errorLabel" styleClass="subtitle" text="Join the E-Karya Platform !" />
 
-    <GridPane hgap="10" vgap="10">
-        <Label text="Full Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="fullNameField" promptText="exemple exemple" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <VBox spacing="15">
+                <!-- Personal Information -->
+                <HBox spacing="10">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label styleClass="field-label" text="Full Name" />
+                        <TextField fx:id="fullNameField" promptText="Foulen Foulen" styleClass="input-field" />
+                    </VBox>
+                </HBox>
 
-        <Label text="Email" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <TextField fx:id="emailField" promptText="exemple@example.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <!-- Email -->
+                <VBox spacing="5">
+                    <Label styleClass="field-label" text="Email" />
+                    <TextField fx:id="emailField" promptText="exemple@example.com" styleClass="input-field" />
+                </VBox>
 
-        <Label text="Phone Number" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="phoneField" promptText="+216 12345678" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <!-- Phone -->
+                <VBox spacing="5">
+                    <Label styleClass="field-label" text="Phone Number" />
+                    <TextField fx:id="phoneField" promptText="+216 12 345 678" styleClass="input-field" />
+                </VBox>
 
-        <Label text="Password" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <columnConstraints>
-         <ColumnConstraints />
-         <ColumnConstraints />
-      </columnConstraints>
-      <rowConstraints>
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-         <RowConstraints />
-      </rowConstraints>
-    </GridPane>
+                <!-- Password -->
+                <VBox spacing="5">
+                    <Label styleClass="field-label" text="Password" />
+                    <PasswordField fx:id="passwordField" promptText="Enter your password" styleClass="input-field" />
+                </VBox>
 
-    <HBox alignment="CENTER_RIGHT" />
+                <!-- Confirm Password -->
+                <VBox spacing="5">
+                    <Label styleClass="field-label" text="Confirm Password" />
+                    <PasswordField fx:id="secpass" promptText="Confirm your password" styleClass="input-field" />
+                </VBox>
 
-    <Button maxWidth="Infinity" onAction="#handleSignUp" text="Sign Up" textFill="#0b0a0b" />
-    
-    <HBox alignment="CENTER" spacing="5">
-        <Label text="Already have an account?" />
-        <Hyperlink onAction="#navigateToSignIn" text="Sign In" />
+                <!-- Register Button -->
+                <Button onAction="#handleSignUp" prefHeight="44.0" prefWidth="154.0" styleClass="register-button" stylesheets="@register-styles.css" text="Create Account" />
+
+                <!-- Login Link -->
+                <HBox alignment="CENTER" styleClass="login-link-container">
+                    <Label text="Already have an account? " />
+                    <Hyperlink onAction="#navigateToSignIn" styleClass="login-link" stylesheets="@../css/register-styles.css" text="Login here" />
+                </HBox>
+            </VBox>
+         <stylesheets>
+            <URL value="@../css/register-styles.css" />
+            <URL value="@../styles/register-styles.css" />
+         </stylesheets>
+        </VBox>
+
+        <!-- Right Side - Illustration -->
+        <StackPane styleClass="illustration-container">
+            <ImageView fitHeight="387.0" fitWidth="400.0" styleClass="illustration-image">
+            <image>
+               <Image url="@../pictures/AppLogo.png" />
+            </image>
+            </ImageView>
+         <stylesheets>
+            <URL value="@register-styles.css" />
+            <URL value="@../styles/register-styles.css" />
+         </stylesheets>
+        </StackPane>
     </HBox>
-</VBox>
+</AnchorPane>

@@ -43,7 +43,7 @@ public class SignUpController {
             showError("All fields are required");
             return;
         } else if (!InputValidator.isValidFullName(fullName)) {
-            showError("Invalid Format for the Full Name (e.g., Omor Bouchniba).");
+            showError("Invalid Format for the Full Name (e.g., Foulen Foulen).");
             return;
         } else if (!InputValidator.isValidEmail(email)) {
             showError("Invalid email format.");
