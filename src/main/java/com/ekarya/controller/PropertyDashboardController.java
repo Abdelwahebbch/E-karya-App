@@ -3,7 +3,6 @@ package com.ekarya.controller;
 import java.io.IOException;
 
 import com.ekarya.DAO.PropertyDAO;
-import com.ekarya.FilePicker.FilePicker;
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 
@@ -16,11 +15,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class PropertyDashboardController {
     User currentUser = new User();

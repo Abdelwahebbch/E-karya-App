@@ -344,6 +344,8 @@ public class MainController {
 
     @FXML
     void handleSearch(ActionEvent event) {
+        this.column = 0;
+        this.row = 0;
         LocalDate checkInDate = startField.getValue();
         LocalDate checkOutDate = endField.getValue();
 
@@ -353,8 +355,8 @@ public class MainController {
                 nbGuestsField.getText())) {
 
             addPropertyToGrid(p);
-            // System.out.println("------------->>  Propertys ID " + p.getId());
-            // System.out.println("------------->>  Propertys Location " + p.getLocation());
+            // System.out.println("------------->> Propertys ID " + p.getId());
+            // System.out.println("------------->> Propertys Location " + p.getLocation());
         }
 
     }
