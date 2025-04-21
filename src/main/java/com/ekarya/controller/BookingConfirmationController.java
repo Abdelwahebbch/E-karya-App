@@ -14,10 +14,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 
 public class BookingConfirmationController {
-    User currentUser = new User();
+    private User currentUser = new User();
+    private Property cuProperty = new Property();
     @FXML
     private Button homeButton;
 
@@ -30,22 +32,25 @@ public class BookingConfirmationController {
     @FXML
     private Text propertyNameText;
 
-    @FXML
-    private Text datesText;
+    @FXML 
+    private Text checkInText;
+
+    @FXML 
+    private Text checkOutText;
 
     @FXML
-    private Text guestsText;
+    private Text locationText;
 
     @FXML
     private Text totalPriceText;
 
-    private String propertyName;
-    private LocalDate checkInDate;
-    private LocalDate checkOutDate;
-    private int adultGuests;
-    private int childGuests;
-    private double totalPrice;
-    private String currency = "TND";
+    // private String propertyName;
+    // private LocalDate checkInDate;
+    // private LocalDate checkOutDate;
+    // private int adultGuests;
+    // private int childGuests;
+    // private double totalPrice;
+    // private String currency = "TND";
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -56,42 +61,54 @@ public class BookingConfirmationController {
         // Default initialization if needed
     }
 
+    public void initData(Property p, User u , double price)
+    {
+        currentUser=u;
+        cuProperty=p;
+
+
+        propertyNameText.setText(p.getTitle());
+        locationText.setText(p.getLocation());
+        totalPriceText.setText(price+" TND");
+
+    }
+
     /**
      * Sets the booking details to be displayed in the confirmation screen.
      */
-    public void setBookingDetails(String propertyName, LocalDate checkInDate, LocalDate checkOutDate,
-            int adultGuests, int childGuests, double totalPrice, String currency) {
-        this.propertyName = propertyName;
-        this.checkInDate = checkInDate;
-        this.checkOutDate = checkOutDate;
-        this.adultGuests = adultGuests;
-        this.childGuests = childGuests;
-        this.totalPrice = totalPrice;
-        this.currency = currency != null ? currency : "TND";
+    // public void setBookingDetails(String propertyName, LocalDate checkInDate, LocalDate checkOutDate,
+    //         int adultGuests, int childGuests, double totalPrice, String currency) {
+    //     this.propertyName = propertyName;
+    //     this.checkInDate = checkInDate;
+    //     this.checkOutDate = checkOutDate;
+    //     this.adultGuests = adultGuests;
+    //     this.childGuests = childGuests;
+    //     this.totalPrice = totalPrice;
+    //     this.currency = currency != null ? currency : "TND";
 
-        updateUI();
-    }
+    //     updateUI();
+    // }
 
     /**
      * Updates the UI elements with the booking details.
      */
-    private void updateUI() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
+    // private void updateUI() {
+    //     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
 
-        propertyNameText.setText(propertyName);
+    //     propertyNameText.setText(propertyName);
 
-        String checkInStr = checkInDate != null ? checkInDate.format(formatter) : "N/A";
-        String checkOutStr = checkOutDate != null ? checkOutDate.format(formatter) : "N/A";
-        datesText.setText("Check-in: " + checkInStr + " | Check-out: " + checkOutStr);
+    //     String checkInStr = checkInDate != null ? checkInDate.format(formatter) : "N/A";
+    //     String checkOutStr = checkOutDate != null ? checkOutDate.format(formatter) : "N/A";
+        
 
-        String guestText = adultGuests + " adult" + (adultGuests != 1 ? "s" : "");
-        if (childGuests > 0) {
-            guestText += ", " + childGuests + " child" + (childGuests != 1 ? "ren" : "");
-        }
-        guestsText.setText("Guests: " + guestText);
+    //     String guestText = adultGuests + " adult" + (adultGuests != 1 ? "s" : "");
+    //     if (childGuests > 0) {
+    //         guestText += ", " + childGuests + " child" + (childGuests != 1 ? "ren" : "");
+    //     }
+    //     guestsText.setText("Guests: " + guestText);
 
-        totalPriceText.setText("Total Price: " + String.format("%.0f", totalPrice) + " " + currency);
-    }
+    //     totalPriceText.setText("Total Price: " + String.format("%.0f", totalPrice) + " " + currency);
+    // }
 
     /**
      * Handles the action when the home button is clicked.
@@ -152,23 +169,23 @@ public class BookingConfirmationController {
     /**
      * Example method to demonstrate how to call this controller with sample data
      */
-    public static void showWithSampleData(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(
-                BookingConfirmationController.class.getResource("/fxml/BookingConfirmation.fxml"));
-        Parent root = loader.load();
+    // public static void showWithSampleData(Stage stage) throws IOException {
+    //     FXMLLoader loader = new FXMLLoader(
+    //             BookingConfirmationController.class.getResource("/fxml/BookingConfirmation.fxml"));
+    //     Parent root = loader.load();
 
-        BookingConfirmationController controller = loader.getController();
-        controller.setBookingDetails(
-                "Appartement cosy au cœur de Paris",
-                LocalDate.of(2025, 3, 1),
-                LocalDate.of(2025, 3, 6),
-                2,
-                0,
-                594.0,
-                "TND");
+    //     BookingConfirmationController controller = loader.getController();
+    //     controller.setBookingDetails(
+    //             "Appartement cosy au cœur de Paris",
+    //             LocalDate.of(2025, 3, 1),
+    //             LocalDate.of(2025, 3, 6),
+    //             2,
+    //             0,
+    //             594.0,
+    //             "TND");
 
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+    //     Scene scene = new Scene(root);
+    //     stage.setScene(scene);
+    //     stage.show();
+    // }
 }

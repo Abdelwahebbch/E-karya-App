@@ -104,7 +104,6 @@
                             <DatePicker fx:id="checkInDatePicker" promptText="Check-in" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
                             <DatePicker fx:id="checkOutDatePicker" promptText="Check-out" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
                         </HBox>
-                  <TextField fx:id="nbGuestField" promptText="Number of Guests" />
                     </VBox>
                     <Button fx:id="bookButton" maxWidth="Infinity" onAction="#handleBooking" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 12 16;" text="Book">
                         <graphic>

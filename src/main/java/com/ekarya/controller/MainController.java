@@ -295,7 +295,7 @@ public class MainController {
         }
 
         // // Set image properties
-        imageView.setFitWidth(1000);
+        imageView.setFitWidth(340);
         imageView.setFitHeight(220);
         imageView.setPreserveRatio(true);
 

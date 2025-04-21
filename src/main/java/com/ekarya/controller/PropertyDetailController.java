@@ -21,6 +21,8 @@ import com.ekarya.Models.User;
 
 public class PropertyDetailController {
 
+    double totalPrice;
+
     User currentUser = new User();
     Property currentProperty = new Property();
     @FXML
@@ -96,35 +98,12 @@ public class PropertyDetailController {
             tvaField.setText(String.valueOf((currentProperty.getPrice() * numberOfDays) * 0.1));
             finalPriceField.setText(((currentProperty.getPrice() * numberOfDays) * 0.1)
                     + (currentProperty.getPrice() * numberOfDays) + "");
+            totalPrice= (currentProperty.getPrice() * numberOfDays) * 0.1 + (currentProperty.getPrice() * numberOfDays);
         } else {
             equationField.setText("");
             equationResultField.setText("");
         }
     }
-
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the FXML file has been loaded.
-     */
-    // @FXML
-    // private void initialize() {
-    // // Initialize the number of guests combo box
-    // for (int i = 1; i <= 10; i++) {
-    // nbVoyage.getItems().add(i);
-    // }
-    // nbVoyage.setValue(2); // Default to 2 guests
-
-    // // Set default dates (current date and 5 days later)
-    // LocalDate today = LocalDate.now();
-    // checkInDatePicker.setValue(today);
-    // checkOutDatePicker.setValue(today.plusDays(5));
-
-    // // Add listeners to update price calculation when dates change
-    // checkInDatePicker.valueProperty().addListener((obs, oldVal, newVal) ->
-    // updatePriceCalculation());
-    // checkOutDatePicker.valueProperty().addListener((obs, oldVal, newVal) ->
-    // updatePriceCalculation());
-    // }
 
     public void initData(Property p, User u) {
         currentUser = u;
@@ -178,9 +157,12 @@ public class PropertyDetailController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BookingConfirmation.fxml"));
             Parent root = loader.load();
-            // Apply fade-in transition
-            root.setOpacity(0); // Start invisible
-            scene.setRoot(root); // Set the new root
+
+            BookingConfirmationController bookingConfirmationController = loader.getController();
+            bookingConfirmationController.initData(currentProperty,currentUser,totalPrice);
+           
+            root.setOpacity(0); 
+            scene.setRoot(root); 
 
             FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), root);
             fadeIn.setFromValue(0);
@@ -255,18 +237,4 @@ public class PropertyDetailController {
          */
     }
 
-    /**
-     * Updates the price calculation based on the selected dates
-     */
-    private void updatePriceCalculation() {
-        LocalDate checkInDate = checkInDatePicker.getValue();
-        LocalDate checkOutDate = checkOutDatePicker.getValue();
-
-        if (checkInDate != null && checkOutDate != null && !checkOutDate.isBefore(checkInDate)) {
-            long nights = ChronoUnit.DAYS.between(checkInDate, checkOutDate);
-            // Update the UI with the new calculation
-            // In a real application, you would update Text elements with the new values
-            System.out.println("Updated price calculation: " + nights + " nights");
-        }
-    }
 }
