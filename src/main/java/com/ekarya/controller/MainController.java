@@ -192,6 +192,8 @@ public class MainController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RentalInterface.fxml"));
             Parent root = loader.load();
+            RentalInterfaceController rentalInterfaceController= loader.getController();
+            rentalInterfaceController.initialize(currentUser);
             scene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();

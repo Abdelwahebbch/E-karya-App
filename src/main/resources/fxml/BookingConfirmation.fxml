@@ -52,11 +52,14 @@
         <VBox alignment="CENTER_LEFT" spacing="12" style="-fx-background-color: #f8f8f8; -fx-padding: 24; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
             <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 16; -fx-font-weight: 700; -fx-fill: #000000;" text="Booking Details" />
             
-            <Text fx:id="propertyNameText" style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #000000;" text="Appartement cosy au cœur de Paris" />
-                  
-            <Text fx:id="datesText" style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #555555;" text="Check-in: Mar 1, 2025 | Check-out: Mar 6, 2025" />
-                  
-            <Text fx:id="guestsText" style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #555555;" text="Guests: 2 adults" />
+            <Text fx:id="propertyNameText" style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #000000;" text="" />
+            
+            <Text fx:id="locationText" style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #000000;" text="" />
+            
+            <Text fx:id="checkInText" style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #555555;" text="" />
+
+            <Text fx:id="checkOutText" style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #555555;" text="" />
+
                   
             <Text fx:id="totalPriceText" style="-fx-font-family: 'Montserrat'; -fx-font-weight: 700; -fx-font-size: 14; -fx-fill: #000000;" text="Total Price: 594 TND" />
         </VBox>

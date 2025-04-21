@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -92,10 +92,10 @@ public class RentalInterfaceController {
      * after the FXML file has been loaded.
      */
     @FXML
-    private void initialize() {
-        // Initialize the controller, load data, etc.
+    public void initialize(User u) {
+        currentUser=u;
         loadRentalData();
-        setupRatingStars();
+       
     }
 
     /**
