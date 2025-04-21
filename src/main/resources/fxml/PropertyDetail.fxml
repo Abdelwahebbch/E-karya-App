@@ -4,7 +4,6 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -115,9 +114,9 @@
                     <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 12;" text="You won't be charged yet" />
                     <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: #F8F8F8; -fx-background-radius: 8;">
                         <HBox>
-                            <Text fx:id="equationField" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="104 TND x 5 nights" HBox.hgrow="ALWAYS" />
+                            <Text fx:id="equationField" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="pick a Date " HBox.hgrow="ALWAYS" />
                             <Region HBox.hgrow="ALWAYS" />
-                            <Text fx:id="equationResultField" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="520 TND" />
+                            <Text fx:id="equationResultField" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="*** TND" />
                         </HBox>
                         <HBox>
                             <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="Service fee" HBox.hgrow="ALWAYS" />
