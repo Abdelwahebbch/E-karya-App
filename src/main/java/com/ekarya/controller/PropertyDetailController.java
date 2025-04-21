@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import com.ekarya.DAO.BookingDAO;
+import com.ekarya.FilePicker.FilePicker;
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 
@@ -177,5 +179,6 @@ public class PropertyDetailController {
         }
 
     }
+
 
 }

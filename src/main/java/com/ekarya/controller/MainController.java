@@ -2,7 +2,7 @@ package com.ekarya.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import com.ekarya.DAO.PropertyDAO;
@@ -21,8 +21,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -51,30 +51,23 @@ public class MainController {
     private int row = 0;
     private final int MAX_COLUMNS = 2;
     private Property cuProperty = new Property();
-
-    // FXML injected fields
-    @FXML
-    private DatePicker arrivalDate;
-    @FXML
-    private DatePicker departureDate;
     @FXML
     private TextField destinationField;
+
     @FXML
-    private VBox listing1;
+    private DatePicker endField;
+
     @FXML
-    private VBox listing2;
+    private Button filterButton;
+
     @FXML
-    private VBox listing3;
-    @FXML
-    private VBox listing4;
-    @FXML
-    private VBox listing5;
-    @FXML
-    private VBox listing6;
+    private TextField nbGuestsField;
+
     @FXML
     private GridPane propertiesGridPane;
+
     @FXML
-    private ComboBox<?> travelersCombo;
+    private DatePicker startField;
 
     // Event handlers
     public void initData(User user) {
@@ -192,7 +185,7 @@ public class MainController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RentalInterface.fxml"));
             Parent root = loader.load();
-            RentalInterfaceController rentalInterfaceController= loader.getController();
+            RentalInterfaceController rentalInterfaceController = loader.getController();
             rentalInterfaceController.initialize(currentUser);
             scene.setRoot(root);
         } catch (IOException e) {
@@ -347,6 +340,23 @@ public class MainController {
         card.setOnMouseClicked(event -> LoadPropertyData(p.getId() + "", event));
 
         return card;
+    }
+
+    @FXML
+    void handleSearch(ActionEvent event) {
+        LocalDate checkInDate = startField.getValue();
+        LocalDate checkOutDate = endField.getValue();
+
+        propertiesGridPane.getChildren().clear();
+        for (Property p : PropertyDAO.loadSpecificPropertys(String.valueOf(destinationField.getText()), checkInDate,
+                checkOutDate,
+                nbGuestsField.getText())) {
+
+            addPropertyToGrid(p);
+            // System.out.println("------------->>  Propertys ID " + p.getId());
+            // System.out.println("------------->>  Propertys Location " + p.getLocation());
+        }
+
     }
 
 }

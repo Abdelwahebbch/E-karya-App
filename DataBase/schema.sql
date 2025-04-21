@@ -1,9 +1,9 @@
-
 -- Les Sequances 
 
 -- create sequence user_id_seq start with 1 increment by 1 nocache nocycle;
 -- create sequence property_id_seq start with 1000 increment by 1 nocache nocycle;
 -- create sequence booking_id_seq start with 5000 increment by 1;
+-- create sequence image_id_seq start with 9000 increment by 1;
 
 
 -- create table users (
@@ -49,22 +49,22 @@
 -- );
 
 
-CREATE OR REPLACE PROCEDURE delete_expired_bookings_and_update_status AS
-BEGIN
-   -- Update property status to 0 for properties with bookings ending today
-   UPDATE properties
-   SET status = 0
-   WHERE id IN (
-      SELECT property_id
-      FROM booking
-      WHERE TRUNC(end_date) = TRUNC(SYSDATE)
-   );
+-- CREATE OR REPLACE PROCEDURE delete_expired_bookings_and_update_status AS
+-- BEGIN
+--    -- Update property status to 0 for properties with bookings ending today
+--    UPDATE properties
+--    SET status = 0
+--    WHERE id IN (
+--       SELECT property_id
+--       FROM booking
+--       WHERE TRUNC(end_date) = TRUNC(SYSDATE)
+--    );
 
-   -- Delete the bookings that end today
-   DELETE FROM booking
-   WHERE TRUNC(end_date) = TRUNC(SYSDATE);
-END;
-/
+--    -- Delete the bookings that end today
+--    DELETE FROM booking
+--    WHERE TRUNC(end_date) = TRUNC(SYSDATE);
+-- END;
+-- /
 
 -- BEGIN
 --    DBMS_SCHEDULER.create_job (
@@ -77,6 +77,9 @@ END;
 --    );
 -- END;
 -- /
+-- BEGIN
+--   DBMS_SCHEDULER.drop_job('RESET_PROPERTY_STATUS');
+-- END;
 
 -- BEGIN
 --    DBMS_SCHEDULER.drop_job(
@@ -118,12 +121,43 @@ END;
 --         FOREIGN KEY (property_id) REFERENCES properties(id)
 -- );
 
+-- By Abdelwaheb
+-- BEGIN
+--   DBMS_SCHEDULER.drop_job('RESET_PROPERTY_STATUS');
+-- END;
+
+
+-- BEGIN
+--   DBMS_SCHEDULER.create_job (
+--     job_name        => 'RESET_PROPERTY_STATUS',
+--     job_type        => 'PLSQL_BLOCK',
+--     job_action      => '
+--       BEGIN
+--         UPDATE properties
+--         SET status = 0
+--         WHERE id IN (
+--           SELECT property_id FROM booking
+--           WHERE end_date < TRUNC(SYSDATE)
+--         );
+--       END;',
+--     start_date      => SYSTIMESTAMP,
+--     repeat_interval => 'FREQ=DAILY;BYHOUR=3;BYMINUTE=37;BYSECOND=0',
+--     enabled         => TRUE
+--   );
+-- END;
 
 
 
 
 
-
+create table images (
+   image_id    number primary key,
+   property_id number not null,
+   file_data   blob,
+   foreign key ( property_id )
+      references properties ( id )
+);
+--drop table images; 
 
 
 
@@ -208,6 +242,3 @@ END;
 --     CONSTRAINT fk_house FOREIGN KEY (house_id) REFERENCES properties(id)
 -- );
 -- -- create sequence property_image_id_seq start with 1 increment by 1 nocache nocycle;
-
-
-

@@ -3,6 +3,7 @@ package com.ekarya.controller;
 import java.io.IOException;
 
 import com.ekarya.DAO.PropertyDAO;
+import com.ekarya.FilePicker.FilePicker;
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 
@@ -15,9 +16,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class PropertyDashboardController {
     User currentUser = new User();
@@ -25,25 +28,7 @@ public class PropertyDashboardController {
     public Property currentProperty;
 
     @FXML
-    private VBox propertiesContainer;
-
-    @FXML
-    private VBox notificationsContainer;
-
-    @FXML
-    private Text propertyTitle;
-
-    @FXML
-    private Text titleText;
-
-    @FXML
-    private Text locationText;
-
-    @FXML
-    private Text priceText;
-
-    @FXML
-    private Text guestsText;
+    private Text bathroomsText;
 
     @FXML
     private Text bedroomsText;
@@ -52,13 +37,16 @@ public class PropertyDashboardController {
     private Text bedsText;
 
     @FXML
-    private Text bathroomsText;
+    private Button deleteButton;
 
     @FXML
     private Text descriptionText;
 
     @FXML
-    private ImageView mainImageView;
+    private Button editButton;
+
+    @FXML
+    private Text guestsText;
 
     @FXML
     private ImageView image1View;
@@ -73,10 +61,25 @@ public class PropertyDashboardController {
     private ImageView image4View;
 
     @FXML
-    private Button editButton;
+    private Text locationText;
 
     @FXML
-    private Button deleteButton;
+    private ImageView mainImageView;
+
+    @FXML
+    private VBox notificationsContainer;
+
+    @FXML
+    private Text priceText;
+
+    @FXML
+    private VBox propertiesContainer;
+
+    @FXML
+    private Text propertyTitle;
+
+    @FXML
+    private Text titleText;
 
     @FXML
     public void initialize(User user) {
@@ -109,9 +112,9 @@ public class PropertyDashboardController {
             AddPropertyController addPropertyController = loader.getController();
             addPropertyController.initialize(currentUser);
 
-             // Apply fade-in transition
-             addPropertyRoot.setOpacity(0); // Start invisible
-             scene.setRoot(addPropertyRoot); // Set the new root
+            // Apply fade-in transition
+            addPropertyRoot.setOpacity(0); // Start invisible
+            scene.setRoot(addPropertyRoot); // Set the new root
 
             FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), addPropertyRoot);
             fadeIn.setFromValue(0);
@@ -123,33 +126,31 @@ public class PropertyDashboardController {
         }
     }
 
+    @FXML
+    private void handleBackToHome(ActionEvent event) {
+        Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+        Scene scene = node.getScene();
 
- @FXML
-private void handleBackToHome(ActionEvent event) {
-    Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
-    Scene scene = node.getScene();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+            Parent root = loader.load();
 
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-        Parent root = loader.load();
+            MainController controller = loader.getController();
+            controller.initData(currentUser);
 
-     
-        MainController controller = loader.getController();
-         controller.initData(currentUser);
+            // Apply fade-in transition
+            root.setOpacity(0); // Start invisible
+            scene.setRoot(root); // Set the new root
 
-        // Apply fade-in transition
-        root.setOpacity(0); // Start invisible
-        scene.setRoot(root); // Set the new root
+            FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), root);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.play();
 
-        FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), root);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        fadeIn.play();
-
-    } catch (IOException e) {
-        e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
 
     @FXML
     void handleDeleteProperty(ActionEvent event) {
@@ -213,5 +214,7 @@ private void handleBackToHome(ActionEvent event) {
         return propertyButton;
 
     }
+
+  
 
 }

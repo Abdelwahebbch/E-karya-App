@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,79 @@ import com.ekarya.utile.DatabaseConnection;
 public class PropertyDAO {
 
     public static final ArrayList<Property> properties = new ArrayList<>();
+
+    public static ArrayList<Property> loadSpecificPropertys(String destination, LocalDate start, LocalDate end,
+            String guests) {
+        ArrayList<Property> list = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT * FROM properties WHERE status = 0"); // status = 0 means
+                                                                                              // available
+        List<Object> parameters = new ArrayList<>();
+
+        if (destination != null && !destination.trim().isEmpty()) {
+            query.append(" AND location = ?");
+            parameters.add(destination);
+        }
+
+        if (guests != null && !guests.trim().isEmpty() && Integer.parseInt(guests) > 0) {
+            query.append(" AND max_guests >= ?");
+            parameters.add(Integer.parseInt(guests));
+        }
+
+        if (start != null && end != null) {
+            query.append(" AND id NOT IN (")
+                    .append("SELECT property_id FROM booking ")
+                    .append("WHERE (start_date <= ? AND end_date >= ?))");
+            parameters.add(java.sql.Date.valueOf(end));
+            parameters.add(java.sql.Date.valueOf(start));
+        }
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(query.toString())) {
+
+            for (int i = 0; i < parameters.size(); i++) {
+                Object param = parameters.get(i);
+                if (param instanceof String) {
+                    stmt.setString(i + 1, (String) param);
+                } else if (param instanceof Integer) {
+                    stmt.setInt(i + 1, (Integer) param);
+                } else if (param instanceof java.sql.Date) {
+                    stmt.setDate(i + 1, (java.sql.Date) param);
+                }
+            }
+
+            ResultSet resultSet = stmt.executeQuery();
+            list = getPropertiesFromResultSet(resultSet);
+
+        } catch (SQLException e) {
+            System.err.println("Error during property search: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public static ArrayList<Property> getPropertiesFromResultSet(ResultSet rs) throws SQLException {
+        ArrayList<Property> properties = new ArrayList<>();
+
+        while (rs.next()) {
+            Property p = new Property(
+                    rs.getString("id"),
+                    rs.getString("title"),
+                    rs.getString("location"),
+                    rs.getString("description"),
+                    rs.getInt("max_guests"),
+                    rs.getInt("max_bedrooms"),
+                    rs.getInt("max_beds"),
+                    rs.getInt("max_bathrooms"),
+                    rs.getDouble("price_per_night"),
+                    rs.getInt("landlord_id"),
+                    rs.getInt("status"));
+
+            properties.add(p);
+        }
+
+        return properties;
+    }
 
     public static ArrayList<Property> loadAllProperties() {
         String query = "SELECT * FROM properties";

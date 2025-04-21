@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -16,7 +15,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Text?>
@@ -55,32 +53,32 @@
                 <HBox alignment="CENTER" spacing="16">
                     <VBox spacing="4" HBox.hgrow="ALWAYS">
                         <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000; -fx-font-size: 12;" text="Destination" />
-                        <TextField prefWidth="150" promptText="Where are you going?" style="-fx-background-color: transparent; -fx-padding: 4 0; -fx-font-family: 'Montserrat'; -fx-font-size: 13;" />
+                        <TextField fx:id="destinationField" prefWidth="150" promptText="Where are you going?" style="-fx-background-color: transparent; -fx-padding: 4 0; -fx-font-family: 'Montserrat'; -fx-font-size: 13;" />
                     </VBox>
 
                     <Separator orientation="VERTICAL" style="-fx-background-color: #E0E0E0;" />
 
                     <VBox spacing="4">
                         <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000; -fx-font-size: 12;" text="Check-in" />
-                        <DatePicker prefWidth="120" promptText="Date" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-size: 13;" />
+                        <DatePicker fx:id="startField" prefWidth="120" promptText="Date" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-size: 13;" />
                     </VBox>
 
                     <Separator orientation="VERTICAL" style="-fx-background-color: #E0E0E0;" />
 
                     <VBox spacing="4">
                         <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000; -fx-font-size: 12;" text="Check-out" />
-                        <DatePicker prefWidth="120" promptText="Date" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-size: 13;" />
+                        <DatePicker fx:id="endField" prefWidth="120" promptText="Date" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-size: 13;" />
                     </VBox>
 
                     <Separator orientation="VERTICAL" style="-fx-background-color: #E0E0E0;" />
 
                     <VBox spacing="4">
                         <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000; -fx-font-size: 12;" text="Guests" />
-                        <ComboBox prefWidth="100" promptText="Add" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-size: 13;" />
+                     <TextField fx:id="nbGuestsField" />
                     </VBox>
 
                     <!-- Enhanced Search Button with SVG icon -->
-                    <Button fx:id="searchButton" styleClass="search-button">
+                    <Button onAction="#handleSearch" styleClass="search-button">
                         <graphic>
                             <HBox alignment="CENTER" spacing="5">
                                 <SVGPath content="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19ZM11 19L21 21L19 11" fill="transparent" stroke="WHITE" strokeWidth="2" />

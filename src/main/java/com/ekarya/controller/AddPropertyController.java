@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 import com.ekarya.DAO.PropertyDAO;
+import com.ekarya.FilePicker.FilePicker;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -18,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class AddPropertyController {
@@ -132,7 +134,6 @@ public class AddPropertyController {
             root.setOpacity(0);
             scene.setRoot(root);
 
-
             // Lancer animation de fondu
             FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(1), root);
             fadeIn.setFromValue(0);
@@ -143,6 +144,15 @@ public class AddPropertyController {
             e.printStackTrace();
             showAlert("Navigation Error", "Failed to load dashboard.");
         }
+    }
+
+    @FXML
+    void handelLoadImage(ActionEvent event) {
+        Stage stage = (Stage) titleField.getScene().getWindow();
+
+        FilePicker f = new FilePicker();
+        f.chooseFile(stage);
+       
     }
 
 }
