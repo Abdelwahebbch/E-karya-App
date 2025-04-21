@@ -49,17 +49,43 @@
 -- );
 
 
--- CREATE OR REPLACE PROCEDURE update_property_status AS
+CREATE OR REPLACE PROCEDURE delete_expired_bookings_and_update_status AS
+BEGIN
+   -- Update property status to 0 for properties with bookings ending today
+   UPDATE properties
+   SET status = 0
+   WHERE id IN (
+      SELECT property_id
+      FROM booking
+      WHERE TRUNC(end_date) = TRUNC(SYSDATE)
+   );
+
+   -- Delete the bookings that end today
+   DELETE FROM booking
+   WHERE TRUNC(end_date) = TRUNC(SYSDATE);
+END;
+/
+
 -- BEGIN
---     -- Update the status of properties where the booking end_date is today's date
---     UPDATE properties
---     SET status = 0
---     WHERE id IN (
---         SELECT property_id
---         FROM booking
---         WHERE end_date = SYSDATE
---     );
--- END update_property_status;
+--    DBMS_SCHEDULER.create_job (
+--       job_name        => 'CLEANUP_EXPIRED_BOOKINGS_JOB',
+--       job_type        => 'PLSQL_BLOCK',
+--       job_action      => 'BEGIN delete_expired_bookings_and_update_status; END;',
+--       start_date      => SYSTIMESTAMP,  -- You can also set a custom start date
+--       repeat_interval => 'FREQ=DAILY; BYHOUR=23; BYMINUTE=59; BYSECOND=59',
+--       enabled         => TRUE
+--    );
+-- END;
+-- /
+
+-- BEGIN
+--    DBMS_SCHEDULER.drop_job(
+--       job_name => 'CLEANUP_EXPIRED_BOOKINGS_JOB'
+--    );
+-- END;
+-- /
+
+
 
 
 -- BEGIN
