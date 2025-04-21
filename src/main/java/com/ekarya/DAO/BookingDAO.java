@@ -2,14 +2,46 @@ package com.ekarya.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
+import com.ekarya.Models.Booking;
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 import com.ekarya.utile.DatabaseConnection;
 
 public class BookingDAO {
+
+    public static final ArrayList<Booking> bookings= new ArrayList<>();
+    public static ArrayList<Booking> loadAllBookings()
+    {
+        String query="SELECT * FROM BOOKING";
+        bookings.clear();
+
+                try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(query);
+                ResultSet resultSet = stmt.executeQuery()) {
+
+            while (resultSet.next()) {
+                bookings.add(new Booking(
+                    resultSet.getInt("BOOKING_ID"),
+                    resultSet.getInt("LANDLORD_ID"),
+                    resultSet.getInt("USER_ID"),
+                    resultSet.getInt("PROPERTY_ID"),
+                    resultSet.getDate("START_DATE"),
+                    resultSet.getDate("END_DATE")));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error when loading the properties: " + e.getMessage());
+        }
+
+
+        return bookings;
+    } 
+
     public static boolean savePropertyDataToBooking(Property p, User u, LocalDate start, LocalDate end) {
         String query = "INSERT INTO booking (booking_id, landlord_id, user_id, property_id, start_date, end_date) " +
                        "VALUES (booking_id_seq.NEXTVAL, ?, ?, ?, ?, ?)";

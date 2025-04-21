@@ -151,6 +151,9 @@ public class BookingConfirmationController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/RentalInterface.fxml"));
             Parent root = loader.load();
 
+            RentalInterfaceController rentalInterfaceController= loader.getController();
+            rentalInterfaceController.initialize(currentUser);
+
             // Apply fade-in transition
             root.setOpacity(0); // Start invisible
             scene.setRoot(root); // Set the new root
