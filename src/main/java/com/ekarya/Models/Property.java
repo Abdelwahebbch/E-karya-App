@@ -1,7 +1,5 @@
 package com.ekarya.Models;
 
-import java.io.File;
-import java.util.List;
 
 /**
  * Data class to hold all the property information
@@ -17,11 +15,13 @@ public class Property {
     private int bathrooms;
     private double price;
     private int landlord_id;
-    private File mainImage;
-    private List<File> additionalImages;
+    private int status;
+    // private File mainImage;
+    // private List<File> additionalImages;
 
     public Property(String id, String title, String location, String description, int guests, int bedrooms, int beds,
-            int bathrooms, double price, int landlord_id/* , File mainImage, List<File> additionalImages */) {
+            int bathrooms, double price, int landlord_id,
+            int status/* , File mainImage, List<File> additionalImages */) {
         this.id = id;
         this.title = title;
         this.location = location;
@@ -36,8 +36,9 @@ public class Property {
         // this.additionalImages = additionalImages;
     }
 
+    // Getters and setters
+
     public Property() {
-        this.landlord_id = 0;
         this.id = null;
         this.title = null;
         this.location = null;
@@ -47,10 +48,10 @@ public class Property {
         this.beds = 0;
         this.bathrooms = 0;
         this.price = 0;
-        // TODO Auto-generated constructor stub
+        this.landlord_id = 0;
+        this.status = 0;
     }
 
-    // Getters and setters
     public String getTitle() {
         return title;
     }
@@ -115,21 +116,21 @@ public class Property {
         this.price = price;
     }
 
-    public File getMainImage() {
-        return mainImage;
-    }
+    // public File getMainImage() {
+    // return mainImage;
+    // }
 
-    public void setMainImage(File mainImage) {
-        this.mainImage = mainImage;
-    }
+    // public void setMainImage(File mainImage) {
+    // this.mainImage = mainImage;
+    // }
 
-    public List<File> getAdditionalImages() {
-        return additionalImages;
-    }
+    // public List<File> getAdditionalImages() {
+    // return additionalImages;
+    // }
 
-    public void setAdditionalImages(List<File> additionalImages) {
-        this.additionalImages = additionalImages;
-    }
+    // public void setAdditionalImages(List<File> additionalImages) {
+    // this.additionalImages = additionalImages;
+    // }
 
     public int getLandlord_id() {
         return landlord_id;
@@ -139,21 +140,22 @@ public class Property {
         this.landlord_id = landlord_id;
     }
 
-    @Override
-    public String toString() {
-        return "PropertyData{" +
-                "title='" + title + '\'' +
-                ", location='" + location + '\'' +
-                ", description='" + description + '\'' +
-                ", guests=" + guests +
-                ", bedrooms=" + bedrooms +
-                ", beds=" + beds +
-                ", bathrooms=" + bathrooms +
-                ", price=" + price +
-                ", mainImage=" + (mainImage != null ? mainImage.getName() : "none") +
-                ", additionalImages=" + (additionalImages != null ? additionalImages.size() : 0) +
-                '}';
-    }
+    // @Override
+    // public String toString() {
+    // return "PropertyData{" +
+    // "title='" + title + '\'' +
+    // ", location='" + location + '\'' +
+    // ", description='" + description + '\'' +
+    // ", guests=" + guests +
+    // ", bedrooms=" + bedrooms +
+    // ", beds=" + beds +
+    // ", bathrooms=" + bathrooms +
+    // ", price=" + price +
+    // ", mainImage=" + (mainImage != null ? mainImage.getName() : "none") +
+    // ", additionalImages=" + (additionalImages != null ? additionalImages.size() :
+    // 0) +
+    // '}';
+    // }
 
     public String getId() {
         return id;
@@ -161,5 +163,13 @@ public class Property {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

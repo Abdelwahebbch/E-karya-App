@@ -284,7 +284,7 @@ public class MainController {
         ImageView imageView;
         try {
             // Load image from local PC file system
-            File file = new File("C:\\Users\\azizb\\OneDrive\\Documents\\Java\\E-karya-App\\src\\main\\java\\com\\ekarya\\controller\\test21.jpg"); // ← Replace this with the actual path
+            File file = new File("/resources/AppLogo2"); // ← Replace this with the actual path
             Image image = new Image(file.toURI().toString());
 
             imageView = new ImageView(image);
@@ -295,7 +295,7 @@ public class MainController {
         }
 
         // // Set image properties
-        imageView.setFitWidth(1000);
+        imageView.setFitWidth(340);
         imageView.setFitHeight(220);
         imageView.setPreserveRatio(true);
 

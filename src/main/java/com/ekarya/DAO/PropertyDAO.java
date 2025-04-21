@@ -33,7 +33,8 @@ public class PropertyDAO {
                         resultSet.getInt("max_beds"),
                         resultSet.getInt("max_bathrooms"),
                         resultSet.getDouble("price_per_night"),
-                        resultSet.getInt("landlord_id")));
+                        resultSet.getInt("landlord_id"),
+                        resultSet.getInt("status")));
             }
 
         } catch (SQLException e) {
@@ -49,22 +50,22 @@ public class PropertyDAO {
 
     public static boolean savePropertyDataToDataBase(Property p) {
 
-        String query = "INSERT INTO properties (id, title, location, price_per_night, max_guests,max_beds,max_bedrooms,max_bathrooms,description, landlord_id) "
-                +
-                "VALUES (property_id_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO properties (id, title, location, price_per_night,max_guests, max_beds, max_bedrooms, max_bathrooms, description, landlord_id, status ) "
+                + "VALUES (property_id_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, p.getTitle());
             stmt.setString(2, p.getLocation());
-            stmt.setLong(3, (long) p.getPrice());
+            stmt.setDouble(3, p.getPrice());
             stmt.setInt(4, p.getGuests());
             stmt.setInt(5, p.getBeds());
             stmt.setInt(6, p.getBedrooms());
             stmt.setInt(7, p.getBathrooms());
             stmt.setString(8, p.getDescription());
             stmt.setInt(9, p.getLandlord_id());
+            stmt.setInt(10, p.getStatus());
 
             int affectedRows = stmt.executeUpdate();
 
@@ -74,7 +75,7 @@ public class PropertyDAO {
                 return false;
             }
         } catch (SQLException e) {
-            System.err.println("Error creating user: " + e.getMessage());
+            System.err.println("Error saving property : " + e.getMessage());
             return false;
         }
 

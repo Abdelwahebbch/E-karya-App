@@ -1,3 +1,11 @@
+
+-- Les Sequances 
+
+-- create sequence user_id_seq start with 1 increment by 1 nocache nocycle;
+-- create sequence property_id_seq start with 1000 increment by 1 nocache nocycle;
+-- create sequence booking_id_seq start with 5000 increment by 1;
+
+
 -- create table users (
 --    id           int primary key,
 --    fullname     varchar(100) not null,
@@ -8,23 +16,76 @@
 --    bio          varchar(2000)
 -- );
 
--- create sequence user_id_seq start with 1 increment by 1 nocache nocycle;
--- create sequence property_id_seq start with 1000 increment by 1 nocache nocycle;
--- CREATE TABLE properties (
---    id              INT PRIMARY KEY,
---    title           VARCHAR2(100) NOT NULL,
---    location        VARCHAR2(100) NOT NULL,
---    price_per_night DECIMAL(10,2) NOT NULL,
---    max_guests      INT NOT NULL,
---    max_beds        INT NOT NULL,
---    max_bedrooms    INT NOT NULL,
---    max_bathrooms   INT NOT NULL,
---    description     VARCHAR2(1000) NOT NULL,
---    landlord_id     INT NOT NULL,
---    CONSTRAINT fk_user FOREIGN KEY (landlord_id) REFERENCES users(id)
+
+-- create table properties (
+--    id              int primary key,
+--    title           varchar2(100) not null,
+--    location        varchar2(100) not null,
+--    price_per_night decimal(10,2) not null,
+--    status          int default 0 not null,
+--    max_guests      int not null,
+--    max_beds        int not null,
+--    max_bedrooms    int not null,
+--    max_bathrooms   int not null,
+--    description     varchar2(1000) not null,
+--    landlord_id     int not null,
+--    constraint fk_user foreign key ( landlord_id )
+--       references users ( id )
 -- );
 
 -- drop TABLE properties;
+
+
+-- create table booking (
+--    booking_id  int primary key not null,
+--    landlord_id int not null,
+--    user_id     int not null,
+--    property_id int not null,
+--    start_date  date not null,
+--    end_date    date not null,
+--    foreign key ( user_id )
+--       references users ( id ),
+--    foreign key ( landlord_id )
+--       references users ( id ),
+--    foreign key ( property_id )
+--       references properties ( id )
+-- );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -- create table rent_proposals (
 --    id               int primary key,
@@ -54,6 +115,9 @@
 --    foreign key ( property_id )
 --       references properties ( id )
 -- );
+
+
+
 -- create table approvals (
 --    id          int primary key,
 --    proposal_id int not null,
@@ -66,3 +130,16 @@
 --    foreign key ( landlord_id )
 --       references users ( id )
 -- );
+
+
+-- CREATE TABLE property_images (
+--     id NUMBER PRIMARY KEY,
+--     house_id NUMBER NOT NULL,
+--     image BLOB NOT NULL,
+--     is_primary NUMBER(1) DEFAULT 0,
+--     CONSTRAINT fk_house FOREIGN KEY (house_id) REFERENCES properties(id)
+-- );
+-- -- create sequence property_image_id_seq start with 1 increment by 1 nocache nocycle;
+
+
+
