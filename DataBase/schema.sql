@@ -33,9 +33,6 @@
 --       references users ( id )
 -- );
 
--- drop TABLE properties;
-
-
 -- create table booking (
 --    booking_id  int primary key not null,
 --    landlord_id int not null,
@@ -50,6 +47,51 @@
 --    foreign key ( property_id )
 --       references properties ( id )
 -- );
+
+
+-- CREATE OR REPLACE PROCEDURE update_property_status AS
+-- BEGIN
+--     -- Update the status of properties where the booking end_date is today's date
+--     UPDATE properties
+--     SET status = 0
+--     WHERE id IN (
+--         SELECT property_id
+--         FROM booking
+--         WHERE end_date = SYSDATE
+--     );
+-- END update_property_status;
+
+
+-- BEGIN
+--    DBMS_SCHEDULER.create_job (
+--       job_name        => 'UPDATE_PROPERTY_STATUS_JOB',
+--       job_type        => 'PLSQL_BLOCK',
+--       job_action      => 'BEGIN update_property_status; END;',
+--       start_date      => SYSTIMESTAMP,        
+--       repeat_interval => 'FREQ=DAILY; BYHOUR=23; BYMINUTE=59; BYSECOND=59',
+--       enabled         => TRUE
+--    );
+-- END;
+-- /
+
+
+
+-- drop TABLE PROPERTY_IMAGES;
+-- drop TABLE properties;
+
+
+
+
+-- CREATE TABLE property_images (
+--     id          NUMBER          NOT NULL,
+--     property_id    NUMBER          NOT NULL,
+--     image       BLOB            NOT NULL,
+--     is_primary  NUMBER(1,0)     DEFAULT 0,
+--     CONSTRAINT pk_house_images PRIMARY KEY (id),
+--     CONSTRAINT fk_house_images_house
+--         FOREIGN KEY (property_id) REFERENCES properties(id)
+-- );
+
 
 
 
