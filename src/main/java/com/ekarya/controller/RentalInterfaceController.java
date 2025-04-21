@@ -19,10 +19,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ekarya.DAO.BookingDAO;
+import com.ekarya.DAO.PropertyDAO;
+import com.ekarya.Models.Booking;
+import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 
 public class RentalInterfaceController {
       User currentUser = new User();
+      Property currentProperty = new Property();
 
     @FXML
     private VBox rentedHomesContainer;
@@ -94,8 +99,32 @@ public class RentalInterfaceController {
     @FXML
     public void initialize(User u) {
         currentUser=u;
-        loadRentalData();
+        BookingDAO.loadAllBookings();
+        PropertyDAO.loadAllProperties();
+        refreshBookingsList();
+        // loadRentalData();
        
+    }
+
+        private void refreshBookingsList() {
+            rentedHomesContainer.getChildren().clear();
+        for (Property p : PropertyDAO.properties) {
+                for(Booking b : BookingDAO.bookings)
+                {
+                    if(currentUser.getId()==b.getUserId() && p.getId().equals(b.getPropertyId()+""))
+                    {
+                        addPropertyToList(p);
+                        break;
+                    }
+                }
+                
+                //TO DO : sala7 logique hna bch ta3mel l affichage ken l dyar eli karihom
+        }
+    }
+
+    public void addPropertyToList(Property property) {
+        Button propertyButton = createPropertyButton(property);
+        rentedHomesContainer.getChildren().add(propertyButton);
     }
 
     /**
@@ -221,26 +250,58 @@ private void handleBackToHome(ActionEvent event) {
                          (i < rating ? "gold" : "#cccccc") + ";");
         }
     }
+    
 
-    /**
-     * Loads sample rental data for demonstration purposes
-     */
-    private void loadRentalData() {
-        // In a real application, you would load this data from a database or service
-        // This is just for demonstration purposes
-        
-        // Set default property details
-        propertyTitle.setText("Property Details");
-        titleText.setText("Cozy apartment in the heart of Paris");
-        locationText.setText("Paris, Île-de-France, France");
-        priceText.setText("104 TND");
-        guestsText.setText("4 guests");
-        bedroomsText.setText("2 bedrooms");
-        bedsText.setText("3 beds");
-        bathroomsText.setText("1 bathroom");
-        descriptionText.setText("Discover this charming apartment located in the heart of Paris. " +
-                "Perfectly situated to explore the city, this comfortable space offers everything " +
-                "you need for a pleasant stay. Enjoy the equipped kitchen, bright living room, " +
-                "and cozy bedroom. Just steps away from major attractions and public transportation.");
+    public void loadPropertyData(String id) {
+        for (Property p : PropertyDAO.getProperties()) {
+            if (p.getId().equals(id)) {
+                currentProperty = p;
+                loadPropertyDetails();
+                break;
+            }
+        }
+    }
+
+    private void loadPropertyDetails() {
+        if (currentProperty != null) {
+            locationText.setText(currentProperty.getLocation());
+            descriptionText.setText(currentProperty.getDescription());
+            titleText.setText(currentProperty.getTitle());
+            bathroomsText.setText(String.valueOf(currentProperty.getBathrooms()));
+            bedroomsText.setText(String.valueOf(currentProperty.getBedrooms()));
+            bedsText.setText(String.valueOf(currentProperty.getBeds()));
+            guestsText.setText(String.valueOf(currentProperty.getGuests()));
+            priceText.setText(currentProperty.getPrice() + "");
+        }
+    }
+
+    private Button createPropertyButton(Property property) {
+        Button propertyButton = new Button();
+        propertyButton.setId("PropertyBtn_" + property.getId());
+        propertyButton.setMaxWidth(Double.MAX_VALUE);
+        propertyButton.setOnAction(event -> loadPropertyData(property.getId()));
+        propertyButton.setStyle("""
+                    -fx-background-color: white;
+                    -fx-border-color: #E0E0E0;
+                    -fx-border-radius: 12;
+                    -fx-background-radius: 12;
+                    -fx-alignment: center-left;
+                    -fx-padding: 10;
+                    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);
+                """);
+
+        Text propertyNameText = new Text(property.getTitle());
+        propertyNameText.setStyle(
+                "-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;");
+
+        Text priceText = new Text(property.getPrice() + " TND per night");
+        priceText.setStyle("-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;");
+
+        VBox textVBox = new VBox(propertyNameText, priceText);
+        HBox hbox = new HBox(10, textVBox);
+        propertyButton.setGraphic(hbox);
+
+        return propertyButton;
+
     }
 }
