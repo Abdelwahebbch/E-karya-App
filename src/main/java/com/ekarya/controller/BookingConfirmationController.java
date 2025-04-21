@@ -9,11 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 
@@ -65,8 +61,6 @@ public class BookingConfirmationController {
     {
         currentUser=u;
         cuProperty=p;
-
-
         propertyNameText.setText(p.getTitle());
         locationText.setText(p.getLocation());
         totalPriceText.setText(price+" TND");

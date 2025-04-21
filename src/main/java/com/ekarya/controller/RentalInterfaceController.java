@@ -14,7 +14,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +25,8 @@ import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 
 public class RentalInterfaceController {
-      User currentUser = new User();
-      Property currentProperty = new Property();
+    User currentUser = new User();
+    Property currentProperty = new Property();
 
     @FXML
     private VBox rentedHomesContainer;
@@ -86,10 +85,8 @@ public class RentalInterfaceController {
     @FXML
     private HBox ratingStarsContainer;
 
-    @FXML
-    private TextArea commentsField;
 
-    private int currentRating = 3; // Default rating (3 stars)
+    private int currentRating = 0; // Default rating (3 stars)
     private List<Button> ratingStars = new ArrayList<>();
 
     /**
@@ -98,27 +95,23 @@ public class RentalInterfaceController {
      */
     @FXML
     public void initialize(User u) {
-        currentUser=u;
+        currentUser = u;
         BookingDAO.loadAllBookings();
         PropertyDAO.loadAllProperties();
         refreshBookingsList();
-        // loadRentalData();
-       
     }
 
-        private void refreshBookingsList() {
-            rentedHomesContainer.getChildren().clear();
+    private void refreshBookingsList() {
+        rentedHomesContainer.getChildren().clear();
         for (Property p : PropertyDAO.properties) {
-                for(Booking b : BookingDAO.bookings)
-                {
-                    if(currentUser.getId()==b.getUserId() && p.getId().equals(b.getPropertyId()+""))
-                    {
-                        addPropertyToList(p);
-                        break;
-                    }
+            for (Booking b : BookingDAO.bookings) {
+                if (currentUser.getId() == b.getUserId() && p.getId().equals(b.getPropertyId() + "")) {
+                    addPropertyToList(p);
+                    break;
                 }
-                
-                //TO DO : sala7 logique hna bch ta3mel l affichage ken l dyar eli karihom
+            }
+
+            // TO DO : sala7 logique hna bch ta3mel l affichage ken l dyar eli karihom
         }
     }
 
@@ -131,75 +124,52 @@ public class RentalInterfaceController {
      * Handles the back button action to navigate back to the home page
      */
     @FXML
-private void handleBackToHome(ActionEvent event) {
-    Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
-    Scene scene = node.getScene();
+    private void handleBackToHome(ActionEvent event) {
+        Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+        Scene scene = node.getScene();
 
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-        Parent root = loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+            Parent root = loader.load();
 
-     
-        MainController controller = loader.getController();
-         controller.initData(currentUser);
+            MainController controller = loader.getController();
+            controller.initData(currentUser);
 
-        // Apply fade-in transition
-        root.setOpacity(0); // Start invisible
-        scene.setRoot(root); // Set the new root
+            // Apply fade-in transition
+            root.setOpacity(0); // Start invisible
+            scene.setRoot(root); // Set the new root
 
-        FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), root);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        fadeIn.play();
+            FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), root);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.play();
 
-    } catch (IOException e) {
-        e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
-
-    /**
-     * Loads rental details when a property is selected from the list
-     */
-    @FXML
-    private void loadRentalDetails(ActionEvent event) {
-        // Get the source button that was clicked
-        //Button clickedButton = (Button) event.getSource();
-        
-        // Extract property information from the button or its data
-        // This is a simplified example - in a real app, you would get the property ID
-        // and load the data from your data model or database
-        String propertyName = "Selected Property";
-        
-        // For demonstration, we'll just update the UI with some hardcoded values
-        propertyTitle.setText(propertyName + " Details");
-        
-        // In a real application, you would load the actual property data here
-        // and update all the fields with the property's information
-    }
-
-
 
     /**
      * Handles submitting a review for the property
      */
     @FXML
     private void handleSubmitReview(ActionEvent event) {
-        String comments = commentsField.getText();
-        
+        // String comments = commentsField.getText();
+
         // In a real application, you would:
         // 1. Validate the input
         // 2. Submit the review to your data model or database
         // 3. Show a confirmation message
-        
-        System.out.println("Submitting review with rating: " + currentRating + " and comments: " + comments);
-        
+
+        System.out.println("Submitting review with rating: " + currentRating /* + " and comments: " + comments */);
+
         // Clear the comments field after submission
-        commentsField.clear();
-        
+       // commentsField.clear();
+
         // Show a confirmation message (in a real app, you might use a dialog)
         // For now, we'll just update the button text temporarily
         reviewButton.setText("Review Submitted!");
-        
+
         // Reset the button text after a delay
         new Thread(() -> {
             try {
@@ -220,18 +190,19 @@ private void handleBackToHome(ActionEvent event) {
         // Clear any existing stars
         ratingStarsContainer.getChildren().clear();
         ratingStars.clear();
-        
+
         // Create 5 star buttons
         for (int i = 1; i <= 5; i++) {
             final int rating = i;
             Button starButton = new Button("★");
-            starButton.setStyle("-fx-background-color: transparent; -fx-text-fill: " + 
-                               (i <= currentRating ? "gold" : "#cccccc") + ";");
-            
+            starButton.setStyle("-fx-background-color: transparent; -fx-text-fill: " +
+            (i <= currentRating ? "gold" : "#cccccc") + "; -fx-font-size: 20px;");
+        
+
             starButton.setOnAction(event -> {
                 setRating(rating);
             });
-            
+
             ratingStars.add(starButton);
             ratingStarsContainer.getChildren().add(starButton);
         }
@@ -242,21 +213,21 @@ private void handleBackToHome(ActionEvent event) {
      */
     private void setRating(int rating) {
         currentRating = rating;
-        
+
         // Update star colors
         for (int i = 0; i < ratingStars.size(); i++) {
             Button star = ratingStars.get(i);
-            star.setStyle("-fx-background-color: transparent; -fx-text-fill: " + 
-                         (i < rating ? "gold" : "#cccccc") + ";");
+            star.setStyle("-fx-background-color: transparent; -fx-text-fill: " +
+                    (i < rating ? "gold" : "#cccccc") + "; -fx-font-size: 20px;");
         }
     }
-    
 
     public void loadPropertyData(String id) {
         for (Property p : PropertyDAO.getProperties()) {
             if (p.getId().equals(id)) {
                 currentProperty = p;
                 loadPropertyDetails();
+                setupRatingStars(); 
                 break;
             }
         }

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -15,7 +16,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.SVGPath?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <VBox maxHeight="600" minHeight="600" prefHeight="600" spacing="0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.RentalInterfaceController">
@@ -159,37 +159,21 @@
                     
                     <!-- Rating and Comments Section -->
                     <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
-                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Give us your feedback :" />
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Rating and Comments" />
                         
                         <HBox alignment="CENTER_LEFT" spacing="10">
-                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Rating:">
-                        <font>
-                           <Font size="20.0" />
-                        </font></Label>
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Rating:" />
                             <HBox fx:id="ratingStarsContainer" spacing="5">
                                 <!-- Stars will be added dynamically -->
-                                <Button style="-fx-background-color: transparent; -fx-text-fill: gold;" text="★">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Button>
-                                <Button style="-fx-background-color: transparent; -fx-text-fill: gold;" text="★">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Button>
-                                <Button style="-fx-background-color: transparent; -fx-text-fill: gold;" text="★">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Button>
-                                <Button style="-fx-background-color: transparent; -fx-text-fill: #cccccc;" text="★">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Button>
-                                <Button style="-fx-background-color: transparent; -fx-text-fill: #cccccc;" text="★">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Button>
+                                <Button style="-fx-background-color: transparent; -fx-text-fill: gold;" text="★" />
+                                <Button style="-fx-background-color: transparent; -fx-text-fill: gold;" text="★" />
+                                <Button style="-fx-background-color: transparent; -fx-text-fill: gold;" text="★" />
+                                <Button style="-fx-background-color: transparent; -fx-text-fill: #cccccc;" text="★" />
+                                <Button style="-fx-background-color: transparent; -fx-text-fill: #cccccc;" text="★" />
                             </HBox>
                         </HBox>
+                        
+                        <TextArea fx:id="commentsField" prefHeight="100" promptText="Write your comments here..." style="-fx-border-color: #E0E0E0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-family: 'Montserrat';" />
                         
                         <!-- Submit Review Button -->
                         <HBox alignment="CENTER_RIGHT">
