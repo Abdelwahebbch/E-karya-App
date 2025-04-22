@@ -206,28 +206,5 @@
                 </VBox>
             </ScrollPane>
         </center>
-        
-        <!-- Right Panel - Notifications -->
-        <right>
-            <VBox prefWidth="250" spacing="10" style="-fx-padding: 20;">
-                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: 800; -fx-fill: #000000;" text="Notifications" />
-                
-                <!-- Notifications List -->
-                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
-                    <VBox fx:id="notificationsContainer" spacing="12">
-                        <!-- Notification items -->
-                        <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 16; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
-                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="New Request" />
-                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="John Smith wants to rent your Paris Apartment from March 10 to 15." wrappingWidth="200" />
-                        </VBox>
-                        
-                        <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 16; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
-                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="New Review" />
-                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="Mary Martin left a 5-star review for your Marseille Villa." wrappingWidth="200" />
-                        </VBox>
-                    </VBox>
-                </ScrollPane>
-            </VBox>
-        </right>
     </BorderPane>
 </VBox>

@@ -171,7 +171,7 @@
                     
                     <!-- Action Buttons -->
                     <HBox alignment="CENTER_RIGHT" spacing="10">
-                        <Button fx:id="editButton" disable="true" onAction="#handleEditProperty" style="-fx-background-color: #333333; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 10 20;" visible="false">
+                        <Button fx:id="editButton" onAction="#handleEditProperty" style="-fx-background-color: #333333; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 10 20;">
                             <graphic>
                                 <HBox alignment="CENTER" spacing="8">
                                     <SVGPath content="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" fill="transparent" stroke="WHITE" strokeWidth="2" />
@@ -179,7 +179,7 @@
                                 </HBox>
                             </graphic>
                         </Button>
-                        <Button fx:id="deleteButton" disable="true" onAction="#handleDeleteProperty" style="-fx-background-color: #666666; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 10 20;" visible="false">
+                        <Button fx:id="deleteButton" onAction="#handleDeleteProperty" style="-fx-background-color: #666666; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 10 20;">
                             <graphic>
                                 <HBox alignment="CENTER" spacing="8">
                                     <SVGPath content="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" fill="transparent" stroke="WHITE" strokeWidth="2" />
@@ -191,5 +191,28 @@
                 </VBox>
             </ScrollPane>
         </center>
+        
+        <!-- Right Panel - Notifications -->
+        <right>
+            <VBox prefWidth="250" spacing="10" style="-fx-padding: 20;">
+                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: 800; -fx-fill: #000000;" text="Notifications" />
+                
+                <!-- Notifications List -->
+                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="notificationsContainer" spacing="12">
+                        <!-- Notification items -->
+                        <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 16; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="New Request" />
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="John Smith wants to rent your Paris Apartment from March 10 to 15." wrappingWidth="200" />
+                        </VBox>
+                        
+                        <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 16; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="New Review" />
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="Mary Martin left a 5-star review for your Marseille Villa." wrappingWidth="200" />
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+            </VBox>
+        </right>
     </BorderPane>
 </VBox>
