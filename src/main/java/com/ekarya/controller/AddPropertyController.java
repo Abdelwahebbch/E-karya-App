@@ -156,9 +156,9 @@ public class AddPropertyController {
 
         FilePicker f = new FilePicker();
         File selectedFile = f.chooseFile(stage);
-        AddPropertyController.imagesFromScene.add(selectedFile);
-        // System.out.println("Inserted !!! ");
+        if (selectedFile != null) 
+            AddPropertyController.imagesFromScene.add(selectedFile);
 
-    }
 
+}
 }
