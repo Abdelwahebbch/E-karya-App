@@ -180,11 +180,13 @@ public class RentalInterfaceController {
                 if (b.getHasReviewed() != 0) {
                     reviewErrorLabel.setText("you have already review this property");
                     reviewErrorLabel.setVisible(true);
+                    reviewErrorLabel.setTextFill(javafx.scene.paint.Color.RED);
                     return;
                 }
                 if (currentDate.isBefore(startLocalDate)) {
                     reviewErrorLabel.setText("You can only leave a review after your stay has started.");
                     reviewErrorLabel.setVisible(true);
+                    reviewErrorLabel.setTextFill(javafx.scene.paint.Color.RED);
                     return;
                 }
                 double newRating = (currentRating + currentProperty.getRating() * currentProperty.getNumRaters())
@@ -196,6 +198,7 @@ public class RentalInterfaceController {
                             currentProperty.getNumRaters())) {
                         reviewErrorLabel.setText("Thank you for your feedback! We're glad you shared your experience.");
                         reviewErrorLabel.setVisible(true);
+                        reviewErrorLabel.setTextFill(javafx.scene.paint.Color.BLACK);
 
                     }
                 } catch (Exception e) {
@@ -341,6 +344,7 @@ public class RentalInterfaceController {
     @FXML
     private void refreshDetails(ActionEvent event) {
         PropertyDAO.loadAllProperties();
+        BookingDAO.loadAllBookings();
         loadPropertyData(currentProperty.getId());
     }
 
