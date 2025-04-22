@@ -5,11 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    // private static final String URL =
-    // "jdbc:oracle:thin:@192.168.100.60:1521:FREE";
-    private static final String USER = "ekarya";
-    // private static final String USER = "c##test";
+    //private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+    private static final String URL ="jdbc:oracle:thin:@192.168.100.60:1521:FREE";
+    //private static final String USER = "ekarya";
+    private static final String USER = "c##test";
     private static final String PASSWORD = "0000";
 
     public static Connection connection;

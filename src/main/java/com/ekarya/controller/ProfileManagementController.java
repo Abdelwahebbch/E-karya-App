@@ -236,4 +236,194 @@ private void handleBackToHome(ActionEvent event) throws Exception {
         }
     }
 
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+
+    public Text getPhoneNumberText() {
+        return phoneNumberText;
+    }
+
+
+    public void setPhoneNumberText(Text phoneNumberText) {
+        this.phoneNumberText = phoneNumberText;
+    }
+
+
+    public TextArea getBioField() {
+        return bioField;
+    }
+
+
+    public void setBioField(TextArea bioField) {
+        this.bioField = bioField;
+    }
+
+
+    public Text getBioText() {
+        return bioText;
+    }
+
+
+    public void setBioText(Text bioText) {
+        this.bioText = bioText;
+    }
+
+
+    public PasswordField getConfirmPassword() {
+        return confirmPassword;
+    }
+
+
+    public void setConfirmPassword(PasswordField confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+
+    public PasswordField getCurrentPassword() {
+        return currentPassword;
+    }
+
+
+    public void setCurrentPassword(PasswordField currentPassword) {
+        this.currentPassword = currentPassword;
+    }
+
+
+    public DatePicker getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+
+    public void setDateOfBirth(DatePicker dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+
+    public TextField getEmailField() {
+        return emailField;
+    }
+
+
+    public void setEmailField(TextField emailField) {
+        this.emailField = emailField;
+    }
+
+
+    public Text getEmailText() {
+        return emailText;
+    }
+
+
+    public void setEmailText(Text emailText) {
+        this.emailText = emailText;
+    }
+
+
+    public TextField getFullNameField() {
+        return fullNameField;
+    }
+
+
+    public void setFullNameField(TextField fullNameField) {
+        this.fullNameField = fullNameField;
+    }
+
+
+    public Text getDateOfBirthText() {
+        return dateOfBirthText;
+    }
+
+
+    public void setDateOfBirthText(Text dateOfBirthText) {
+        this.dateOfBirthText = dateOfBirthText;
+    }
+
+
+    public PasswordField getNewPassword() {
+        return newPassword;
+    }
+
+
+    public void setNewPassword(PasswordField newPassword) {
+        this.newPassword = newPassword;
+    }
+
+
+    public TextField getPhoneField() {
+        return phoneField;
+    }
+
+
+    public void setPhoneField(TextField phoneField) {
+        this.phoneField = phoneField;
+    }
+
+
+    public Button getRefreshAccountButton() {
+        return refreshAccountButton;
+    }
+
+
+    public void setRefreshAccountButton(Button refreshAccountButton) {
+        this.refreshAccountButton = refreshAccountButton;
+    }
+
+
+    public Button getSaveChangesButton() {
+        return saveChangesButton;
+    }
+
+
+    public void setSaveChangesButton(Button saveChangesButton) {
+        this.saveChangesButton = saveChangesButton;
+    }
+
+
+    public Button getUpdatePasswordButton() {
+        return updatePasswordButton;
+    }
+
+
+    public void setUpdatePasswordButton(Button updatePasswordButton) {
+        this.updatePasswordButton = updatePasswordButton;
+    }
+
+
+    public Text getFullnameText() {
+        return fullnameText;
+    }
+
+
+    public void setFullnameText(Text fullnameText) {
+        this.fullnameText = fullnameText;
+    }
+
+
+    public Label getErrorLabel() {
+        return errorLabel;
+    }
+
+
+    public void setErrorLabel(Label errorLabel) {
+        this.errorLabel = errorLabel;
+    }
+
+
+    public Label getPasswordErrorLabel() {
+        return passwordErrorLabel;
+    }
+
+
+    public void setPasswordErrorLabel(Label passwordErrorLabel) {
+        this.passwordErrorLabel = passwordErrorLabel;
+    }
+
 }
