@@ -2,11 +2,15 @@ package com.ekarya.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Optional;
 
+import com.ekarya.DAO.BlobDAO;
 import com.ekarya.DAO.PropertyDAO;
 import com.ekarya.Models.User;
+import com.ekarya.Models.ImageModel;
 import com.ekarya.Models.Property;
 import com.ekarya.utile.DatabaseConnection;
 
@@ -70,14 +74,16 @@ public class MainController {
     private DatePicker startField;
 
     // Event handlers
-    public void initData(User user) {
+    public void initData(User user) throws Exception {
         this.currentUser = user;
         PropertyDAO.loadAllProperties();
         refreshPropertyList();
     }
 
-    public void addPropertyToGrid(Property property) {
-        Node card = createListingCard(property);
+    public void addPropertyToGrid(Property property) throws Exception {
+        ArrayList<ImageModel> x = new ArrayList<>();
+        x = BlobDAO.loadImagesForProperty(property.getId());
+        Node card = createListingCard(property,x.getFirst());
 
         GridPane.setColumnIndex(card, column);
         GridPane.setRowIndex(card, row);
@@ -102,7 +108,7 @@ public class MainController {
 
     }
 
-    private void refreshPropertyList() {
+    private void refreshPropertyList() throws Exception {
         propertiesGridPane.getChildren().clear();
         for (Property p : PropertyDAO.properties) {
             addPropertyToGrid(p);
@@ -249,7 +255,7 @@ public class MainController {
 
     }
 
-    public VBox createListingCard(Property p) {
+    public VBox createListingCard(Property p, ImageModel i) {
         VBox card = new VBox();
         card.setUserData(p);
         card.setSpacing(8);
@@ -260,46 +266,33 @@ public class MainController {
         card.setEffect(new DropShadow());
 
         // ---- Image ----
-        // ImageView imageView;
-        // URL imageUrl = getClass().getResource("/images/Team7.jpg");
-        // if (imageUrl != null) {
-        // imageView = new ImageView(new Image(imageUrl.toExternalForm()));
-        // } else {
-        // imageView = new ImageView(); // fallback
-        // }
-        // imageView.setFitWidth(300);
-        // imageView.setFitHeight(220);
-        // imageView.setPreserveRatio(true);
+        ImageView imageView = new ImageView();
 
-        // StackPane imagePane = new StackPane(imageView);
-        // imagePane.setAlignment(Pos.CENTER);
-        // imagePane.setStyle("-fx-background-color: #f0f0f0; -fx-border-radius: 10 10 0
-        // 0; -fx-background-radius: 10 10 0 0;");
-
-        ImageView imageView;
         try {
-            // Load image from local PC file system
-            File file = new File("/resources/AppLogo2"); // ← Replace this with the actual path
-            Image image = new Image(file.toURI().toString());
-
-            imageView = new ImageView(image);
+            if (i != null && i.getImgFile() != null && i.getImgFile().exists()) {
+                Image image = new Image(i.getImgFile().toURI().toString());
+                imageView.setImage(image);
+            } else {
+                // Fallback image if none provided
+                URL fallbackUrl = getClass().getResource("/pictures/error.png");
+                if (fallbackUrl != null) {
+                    imageView.setImage(new Image(fallbackUrl.toExternalForm()));
+                }
+            }
         } catch (Exception e) {
-            // Fallback in case the image file is not found or can't be loaded
-            imageView = new ImageView();
-            System.err.println("Could not load image: " + e.getMessage());
+            System.err.println("Could not load property image: " + e.getMessage());
         }
 
-        // // Set image properties
-        imageView.setFitWidth(340);
+        imageView.setFitWidth(300);
         imageView.setFitHeight(220);
         imageView.setPreserveRatio(true);
 
-        // Wrap in StackPane with style
         StackPane imagePane = new StackPane(imageView);
         imagePane.setAlignment(Pos.CENTER);
         imagePane.setStyle(
                 "-fx-background-color: #f0f0f0; -fx-border-radius: 10 10 0 0; -fx-background-radius: 10 10 0 0;");
 
+        // ---- Content Box ----
         VBox contentBox = new VBox(5);
         contentBox.setPadding(new Insets(8));
 
@@ -318,13 +311,12 @@ public class MainController {
         HBox ratingBox = new HBox(5, star, rating);
         topRow.getChildren().addAll(location, spacer, ratingBox);
 
-        // ---- Subtitle and Date ----
+        // ---- Subtitle and Price ----
         Label subtitle = new Label(p.getTitle());
         subtitle.setFont(Font.font("Arial", FontWeight.NORMAL, 13));
 
-        // ---- Price Row ----
         HBox priceRow = new HBox(5);
-        Label price = new Label("TND" + p.getPrice());
+        Label price = new Label("TND " + p.getPrice());
         price.setFont(Font.font("Arial", FontWeight.BOLD, 13));
 
         Label perNight = new Label("per night");
@@ -336,14 +328,14 @@ public class MainController {
         contentBox.getChildren().addAll(topRow, subtitle, priceRow);
         card.getChildren().addAll(imagePane, contentBox);
 
-        // ---- Scene Switcher Call ----
-        card.setOnMouseClicked(event -> LoadPropertyData(p.getId() + "", event));
+        // ---- Click Event ----
+        card.setOnMouseClicked(event -> LoadPropertyData(p.getId(), event));
 
         return card;
     }
 
     @FXML
-    void handleSearch(ActionEvent event) {
+    void handleSearch(ActionEvent event) throws Exception {
         this.column = 0;
         this.row = 0;
         LocalDate checkInDate = startField.getValue();

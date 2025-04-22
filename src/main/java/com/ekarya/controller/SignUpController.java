@@ -33,7 +33,7 @@ public class SignUpController {
     private Label errorLabel;
 
     @FXML
-    void handleSignUp(ActionEvent event) throws IOException {
+    void handleSignUp(ActionEvent event) throws Exception {
         String fullName = fullNameField.getText();
         String email = emailField.getText();
         String phoneNumber = phoneField.getText();

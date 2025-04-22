@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -122,9 +121,10 @@ public class RentalInterfaceController {
 
     /**
      * Handles the back button action to navigate back to the home page
-     */
-    @FXML
-    private void handleBackToHome(ActionEvent event) {
+          * @throws Exception 
+          */
+         @FXML
+         private void handleBackToHome(ActionEvent event) throws Exception {
         Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
         Scene scene = node.getScene();
 

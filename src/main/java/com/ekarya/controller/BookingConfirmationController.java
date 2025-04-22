@@ -106,9 +106,10 @@ public class BookingConfirmationController {
 
     /**
      * Handles the action when the home button is clicked.
-     */
-    @FXML
-    private void handleBackToHome(ActionEvent event) {
+          * @throws Exception 
+          */
+         @FXML
+         private void handleBackToHome(ActionEvent event) throws Exception {
         Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
         Scene scene = node.getScene();
 

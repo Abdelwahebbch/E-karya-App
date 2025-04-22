@@ -112,9 +112,6 @@ public class AddPropertyController {
             showAlert("Invalid Input", "Please enter valid numbers for guests, bedrooms, beds, bathrooms, and price.");
             return null;
         }
-
-        // TODO: Handle images if needed
-
         return property;
     }
 
@@ -128,7 +125,7 @@ public class AddPropertyController {
 
     @FXML
     void handleBackToDashboard(ActionEvent event) throws Exception {
-        Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+        Node node = (Node) event.getSource();
         Scene scene = node.getScene();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropertyDashboard.fxml"));

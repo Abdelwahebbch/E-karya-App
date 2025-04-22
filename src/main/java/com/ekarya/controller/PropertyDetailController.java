@@ -122,9 +122,10 @@ public class PropertyDetailController {
 
     /**
      * Handles the back button action to navigate back to the home page
-     */
-    @FXML
-    private void handleBackToHome(ActionEvent event) {
+          * @throws Exception 
+          */
+         @FXML
+         private void handleBackToHome(ActionEvent event) throws Exception {
         Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
         Scene scene = node.getScene();
 

@@ -129,7 +129,7 @@ public class PropertyDashboardController {
     }
 
     @FXML
-    private void handleBackToHome(ActionEvent event) {
+    private void handleBackToHome(ActionEvent event) throws Exception {
         Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
         Scene scene = node.getScene();
 
