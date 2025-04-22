@@ -1,6 +1,5 @@
 package com.ekarya.Models;
 
-
 /**
  * Data class to hold all the property information
  */
@@ -16,12 +15,16 @@ public class Property {
     private double price;
     private int landlord_id;
     private int status;
+    private double rating;
+    private int numRaters;
+
     // private File mainImage;
     // private List<File> additionalImages;
 
-    public Property(String id, String title, String location, String description, int guests, int bedrooms, int beds,
-            int bathrooms, double price, int landlord_id,
-            int status/* , File mainImage, List<File> additionalImages */) {
+    public Property(String id, String title, String location, String description,
+            int guests, int bedrooms, int beds, int bathrooms,
+            double price, int landlord_id, int status,
+            double rating, int numRaters/* , File mainImage, List<File> additionalImages */) {
         this.id = id;
         this.title = title;
         this.location = location;
@@ -32,6 +35,9 @@ public class Property {
         this.bathrooms = bathrooms;
         this.price = price;
         this.landlord_id = landlord_id;
+        this.status = status;
+        this.rating = rating;
+        this.numRaters = numRaters;
         // this.mainImage = mainImage;
         // this.additionalImages = additionalImages;
     }
@@ -50,6 +56,8 @@ public class Property {
         this.price = 0;
         this.landlord_id = 0;
         this.status = 0;
+        this.rating = 0.0;
+        this.numRaters = 0;
     }
 
     public String getTitle() {
@@ -116,7 +124,48 @@ public class Property {
         this.price = price;
     }
 
-    // public File getMainImage() {
+
+    public int getLandlord_id() {
+        return landlord_id;
+    }
+
+    public void setLandlord_id(int landlord_id) {
+        this.landlord_id = landlord_id;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public int getNumRaters() {
+        return numRaters;
+    }
+
+    public void setNumRaters(int numRaters) {
+        this.numRaters = numRaters;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+        // public File getMainImage() {
     // return mainImage;
     // }
 
@@ -130,15 +179,7 @@ public class Property {
 
     // public void setAdditionalImages(List<File> additionalImages) {
     // this.additionalImages = additionalImages;
-    // }
-
-    public int getLandlord_id() {
-        return landlord_id;
-    }
-
-    public void setLandlord_id(int landlord_id) {
-        this.landlord_id = landlord_id;
-    }
+    // }   
 
     // @Override
     // public String toString() {
@@ -156,20 +197,4 @@ public class Property {
     // 0) +
     // '}';
     // }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 }

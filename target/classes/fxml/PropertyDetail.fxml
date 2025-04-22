@@ -45,10 +45,10 @@
             <VBox spacing="10">
                 <Text fx:id="titleField" style="-fx-font-family: 'Montserrat'; -fx-font-size: 24; -fx-font-weight: 800; -fx-fill: #000000;" text="Default" />
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="★ 9,99" />
-                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="(999 reviews)" />
+                    <Text fx:id="ratingText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="" />
+                    <Text fx:id="numRatersText" style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="" />
                     <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #000000; -fx-font-weight: bold;" text="• Location" />
-                    <Text fx:id="locationField" style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="Paris, Île-de-France, France" />
+                    <Text fx:id="locationField" style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="" />
                 </HBox>
             </VBox>
 

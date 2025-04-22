@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -26,6 +27,7 @@ public class PropertyDetailController {
 
     public static User currentUser = new User();
     public static Property currentProperty = new Property();
+    DecimalFormat df = new DecimalFormat("#.00");
     @FXML
     private Button bookButton;
 
@@ -67,6 +69,9 @@ public class PropertyDetailController {
 
     @FXML
     private Text tvaField;
+
+    @FXML private Text ratingText;
+    @FXML private Text numRatersText;
 
     public void initialize() {
         checkInDatePicker.valueProperty().addListener((obs, oldDate, newDate) -> {
@@ -110,6 +115,9 @@ public class PropertyDetailController {
     public void initData(Property p, User u) {
         currentUser = u;
         currentProperty = p;
+
+        ratingText.setText("★ "+df.format(p.getRating()));
+        numRatersText.setText("("+p.getNumRaters()+" reviews)");
         descriptionField.setText(p.getDescription());
         detailsField.setText(
                 p.getGuests() + " Guestes " + p.getBathrooms() + " Bathrooms " + p.getBedrooms() + " Bedrooms");

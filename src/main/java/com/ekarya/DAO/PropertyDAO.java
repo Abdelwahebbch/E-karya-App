@@ -24,8 +24,7 @@ public class PropertyDAO {
     public static ArrayList<Property> loadSpecificPropertys(String destination, LocalDate start, LocalDate end,
             String guests) {
         ArrayList<Property> list = new ArrayList<>();
-        StringBuilder query = new StringBuilder("SELECT * FROM properties WHERE status = 0"); // status = 0 means
-                                                                                              // available
+        StringBuilder query = new StringBuilder("SELECT * FROM properties WHERE status = 0"); 
         List<Object> parameters = new ArrayList<>();
 
         if (destination != null && !destination.trim().isEmpty()) {
@@ -86,7 +85,9 @@ public class PropertyDAO {
                     rs.getInt("max_bathrooms"),
                     rs.getDouble("price_per_night"),
                     rs.getInt("landlord_id"),
-                    rs.getInt("status"));
+                    rs.getInt("status"),
+                    rs.getDouble("rating"),
+                    rs.getInt("num_raters"));
 
             properties.add(p);
         }
@@ -114,7 +115,9 @@ public class PropertyDAO {
                         resultSet.getInt("max_bathrooms"),
                         resultSet.getDouble("price_per_night"),
                         resultSet.getInt("landlord_id"),
-                        resultSet.getInt("status")));
+                        resultSet.getInt("status"),
+                        resultSet.getDouble("rating"),
+                        resultSet.getInt("num_raters")));
             }
 
         } catch (SQLException e) {
@@ -123,7 +126,6 @@ public class PropertyDAO {
 
         return properties;
     }
-
     public static List<Property> getProperties() {
         return new ArrayList<>(properties); // return a copy
     }
@@ -172,4 +174,29 @@ public class PropertyDAO {
             return false;
         }
     }
+
+    public static boolean updatePropertyRating(String propertyId, double newRating, int newRaterCount) throws Exception {
+        String query = "UPDATE properties SET rating = ?, num_raters = ? WHERE id = ?";
+    
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+             
+            stmt.setDouble(1, newRating);
+            stmt.setInt(2, newRaterCount);
+            stmt.setString(3, propertyId);
+    
+            int affectedRows = stmt.executeUpdate();
+            
+            if (affectedRows == 0) {
+                throw new SQLException("Updating property rating failed, no rows affected.");
+            }
+    
+            return true;
+            
+        } catch (SQLException e) {
+            System.err.println("Error updating property rating: " + e.getMessage());
+            return false;
+        }
+    }
+    
 }

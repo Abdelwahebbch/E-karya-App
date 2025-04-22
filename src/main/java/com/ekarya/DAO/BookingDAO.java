@@ -31,7 +31,8 @@ public class BookingDAO {
                     resultSet.getInt("USER_ID"),
                     resultSet.getInt("PROPERTY_ID"),
                     resultSet.getDate("START_DATE"),
-                    resultSet.getDate("END_DATE")));
+                    resultSet.getDate("END_DATE"),
+                    resultSet.getInt("has_reviewed")));
             }
 
         } catch (SQLException e) {

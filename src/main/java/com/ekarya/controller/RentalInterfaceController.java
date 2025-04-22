@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -16,6 +17,8 @@ import javafx.scene.text.Text;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +33,7 @@ import com.ekarya.Models.User;
 public class RentalInterfaceController {
     User currentUser = new User();
     Property currentProperty = new Property();
+    DecimalFormat df = new DecimalFormat("#.00");
 
     @FXML
     private VBox rentedHomesContainer;
@@ -88,14 +92,15 @@ public class RentalInterfaceController {
     @FXML
     private HBox ratingStarsContainer;
 
+    @FXML
+    private Label reviewErrorLabel;
 
-    private int currentRating = 0; // Default rating (3 stars)
+    @FXML
+    private Text ratingText;
+
+    private int currentRating = 0;
     private List<Button> ratingStars = new ArrayList<>();
 
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the FXML file has been loaded.
-     */
     @FXML
     public void initialize(User u) {
         currentUser = u;
@@ -113,8 +118,6 @@ public class RentalInterfaceController {
                     break;
                 }
             }
-
-            // TO DO : sala7 logique hna bch ta3mel l affichage ken l dyar eli karihom
         }
     }
 
@@ -125,10 +128,11 @@ public class RentalInterfaceController {
 
     /**
      * Handles the back button action to navigate back to the home page
-          * @throws Exception 
-          */
-         @FXML
-         private void handleBackToHome(ActionEvent event) throws Exception {
+     * 
+     * @throws Exception
+     */
+    @FXML
+    private void handleBackToHome(ActionEvent event) throws Exception {
         Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
         Scene scene = node.getScene();
 
@@ -158,23 +162,52 @@ public class RentalInterfaceController {
      */
     @FXML
     private void handleSubmitReview(ActionEvent event) {
-        // String comments = commentsField.getText();
 
-        // In a real application, you would:
-        // 1. Validate the input
-        // 2. Submit the review to your data model or database
-        // 3. Show a confirmation message
+        // fi kol nazla 3la element ytsajel fi currentp fih id dar nhez l id w na3mel
+        // loop fl bookings
+        // w nchouf el user eli 7al tawa w 3andou l booking adhika 3mal review wala le
+        // ken 3amel review t9lou dja 3malt review sinon t7seb w ta3mel update fl db
 
-        System.out.println("Submitting review with rating: " + currentRating /* + " and comments: " + comments */);
+        for (Booking b : BookingDAO.bookings) {
+            java.sql.Date startDate = b.getStartDate();
+            LocalDate startLocalDate = startDate.toLocalDate();
+            LocalDate currentDate = LocalDate.now();
 
-        // Clear the comments field after submission
-       // commentsField.clear();
+            if (currentUser.getId() == b.getUserId() &&
+                    currentProperty.getId().equals(b.getPropertyId() + ""))
 
-        // Show a confirmation message (in a real app, you might use a dialog)
-        // For now, we'll just update the button text temporarily
+            {
+                if (b.getHasReviewed() != 0) {
+                    reviewErrorLabel.setText("you have already review this property");
+                    reviewErrorLabel.setVisible(true);
+                    return;
+                }
+                if (currentDate.isBefore(startLocalDate)) {
+                    reviewErrorLabel.setText("You can only leave a review after your stay has started.");
+                    reviewErrorLabel.setVisible(true);
+                    return;
+                }
+                double newRating = (currentRating + currentProperty.getRating() * currentProperty.getNumRaters())
+                        / (currentProperty.getNumRaters() + 1);
+                currentProperty.setRating(newRating);
+                currentProperty.setNumRaters(currentProperty.getNumRaters() + 1);
+                try {
+                    if (PropertyDAO.updatePropertyRating(currentProperty.getId(), currentProperty.getRating(),
+                            currentProperty.getNumRaters())) {
+                        reviewErrorLabel.setText("Thank you for your feedback! We're glad you shared your experience.");
+                        reviewErrorLabel.setVisible(true);
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        }
+
         reviewButton.setText("Review Submitted!");
 
-        // Reset the button text after a delay
         new Thread(() -> {
             try {
                 Thread.sleep(2000);
@@ -200,8 +233,7 @@ public class RentalInterfaceController {
             final int rating = i;
             Button starButton = new Button("★");
             starButton.setStyle("-fx-background-color: transparent; -fx-text-fill: " +
-            (i <= currentRating ? "gold" : "#cccccc") + "; -fx-font-size: 20px;");
-        
+                    (i <= currentRating ? "gold" : "#cccccc") + "; -fx-font-size: 20px;");
 
             starButton.setOnAction(event -> {
                 setRating(rating);
@@ -231,7 +263,7 @@ public class RentalInterfaceController {
             if (p.getId().equals(id)) {
                 currentProperty = p;
                 loadPropertyDetails();
-                setupRatingStars(); 
+                setupRatingStars();
                 break;
             }
         }
@@ -248,8 +280,9 @@ public class RentalInterfaceController {
             bedsText.setText(String.valueOf(currentProperty.getBeds()));
             guestsText.setText(String.valueOf(currentProperty.getGuests()));
             priceText.setText(currentProperty.getPrice() + "");
+            ratingText.setText("★ " + df.format(currentProperty.getRating()));
 
-              try {
+            try {
                 ArrayList<ImageModel> propertyImages = BlobDAO.loadImagesForProperty(currentProperty.getId());
                 for (ImageModel i : propertyImages) {
                     TheFivePhotos.add(i.getImgFile());
@@ -257,13 +290,17 @@ public class RentalInterfaceController {
             } catch (Exception e) {
                 System.err.println("Failed to load images for property: " + e.getMessage());
             }
-    
+
             if (!TheFivePhotos.isEmpty()) {
                 mainImageView.setImage(new Image(TheFivePhotos.get(0).toURI().toString()));
-                if (TheFivePhotos.size() > 1) image1View.setImage(new Image(TheFivePhotos.get(1).toURI().toString()));
-                if (TheFivePhotos.size() > 2) image2View.setImage(new Image(TheFivePhotos.get(2).toURI().toString()));
-                if (TheFivePhotos.size() > 3) image3View.setImage(new Image(TheFivePhotos.get(3).toURI().toString()));
-                if (TheFivePhotos.size() > 4) image4View.setImage(new Image(TheFivePhotos.get(4).toURI().toString()));
+                if (TheFivePhotos.size() > 1)
+                    image1View.setImage(new Image(TheFivePhotos.get(1).toURI().toString()));
+                if (TheFivePhotos.size() > 2)
+                    image2View.setImage(new Image(TheFivePhotos.get(2).toURI().toString()));
+                if (TheFivePhotos.size() > 3)
+                    image3View.setImage(new Image(TheFivePhotos.get(3).toURI().toString()));
+                if (TheFivePhotos.size() > 4)
+                    image4View.setImage(new Image(TheFivePhotos.get(4).toURI().toString()));
                 TheFivePhotos.clear();
             } else {
                 mainImageView.setImage(new Image("/pictures/error.png"));
@@ -300,4 +337,11 @@ public class RentalInterfaceController {
         return propertyButton;
 
     }
+
+    @FXML
+    private void refreshDetails(ActionEvent event) {
+        PropertyDAO.loadAllProperties();
+        loadPropertyData(currentProperty.getId());
+    }
+
 }

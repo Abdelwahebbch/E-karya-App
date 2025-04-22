@@ -3,6 +3,7 @@ package com.ekarya.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -55,6 +56,8 @@ public class MainController {
     private int row = 0;
     private final int MAX_COLUMNS = 2;
     private Property cuProperty = new Property();
+    DecimalFormat df = new DecimalFormat("#.00");
+
     @FXML
     private TextField destinationField;
 
@@ -81,21 +84,27 @@ public class MainController {
     }
 
     public void addPropertyToGrid(Property property) throws Exception {
-        ArrayList<ImageModel> x = new ArrayList<>();
-        x = BlobDAO.loadImagesForProperty(property.getId());
-        Node card = createListingCard(property,x.getFirst());
-
+        ArrayList<ImageModel> x = BlobDAO.loadImagesForProperty(property.getId());
+    
+        if (x.isEmpty()) {
+            System.out.println("No images found for property with ID: " + property.getId());
+            return; 
+        }
+    
+        Node card = createListingCard(property, x.get(0));
+    
         GridPane.setColumnIndex(card, column);
         GridPane.setRowIndex(card, row);
-
+    
         propertiesGridPane.getChildren().add(card);
-
+    
         column++;
         if (column > MAX_COLUMNS) {
             column = 0;
             row++;
         }
     }
+    
 
     public void LoadPropertyData(String id, MouseEvent e) {
         for (Property p : PropertyDAO.getProperties()) {
@@ -111,7 +120,8 @@ public class MainController {
     private void refreshPropertyList() throws Exception {
         propertiesGridPane.getChildren().clear();
         for (Property p : PropertyDAO.properties) {
-            addPropertyToGrid(p);
+            if(p.getStatus()==0)
+                addPropertyToGrid(p);
         }
     }
 
@@ -306,9 +316,10 @@ public class MainController {
 
         Label star = new Label("★");
         star.setTextFill(Color.ORANGE);
-        Label rating = new Label("4.96");
+        Label rating = new Label(df.format(p.getRating())+"");
+        Label numRaters= new Label("("+p.getNumRaters()+" reviews)");
 
-        HBox ratingBox = new HBox(5, star, rating);
+        HBox ratingBox = new HBox(5, star, rating, numRaters);
         topRow.getChildren().addAll(location, spacer, ratingBox);
 
         // ---- Subtitle and Price ----
