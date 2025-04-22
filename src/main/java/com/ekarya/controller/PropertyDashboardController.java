@@ -1,8 +1,13 @@
 package com.ekarya.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.Blob;
+import java.util.ArrayList;
 
+import com.ekarya.DAO.BlobDAO;
 import com.ekarya.DAO.PropertyDAO;
+import com.ekarya.Models.ImageModel;
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 
@@ -14,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -79,9 +85,10 @@ public class PropertyDashboardController {
     private Text titleText;
 
     @FXML
-    public void initialize(User user) {
+    public void initialize(User user) throws Exception {
         this.currentUser = user;
         PropertyDAO.loadAllProperties();
+        BlobDAO.loadAllImagesFromDataBase();
         refreshPropertyList();
     }
 
@@ -170,6 +177,8 @@ public class PropertyDashboardController {
     }
 
     private void loadPropertyDetails() {
+        ArrayList<File> TheFivePhotos = new ArrayList<>();
+
         if (currentProperty != null) {
             locationText.setText(currentProperty.getLocation());
             descriptionText.setText(currentProperty.getDescription());
@@ -178,7 +187,36 @@ public class PropertyDashboardController {
             bedroomsText.setText(String.valueOf(currentProperty.getBedrooms()));
             bedsText.setText(String.valueOf(currentProperty.getBeds()));
             guestsText.setText(String.valueOf(currentProperty.getGuests()));
-            priceText.setText(currentProperty.getPrice() + "");
+            priceText.setText(String.valueOf(currentProperty.getPrice()));
+
+            for (ImageModel i : BlobDAO.AllDataBaseImages) {
+                if (i.getPropertyId().equals(currentProperty.getId())) {
+                    TheFivePhotos.add(i.getImgFile());
+                }
+            }
+
+            // Vérifie si au moins une image a été trouvée
+            if (!TheFivePhotos.isEmpty()) {
+                // Affiche la première image dans le mainImageView
+                mainImageView.setImage(new Image(TheFivePhotos.get(0).toURI().toString()));
+
+                // Affiche les images suivantes dans les ImageView (si elles existent)
+                if (TheFivePhotos.size() > 1) {
+                    image1View.setImage(new Image(TheFivePhotos.get(1).toURI().toString()));
+                }
+                if (TheFivePhotos.size() > 2) {
+                    image2View.setImage(new Image(TheFivePhotos.get(2).toURI().toString()));
+                }
+                if (TheFivePhotos.size() > 3) {
+                    image3View.setImage(new Image(TheFivePhotos.get(3).toURI().toString()));
+                }
+                if (TheFivePhotos.size() > 4) {
+                    image4View.setImage(new Image(TheFivePhotos.get(4).toURI().toString()));
+                }
+            } else {
+                System.out.println("Aucune image trouvée pour la propriété : " + currentProperty.getId());
+                mainImageView.setImage(new Image("/pictures/error.png")); // ou une image par défaut
+            }
         }
     }
 
@@ -211,7 +249,5 @@ public class PropertyDashboardController {
         return propertyButton;
 
     }
-
-  
 
 }

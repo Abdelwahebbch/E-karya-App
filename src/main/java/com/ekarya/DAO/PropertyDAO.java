@@ -1,5 +1,6 @@
 package com.ekarya.DAO;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,11 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ekarya.Models.Property;
+import com.ekarya.controller.AddPropertyController;
 import com.ekarya.utile.DatabaseConnection;
 
 public class PropertyDAO {
 
     public static final ArrayList<Property> properties = new ArrayList<>();
+    private static ArrayList<File> propImages = AddPropertyController.getImages();
 
     public static ArrayList<Property> loadSpecificPropertys(String destination, LocalDate start, LocalDate end,
             String guests) {
@@ -122,14 +125,14 @@ public class PropertyDAO {
         return new ArrayList<>(properties); // return a copy
     }
 
-    public static boolean savePropertyDataToDataBase(Property p) {
-
-        String query = "INSERT INTO properties (id, title, location, price_per_night,max_guests, max_beds, max_bedrooms, max_bathrooms, description, landlord_id, status ) "
-                + "VALUES (property_id_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+    public static boolean savePropertyDataToDataBase(Property p) throws Exception {
+        String query = "INSERT INTO properties (id, title, location, price_per_night, max_guests, max_beds, max_bedrooms, max_bathrooms, description, landlord_id, status) "
+                     + "VALUES (property_id_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
         try (Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(query)) {
-
+             PreparedStatement stmt = conn.prepareStatement(
+                 query, new String[] { "id" }) // <-- ask Oracle to return the generated ID
+        ) {
             stmt.setString(1, p.getTitle());
             stmt.setString(2, p.getLocation());
             stmt.setDouble(3, p.getPrice());
@@ -140,18 +143,28 @@ public class PropertyDAO {
             stmt.setString(8, p.getDescription());
             stmt.setInt(9, p.getLandlord_id());
             stmt.setInt(10, p.getStatus());
-
+    
             int affectedRows = stmt.executeUpdate();
-
-            if (affectedRows > 0) {
-                return true;
-            } else {
-                return false;
+    
+            if (affectedRows == 0) {
+                throw new SQLException("Inserting property failed, no rows affected.");
             }
+    
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int generatedId = generatedKeys.getInt(1); // You can use this ID to insert images
+                    for (File f : propImages) {
+                        BlobDAO.insertBlob(generatedId+"", f); // Assuming insertBlob accepts int ID
+                    }
+                    return true;
+                } else {
+                    throw new SQLException("Inserting property failed, no ID returned.");
+                }
+            }
+    
         } catch (SQLException e) {
-            System.err.println("Error saving property : " + e.getMessage());
+            System.err.println("Error saving property: " + e.getMessage());
             return false;
         }
-
     }
 }

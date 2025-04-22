@@ -1,9 +1,12 @@
 package com.ekarya.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
+import com.ekarya.DAO.BlobDAO;
 import com.ekarya.DAO.PropertyDAO;
 import com.ekarya.FilePicker.FilePicker;
 
@@ -24,6 +27,12 @@ import javafx.stage.Stage;
 public class AddPropertyController {
 
     private User currentUser = new User();
+    private Property cuProperty = new Property();
+    private static ArrayList<File> imagesFromScene = new ArrayList<>();
+
+    public static ArrayList<File> getImages() {
+        return imagesFromScene;
+    }
 
     @FXML
     private TextField titleField;
@@ -63,15 +72,15 @@ public class AddPropertyController {
 
     @FXML
     void createPropertyButton(ActionEvent event) {
-        Property data = collectPropertyData();
+        this.cuProperty = collectPropertyData();
 
-        if (data == null)
+        if (cuProperty == null)
             return; // invalid data
 
         try {
-            if (PropertyDAO.savePropertyDataToDataBase(data)) {
+            if (PropertyDAO.savePropertyDataToDataBase(cuProperty)) {
                 // Success alert
-                PropertyDAO.properties.add(data);
+                PropertyDAO.properties.add(cuProperty);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
@@ -119,7 +128,7 @@ public class AddPropertyController {
     }
 
     @FXML
-    void handleBackToDashboard(ActionEvent event) {
+    void handleBackToDashboard(ActionEvent event) throws Exception {
         Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
         Scene scene = node.getScene();
         try {
@@ -146,12 +155,14 @@ public class AddPropertyController {
     }
 
     @FXML
-    void handelLoadImage(ActionEvent event) {
+    void handelLoadImage(ActionEvent event) throws Exception {
         Stage stage = (Stage) titleField.getScene().getWindow();
 
         FilePicker f = new FilePicker();
-        f.chooseFile(stage);
-       
+        File selectedFile = f.chooseFile(stage);
+        AddPropertyController.imagesFromScene.add(selectedFile);
+        // System.out.println("Inserted !!! ");
+
     }
 
 }

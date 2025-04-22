@@ -80,10 +80,10 @@
                     
                     <!-- Main Image Upload -->
                     <VBox alignment="CENTER" style="-fx-border-color: #E0E0E0; -fx-border-style: dashed; -fx-border-radius: 12; -fx-background-radius: 12;" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="2">
-                        <ImageView fx:id="mainImageView" fitHeight="250" fitWidth="400">
-                            <Image url="@../pictures/AppLogo.png" />
+                        <ImageView fx:id="mainImageView" fitHeight="250" fitWidth="400" preserveRatio="true">
+                            <Image url="@../../../../../../../Desktop/abb.png" />
                         </ImageView>
-                        <Button fx:id="mainImageButton" onAction="#handelLoadImage" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+ Main Image" />
+                        <Button onAction="#handelLoadImage" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+ Main Image" />
                     </VBox>
                     
                     <!-- Additional Images Upload -->
@@ -91,28 +91,28 @@
                         <ImageView fx:id="image1View" fitHeight="120" fitWidth="200.0" preserveRatio="true">
                             <Image url="@placeholder.png" />
                         </ImageView>
-                        <Button fx:id="image1Button" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+" />
+                        <Button onAction="#handelLoadImage" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+" />
                     </VBox>
                     
                     <VBox alignment="CENTER" style="-fx-border-color: #E0E0E0; -fx-border-style: dashed; -fx-border-radius: 12; -fx-background-radius: 12;" GridPane.columnIndex="2" GridPane.rowIndex="0">
                         <ImageView fx:id="image2View" fitHeight="120" fitWidth="200.0" preserveRatio="true">
                             <Image url="@placeholder.png" />
                         </ImageView>
-                        <Button fx:id="image2Button" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+" />
+                        <Button onAction="#handelLoadImage" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+" />
                     </VBox>
                     
                     <VBox alignment="CENTER" style="-fx-border-color: #E0E0E0; -fx-border-style: dashed; -fx-border-radius: 12; -fx-background-radius: 12;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <ImageView fx:id="image3View" fitHeight="120" fitWidth="200.0" preserveRatio="true">
                             <Image url="@placeholder.png" />
                         </ImageView>
-                        <Button fx:id="image3Button" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+" />
+                        <Button onAction="#handelLoadImage" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+" />
                     </VBox>
                     
                     <VBox alignment="CENTER" style="-fx-border-color: #E0E0E0; -fx-border-style: dashed; -fx-border-radius: 12; -fx-background-radius: 12;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                         <ImageView fx:id="image4View" fitHeight="120" fitWidth="200.0" preserveRatio="true">
                             <Image url="@placeholder.png" />
                         </ImageView>
-                        <Button fx:id="image4Button" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+" />
+                        <Button onAction="#handelLoadImage" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+" />
                     </VBox>
                 </GridPane>
             </VBox>

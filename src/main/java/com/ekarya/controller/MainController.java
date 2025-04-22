@@ -164,7 +164,7 @@ public class MainController {
     }
 
     @FXML
-    void ToDashBoard(ActionEvent event) {
+    void ToDashBoard(ActionEvent event) throws Exception {
         MenuItem menuItem = (MenuItem) event.getSource();
         Scene scene = menuItem.getParentPopup().getOwnerWindow().getScene();
         try {
