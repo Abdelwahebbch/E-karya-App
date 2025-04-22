@@ -8,18 +8,22 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ekarya.DAO.BlobDAO;
 import com.ekarya.DAO.BookingDAO;
 import com.ekarya.DAO.PropertyDAO;
 import com.ekarya.Models.Booking;
+import com.ekarya.Models.ImageModel;
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 
@@ -234,6 +238,7 @@ public class RentalInterfaceController {
     }
 
     private void loadPropertyDetails() {
+        ArrayList<File> TheFivePhotos = new ArrayList<>();
         if (currentProperty != null) {
             locationText.setText(currentProperty.getLocation());
             descriptionText.setText(currentProperty.getDescription());
@@ -243,6 +248,26 @@ public class RentalInterfaceController {
             bedsText.setText(String.valueOf(currentProperty.getBeds()));
             guestsText.setText(String.valueOf(currentProperty.getGuests()));
             priceText.setText(currentProperty.getPrice() + "");
+
+              try {
+                ArrayList<ImageModel> propertyImages = BlobDAO.loadImagesForProperty(currentProperty.getId());
+                for (ImageModel i : propertyImages) {
+                    TheFivePhotos.add(i.getImgFile());
+                }
+            } catch (Exception e) {
+                System.err.println("Failed to load images for property: " + e.getMessage());
+            }
+    
+            if (!TheFivePhotos.isEmpty()) {
+                mainImageView.setImage(new Image(TheFivePhotos.get(0).toURI().toString()));
+                if (TheFivePhotos.size() > 1) image1View.setImage(new Image(TheFivePhotos.get(1).toURI().toString()));
+                if (TheFivePhotos.size() > 2) image2View.setImage(new Image(TheFivePhotos.get(2).toURI().toString()));
+                if (TheFivePhotos.size() > 3) image3View.setImage(new Image(TheFivePhotos.get(3).toURI().toString()));
+                if (TheFivePhotos.size() > 4) image4View.setImage(new Image(TheFivePhotos.get(4).toURI().toString()));
+                TheFivePhotos.clear();
+            } else {
+                mainImageView.setImage(new Image("/pictures/error.png"));
+            }
         }
     }
 
