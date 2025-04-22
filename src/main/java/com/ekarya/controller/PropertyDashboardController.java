@@ -2,7 +2,6 @@ package com.ekarya.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Blob;
 import java.util.ArrayList;
 
 import com.ekarya.DAO.BlobDAO;
@@ -88,7 +87,6 @@ public class PropertyDashboardController {
     public void initialize(User user) throws Exception {
         this.currentUser = user;
         PropertyDAO.loadAllProperties();
-        BlobDAO.loadAllImagesFromDataBase();
         refreshPropertyList();
     }
 
@@ -178,7 +176,7 @@ public class PropertyDashboardController {
 
     private void loadPropertyDetails() {
         ArrayList<File> TheFivePhotos = new ArrayList<>();
-
+    
         if (currentProperty != null) {
             locationText.setText(currentProperty.getLocation());
             descriptionText.setText(currentProperty.getDescription());
@@ -188,37 +186,29 @@ public class PropertyDashboardController {
             bedsText.setText(String.valueOf(currentProperty.getBeds()));
             guestsText.setText(String.valueOf(currentProperty.getGuests()));
             priceText.setText(String.valueOf(currentProperty.getPrice()));
-
-            for (ImageModel i : BlobDAO.AllDataBaseImages) {
-                if (i.getPropertyId().equals(currentProperty.getId())) {
+    
+            try {
+                ArrayList<ImageModel> propertyImages = BlobDAO.loadImagesForProperty(currentProperty.getId());
+                for (ImageModel i : propertyImages) {
                     TheFivePhotos.add(i.getImgFile());
                 }
+            } catch (Exception e) {
+                System.err.println("Failed to load images for property: " + e.getMessage());
             }
-
-            // Vérifie si au moins une image a été trouvée
+    
             if (!TheFivePhotos.isEmpty()) {
-                // Affiche la première image dans le mainImageView
                 mainImageView.setImage(new Image(TheFivePhotos.get(0).toURI().toString()));
-
-                // Affiche les images suivantes dans les ImageView (si elles existent)
-                if (TheFivePhotos.size() > 1) {
-                    image1View.setImage(new Image(TheFivePhotos.get(1).toURI().toString()));
-                }
-                if (TheFivePhotos.size() > 2) {
-                    image2View.setImage(new Image(TheFivePhotos.get(2).toURI().toString()));
-                }
-                if (TheFivePhotos.size() > 3) {
-                    image3View.setImage(new Image(TheFivePhotos.get(3).toURI().toString()));
-                }
-                if (TheFivePhotos.size() > 4) {
-                    image4View.setImage(new Image(TheFivePhotos.get(4).toURI().toString()));
-                }
+                if (TheFivePhotos.size() > 1) image1View.setImage(new Image(TheFivePhotos.get(1).toURI().toString()));
+                if (TheFivePhotos.size() > 2) image2View.setImage(new Image(TheFivePhotos.get(2).toURI().toString()));
+                if (TheFivePhotos.size() > 3) image3View.setImage(new Image(TheFivePhotos.get(3).toURI().toString()));
+                if (TheFivePhotos.size() > 4) image4View.setImage(new Image(TheFivePhotos.get(4).toURI().toString()));
+                TheFivePhotos.clear();
             } else {
-                System.out.println("Aucune image trouvée pour la propriété : " + currentProperty.getId());
-                mainImageView.setImage(new Image("/pictures/error.png")); // ou une image par défaut
+                mainImageView.setImage(new Image("/pictures/error.png"));
             }
         }
     }
+    
 
     private Button createPropertyButton(Property property) {
         Button propertyButton = new Button();

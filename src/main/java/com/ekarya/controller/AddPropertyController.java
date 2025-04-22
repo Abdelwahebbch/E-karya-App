@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
-import com.ekarya.DAO.BlobDAO;
 import com.ekarya.DAO.PropertyDAO;
 import com.ekarya.FilePicker.FilePicker;
 

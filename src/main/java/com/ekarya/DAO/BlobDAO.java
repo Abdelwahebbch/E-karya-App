@@ -19,7 +19,7 @@ public class BlobDAO {
             pstmt.setBinaryStream(2, fis, (int) file.length());
             pstmt.executeUpdate();
 
-            System.out.println("Inserted BLOB for ID: ");
+            System.out.println("Inserted BLOB for pro ID : " + propertyId);
         }
     }
 
@@ -73,33 +73,31 @@ public class BlobDAO {
         }
     }
 
-    public static void loadAllImagesFromDataBase() throws Exception {
+    public static ArrayList<ImageModel> loadImagesForProperty(String propertyId) throws Exception {
+        ArrayList<ImageModel> propertyImages = new ArrayList<>();
 
-        String sql = "SELECT property_id, file_data FROM images";
-
+        String sql = "SELECT file_data FROM images WHERE property_id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql);
-                ResultSet rs = pstmt.executeQuery()) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            while (rs.next()) {
-                String propertyId = rs.getString("property_id");
-
-                // Read BLOB as InputStream
-                InputStream input = rs.getBinaryStream("file_data");
-
-                // Save to temp file
-                File outputFile = File.createTempFile("img_" + propertyId + "_", ".bin");
-                try (FileOutputStream fos = new FileOutputStream(outputFile)) {
-                    byte[] buffer = new byte[1024];
-                    int bytesRead;
-                    while ((bytesRead = input.read(buffer)) != -1) {
-                        fos.write(buffer, 0, bytesRead);
+            pstmt.setString(1, propertyId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    InputStream input = rs.getBinaryStream("file_data");
+                    File outputFile = File.createTempFile("img_" + propertyId + "_", ".bin");
+                    try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+                        byte[] buffer = new byte[1024];
+                        int bytesRead;
+                        while ((bytesRead = input.read(buffer)) != -1) {
+                            fos.write(buffer, 0, bytesRead);
+                        }
                     }
+                    propertyImages.add(new ImageModel(propertyId, outputFile));
                 }
-
-                // Add to list
-                AllDataBaseImages.add(new ImageModel(propertyId, outputFile));
             }
         }
+
+        return propertyImages;
     }
+
 }

@@ -18,6 +18,9 @@ public class PropertyDAO {
     public static final ArrayList<Property> properties = new ArrayList<>();
     private static ArrayList<File> propImages = AddPropertyController.getImages();
 
+
+
+
     public static ArrayList<Property> loadSpecificPropertys(String destination, LocalDate start, LocalDate end,
             String guests) {
         ArrayList<Property> list = new ArrayList<>();
@@ -153,9 +156,11 @@ public class PropertyDAO {
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int generatedId = generatedKeys.getInt(1); // You can use this ID to insert images
+
                     for (File f : propImages) {
-                        BlobDAO.insertBlob(generatedId+"", f); // Assuming insertBlob accepts int ID
+                        BlobDAO.insertBlob(String.valueOf(generatedId), f); // Assuming insertBlob accepts int ID
                     }
+                    propImages.clear();
                     return true;
                 } else {
                     throw new SQLException("Inserting property failed, no ID returned.");
