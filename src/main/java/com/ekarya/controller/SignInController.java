@@ -50,8 +50,7 @@ public class SignInController {
     @FXML
     private Label errorLabel;
 
-    @FXML
-    private void handleSignIn(ActionEvent event) throws Exception {
+    @FXML void handleSignIn(ActionEvent event) throws Exception {
         String email = emailField.getText();
         String password = passwordField.getText();
         UserDAO userDAO = new UserDAO();

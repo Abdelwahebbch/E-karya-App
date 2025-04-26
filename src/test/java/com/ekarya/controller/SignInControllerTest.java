@@ -33,7 +33,7 @@ public class SignInControllerTest {
     }
 
     @Test
-    public void handleSignIn_showsErrorWhenFieldsAreEmpty() {
+    public void handleSignIn_showsErrorWhenFieldsAreEmpty() throws Exception {
         // Leave email and password empty
         controller.getEmailField().setText("");
         controller.getPasswordField().setText("");
@@ -47,7 +47,7 @@ public class SignInControllerTest {
     }
 
     @Test
-    public void handleSignIn_noErrorWhenFieldsAreFilled() {
+    public void handleSignIn_noErrorWhenFieldsAreFilled() throws Exception {
         // Provide valid input
         controller.getEmailField().setText("test@example.com");
         controller.getPasswordField().setText("password123");
