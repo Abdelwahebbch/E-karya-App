@@ -15,6 +15,7 @@ import com.ekarya.Models.User;
 
 public class BookingConfirmationController {
     private User currentUser = new User();
+    @SuppressWarnings("unused")
     private Property cuProperty = new Property();
     @FXML
     private Button homeButton;
