@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="600" minHeight="600" prefHeight="600" spacing="0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.RentalInterfaceController">
+    <!-- Modern Top Navigation Bar -->
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 12 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 4); -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;">
+        <HBox alignment="CENTER" spacing="8">
+            <Circle fill="#000000" radius="16" />
+            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 20; -fx-font-weight: 700; -fx-fill: #000000;" text="E-Karya" />
+        </HBox>
+
+        <Region HBox.hgrow="ALWAYS" />
+        <Button onAction="#handleBackToHome" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 8 16;">
+            <graphic>
+                <HBox alignment="CENTER" spacing="8">
+                    <SVGPath content="M19 12H5M12 19l-7-7 7-7" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                    <Text fill="WHITE" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Back to Home" />
+                </HBox>
+            </graphic>
+        </Button>
+    </HBox>
+    
+    <!-- Main Content Area -->
+    <BorderPane VBox.vgrow="ALWAYS">
+        <!-- Left Panel - List of homes rented by the user -->
+        <left>
+            <VBox prefWidth="250" spacing="10" style="-fx-background-color: #FFFFFF; -fx-padding: 20;">
+                <!-- Properties List Title -->
+                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: 800; -fx-fill: #000000;" text="My Bookings" />
+                
+                <!-- Properties List -->
+                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="rentedHomesContainer" spacing="12" />
+                </ScrollPane>
+            </VBox>
+        </left>
+        
+        <!-- Center Panel - Home description and rating area -->
+        <center>
+            <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+                <VBox spacing="20" style="-fx-padding: 20;">
+                    <!-- Property Details Header -->
+                    <Text fx:id="propertyTitle" style="-fx-font-family: 'Montserrat'; -fx-font-size: 24; -fx-font-weight: 800; -fx-fill: #000000;" text="Property Details" />
+                    
+                    <!-- Property Images Section -->
+                    <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Property Photos" />
+                        
+                        <GridPane hgap="10" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="50" />
+                                <ColumnConstraints percentWidth="25" />
+                                <ColumnConstraints percentWidth="25" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints percentHeight="50" />
+                                <RowConstraints percentHeight="50" />
+                            </rowConstraints>
+                            
+                            <!-- Main Image -->
+                            <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="2">
+                                <ImageView fx:id="mainImageView" fitHeight="250" fitWidth="400" preserveRatio="true" style="-fx-background-radius: 8;">
+                                    <Image url="@placeholder.png" />
+                                </ImageView>
+                            </StackPane>
+                            
+                            <!-- Additional Images -->
+                            <StackPane GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                <ImageView fx:id="image1View" fitHeight="120" fitWidth="195" preserveRatio="true" style="-fx-background-radius: 8;">
+                                    <Image url="@placeholder.png" />
+                                </ImageView>
+                            </StackPane>
+                            
+                            <StackPane GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                <ImageView fx:id="image2View" fitHeight="120" fitWidth="195" preserveRatio="true" style="-fx-background-radius: 8;">
+                                    <Image url="@placeholder.png" />
+                                </ImageView>
+                            </StackPane>
+                            
+                            <StackPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <ImageView fx:id="image3View" fitHeight="120" fitWidth="195" preserveRatio="true" style="-fx-background-radius: 8;">
+                                    <Image url="@placeholder.png" />
+                                </ImageView>
+                            </StackPane>
+                            
+                            <StackPane GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                <ImageView fx:id="image4View" fitHeight="120" fitWidth="195" preserveRatio="true" style="-fx-background-radius: 8;">
+                                    <Image url="@placeholder.png" />
+                                </ImageView>
+                            </StackPane>
+                        </GridPane>
+                    </VBox>
+                    
+                    <!-- Property Information Section -->
+                    <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="General Information" />
+                        
+                        <GridPane hgap="20" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="30" />
+                                <ColumnConstraints percentWidth="70" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                            </rowConstraints>
+                            
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <Text fx:id="titleText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="please select a property" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <Text fx:id="locationText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="please select a property" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Price per night:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <Text fx:id="priceText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="please select a property" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                            
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Guests:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                            <Text fx:id="guestsText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="please select a property" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                            
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Bedrooms:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                            <Text fx:id="bedroomsText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="please select a property" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                            
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Beds:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                            <Text fx:id="bedsText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="please select a property" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                            
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Bathrooms:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                            <Text fx:id="bathroomsText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="please select a property" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        </GridPane>
+                    </VBox>
+                    
+                    <!-- Property Description Section -->
+                    <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Description" />
+                        
+                        <Text fx:id="descriptionText" style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="please select a property" wrappingWidth="400" />
+                    </VBox>
+                    
+                    <!-- Rating and Comments Section -->
+                    <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
+                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Give us your feedback :" />
+                        
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Rating:">
+                        <font>
+                           <Font size="20.0" />
+                        </font></Label>
+                            <HBox fx:id="ratingStarsContainer" spacing="5">
+                                <!-- Stars will be added dynamically -->
+                                <Button style="-fx-background-color: transparent; -fx-text-fill: gold;" text="★">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Button>
+                                <Button style="-fx-background-color: transparent; -fx-text-fill: gold;" text="★">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Button>
+                                <Button style="-fx-background-color: transparent; -fx-text-fill: gold;" text="★">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Button>
+                                <Button style="-fx-background-color: transparent; -fx-text-fill: #cccccc;" text="★">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Button>
+                                <Button style="-fx-background-color: transparent; -fx-text-fill: #cccccc;" text="★">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Button>
+                            </HBox>
+                        </HBox>
+                        
+                        <!-- Submit Review Button -->
+                        <HBox alignment="CENTER_RIGHT">
+                            <Button fx:id="reviewButton" onAction="#handleSubmitReview" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 10 20;">
+                                <graphic>
+                                    <HBox alignment="CENTER" spacing="8">
+                                        <SVGPath content="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                                        <Text fill="WHITE" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Submit Review" />
+                                    </HBox>
+                                </graphic>
+                            </Button>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </ScrollPane>
+        </center>
+        
+        <!-- Right Panel - Notifications -->
+        <right>
+            <VBox prefWidth="250" spacing="10" style="-fx-padding: 20;">
+                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: 800; -fx-fill: #000000;" text="Notifications" />
+                
+                <!-- Notifications List -->
+                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="notificationsContainer" spacing="12">
+                        <!-- Notification items -->
+                        <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 16; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="New Request" />
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="John Smith wants to rent your Paris Apartment from March 10 to 15." wrappingWidth="200" />
+                        </VBox>
+                        
+                        <VBox style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 16; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;" text="New Review" />
+                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;" text="Mary Martin left a 5-star review for your Marseille Villa." wrappingWidth="200" />
+                        </VBox>
+                    </VBox>
+                </ScrollPane>
+            </VBox>
+        </right>
+    </BorderPane>
+</VBox>

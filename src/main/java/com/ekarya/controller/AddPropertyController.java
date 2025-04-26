@@ -1,14 +1,23 @@
 package com.ekarya.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import com.ekarya.Models.Property;
+import com.ekarya.Models.User;
+import com.ekarya.DAO.PropertyDAO;
+import com.ekarya.FilePicker.FilePicker;
+
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -16,82 +25,140 @@ import javafx.stage.Stage;
 
 public class AddPropertyController {
 
-    @FXML
-    private ComboBox<?> bathroomsCombo;
+    private User currentUser = new User();
+    private Property cuProperty = new Property();
+    private static ArrayList<File> imagesFromScene = new ArrayList<>();
+
+    public static ArrayList<File> getImages() {
+        return imagesFromScene;
+    }
 
     @FXML
-    private ComboBox<?> bedroomsCombo;
-
+    private TextField titleField;
     @FXML
-    private ComboBox<?> bedsCombo;
-
+    private TextField locationField;
+    @FXML
+    private TextField priceField;
+    @FXML
+    private TextField guestsField;
+    @FXML
+    private TextField bedroomsField;
+    @FXML
+    private TextField bedsField;
+    @FXML
+    private TextField bathroomsField;
     @FXML
     private TextArea descriptionArea;
 
     @FXML
-    private ComboBox<?> guestsCombo;
-
-    @FXML
-    private Button image1Button;
-
+    private ImageView mainImageView;
     @FXML
     private ImageView image1View;
-
-    @FXML
-    private Button image2Button;
-
     @FXML
     private ImageView image2View;
-
-    @FXML
-    private Button image3Button;
-
     @FXML
     private ImageView image3View;
-
-    @FXML
-    private Button image4Button;
-
     @FXML
     private ImageView image4View;
-
-    @FXML
-    private TextField locationField;
-
-    @FXML
-    private Button mainImageButton;
-
-    @FXML
-    private ImageView mainImageView;
-
-    @FXML
-    private TextField priceField;
 
     @FXML
     private Button submitButton;
 
     @FXML
-    private TextField titleField;
+    public void initialize(User user) {
+        this.currentUser = user;
+    }
 
-        @FXML
-    private void handleBackToDashboard(ActionEvent event) {
+    @FXML
+    void createPropertyButton(ActionEvent event) {
+        this.cuProperty = collectPropertyData();
+
+        if (cuProperty == null)
+            return; // invalid data
+
         try {
-            // Load the home page FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropretyDashboard.fxml"));
-            Parent homePageRoot = loader.load();
-            
-            // Get the current stage
-            Stage stage = (Stage) submitButton.getScene().getWindow();
-            
-            // Set the home page scene
-            Scene scene = new Scene(homePageRoot);
-            stage.setScene(scene);
-            stage.show();
-            stage.setFullScreen(true);
-        } catch (IOException e) {
-            System.err.println("Error loading Dashboard.fxml: " + e.getMessage());
+            if (PropertyDAO.savePropertyDataToDataBase(cuProperty)) {
+                // Success alert
+                PropertyDAO.properties.add(cuProperty);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Property listing created successfully!");
+                alert.showAndWait();
+
+                // Redirect to dashboard
+                handleBackToDashboard(event);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
+            showAlert("Error", "Failed to save property. Please try again.");
         }
     }
 
+    public Property collectPropertyData() {
+        Property property = new Property();
+        try {
+            property.setTitle(titleField.getText().trim());
+            property.setLocation(locationField.getText().trim());
+            property.setDescription(descriptionArea.getText().trim());
+            property.setGuests(Integer.parseInt(guestsField.getText()));
+            property.setBedrooms(Integer.parseInt(bedroomsField.getText()));
+            property.setBeds(Integer.parseInt(bedsField.getText()));
+            property.setBathrooms(Integer.parseInt(bathroomsField.getText()));
+            property.setPrice(Double.parseDouble(priceField.getText()));
+            property.setLandlord_id(currentUser.getId());
+            System.out.println(currentUser.getId());
+        } catch (NumberFormatException e) {
+            showAlert("Invalid Input", "Please enter valid numbers for guests, bedrooms, beds, bathrooms, and price.");
+            return null;
+        }
+        return property;
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    @FXML
+    void handleBackToDashboard(ActionEvent event) throws Exception {
+        Node node = (Node) event.getSource();
+        Scene scene = node.getScene();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PropertyDashboard.fxml"));
+            Parent root = loader.load();
+
+            PropertyDashboardController propertyDashboardController = loader.getController();
+            propertyDashboardController.initialize(currentUser);
+
+            // Appliquer opacité à 0 pour début de l'animation
+            root.setOpacity(0);
+            scene.setRoot(root);
+
+            // Lancer animation de fondu
+            FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(1), root);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.play();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Navigation Error", "Failed to load dashboard.");
+        }
+    }
+
+    @FXML
+    void handelLoadImage(ActionEvent event) throws Exception {
+        Stage stage = (Stage) titleField.getScene().getWindow();
+
+        FilePicker f = new FilePicker();
+        File selectedFile = f.chooseFile(stage);
+        if (selectedFile != null) 
+            AddPropertyController.imagesFromScene.add(selectedFile);
+
+
+}
 }

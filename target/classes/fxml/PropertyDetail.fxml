@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
@@ -13,7 +12,6 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Text?>
 
@@ -21,7 +19,11 @@
     <!-- Modern Top Navigation Bar -->
     <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 12 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 4); -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;">
         <HBox alignment="CENTER" spacing="8">
-            <Circle fill="#000000" radius="16" />
+         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../pictures/AppLogo2.png" />
+            </image>
+         </ImageView>
             <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 20; -fx-font-weight: 700; -fx-fill: #000000;" text="E-Karya" />
         </HBox>
 
@@ -41,12 +43,12 @@
         <VBox spacing="20" style="-fx-padding: 20;">
             <!-- Room Title and Rating -->
             <VBox spacing="10">
-                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 24; -fx-font-weight: 800; -fx-fill: #000000;" text="Cozy apartment in the heart of Paris" />
+                <Text fx:id="titleField" style="-fx-font-family: 'Montserrat'; -fx-font-size: 24; -fx-font-weight: 800; -fx-fill: #000000;" text="Default" />
                 <HBox alignment="CENTER_LEFT" spacing="10">
-                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="★ 4,96" />
-                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="(127 reviews)" />
-                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #000000; -fx-font-weight: bold;" text="• Superhost" />
-                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="• Paris, Île-de-France, France" />
+                    <Text fx:id="ratingText" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="" />
+                    <Text fx:id="numRatersText" style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="" />
+                    <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #000000; -fx-font-weight: bold;" text="• Location" />
+                    <Text fx:id="locationField" style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="" />
                 </HBox>
             </VBox>
 
@@ -83,25 +85,24 @@
                 <!-- Left Column: Room Details -->
                 <VBox spacing="20" HBox.hgrow="ALWAYS">
                     <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
-                        <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Entire apartment - Host: Marie" />
-                        <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="4 guests • 1 bedroom • 2 beds • 1 bathroom" />
+                        <Text fx:id="propNameField" style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Property Name" />
+                        <Text fx:id="detailsField" style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="4 guests • 1 bedroom • 2 beds • 1 bathroom" />
                     </VBox>
                     
                     <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);">
                         <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 16; -fx-font-weight: bold; -fx-fill: #000000;" text="Description" />
-                        <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="Discover this charming apartment located in the heart of Paris. Perfectly situated to explore the city, this comfortable space offers everything you need for a pleasant stay. Enjoy the equipped kitchen, bright living room, and cozy bedroom. Just steps away from major attractions and public transportation." wrappingWidth="400" />
+                        <Text fx:id="descriptionField" style="-fx-font-family: 'Montserrat'; -fx-fill: #555555;" text="Discover this charming apartment located in the heart of Paris. Perfectly situated to explore the city, this comfortable space offers everything you need for a pleasant stay. Enjoy the equipped kitchen, bright living room, and cozy bedroom. Just steps away from major attractions and public transportation." wrappingWidth="400" />
                     </VBox>
                 </VBox>
                 
                 <!-- Right Column: Booking Widget -->
                 <VBox alignment="TOP_CENTER" minWidth="300" spacing="15" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
-                    <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #000000;" text="104 € per night" />
+                    <Text fx:id="priceField" style="-fx-font-family: 'Montserrat'; -fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #000000;" text="104 TND per night" />
                     <VBox spacing="10">
                         <HBox spacing="10">
                             <DatePicker fx:id="checkInDatePicker" promptText="Check-in" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
                             <DatePicker fx:id="checkOutDatePicker" promptText="Check-out" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
                         </HBox>
-                        <ComboBox fx:id="nbVoyage" promptText="Number of guests" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
                     </VBox>
                     <Button fx:id="bookButton" maxWidth="Infinity" onAction="#handleBooking" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 12 16;" text="Book">
                         <graphic>
@@ -113,20 +114,20 @@
                     <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #555555; -fx-font-size: 12;" text="You won't be charged yet" />
                     <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: #F8F8F8; -fx-background-radius: 8;">
                         <HBox>
-                            <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="104 € x 5 nights" HBox.hgrow="ALWAYS" />
+                            <Text fx:id="equationField" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="pick a Date " HBox.hgrow="ALWAYS" />
                             <Region HBox.hgrow="ALWAYS" />
-                            <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="520 €" />
+                            <Text fx:id="equationResultField" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="*** TND" />
                         </HBox>
                         <HBox>
                             <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="Service fee" HBox.hgrow="ALWAYS" />
                             <Region HBox.hgrow="ALWAYS" />
-                            <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="74 €" />
+                            <Text fx:id="tvaField" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="74 TND" />
                         </HBox>
                         <Separator style="-fx-background-color: #E0E0E0;" />
                         <HBox>
                             <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text="Total" HBox.hgrow="ALWAYS" />
                             <Region HBox.hgrow="ALWAYS" />
-                            <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text="594 €" />
+                            <Text fx:id="finalPriceField" style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text="594 TND" />
                         </HBox>
                     </VBox>
                 </VBox>

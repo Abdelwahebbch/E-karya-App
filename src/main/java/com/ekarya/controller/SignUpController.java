@@ -10,48 +10,98 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
+import com.ekarya.DAO.UserDAO;
+import com.ekarya.Models.User;
+import com.ekarya.validation.InputValidator;
 
 public class SignUpController {
     @FXML
     private TextField fullNameField;
-    
+
     @FXML
     private TextField emailField;
-    
+
     @FXML
     private TextField phoneField;
-    
+
     @FXML
     private PasswordField passwordField;
-    
+    @FXML
+    private PasswordField secpass;
+
     @FXML
     private Label errorLabel;
-    
+
     @FXML
-    void handleSignUp(ActionEvent event) {
-        // Get the values from the fields
+    void handleSignUp(ActionEvent event) throws Exception {
         String fullName = fullNameField.getText();
         String email = emailField.getText();
-        String phone = phoneField.getText();
+        String phoneNumber = phoneField.getText();
+        UserDAO userDAO = new UserDAO();
         String password = passwordField.getText();
-        
-        // Validate the input
-        if (fullName.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()) {
+        String secPassword = secpass.getText();
+
+        // Check if ANY field is empty (using OR instead of AND)
+        if (fullName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || password.isEmpty()) {
             showError("All fields are required");
             return;
+        } else if (!InputValidator.isValidFullName(fullName)) {
+            showError("Invalid Format for the Full Name (e.g., Foulen Foulen).");
+            return;
+        } else if (!InputValidator.isValidEmail(email)) {
+            showError("Invalid email format.");
+            return;
+        } else if (!InputValidator.samePassword(password, secPassword)) {
+            showError("passwords are not the same .");
+            return;
+        } else if (!InputValidator.isValidPhoneNumber(phoneNumber)) {
+            showError("Phone number must be 8 digits and start with 9X, 5X, or 2X.");
+            return;
+        } else if (!InputValidator.isValidPassword(password)) {
+            showError(
+                    "Password must be at least 8 characters long, include upper and lower case letters, a number, and a special character.");
+            return;
+        } else {
+            User user = userDAO.createUser(fullName, phoneNumber, email, password);
+            if (user != null) {
+                try {
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+                    Parent mainRoot = loader.load();
+
+                    MainController mainController = loader.getController();
+                    mainController.initData(user);
+
+                    Stage stage = (Stage) fullNameField.getScene().getWindow();
+
+                    Scene mainScene = new Scene(mainRoot);
+                    stage.setScene(mainScene);
+                    stage.setTitle("Main Application");
+                    stage.setFullScreen(true);
+                    stage.show();
+
+                    // Successfully navigated to main scene, so return to avoid navigating to
+                    // sign-in
+                    return;
+                } catch (IOException e) {
+                    showError("Error loading main scene: " + e.getMessage());
+                    // Continue to sign-in as fallback
+                }
+            } else {
+                showError("Failed to create user. Please try again.");
+                return;
+            }
         }
-        
-        // TODO: Add your sign-up logic here
-        // For example, create a user in your database
-        
-        // For now, just show a success message and navigate to sign in
+
+        // Only navigate to sign-in if we didn't successfully navigate to the main scene
+        // This serves as a fallback navigation
         try {
             navigateToSignIn(event);
         } catch (IOException e) {
             showError("Error navigating to sign in page: " + e.getMessage());
         }
     }
-    
+
     @FXML
     void navigateToSignIn(ActionEvent event) throws IOException {
         Parent signInRoot = FXMLLoader.load(getClass().getResource("/fxml/signin.fxml"));
@@ -60,7 +110,7 @@ public class SignUpController {
         stage.setScene(signInScene);
         stage.setTitle("E-karya - Sign In");
     }
-    
+
     private void showError(String message) {
         errorLabel.setText(message);
         errorLabel.setVisible(true);

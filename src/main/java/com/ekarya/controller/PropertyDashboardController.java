@@ -1,40 +1,54 @@
 package com.ekarya.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import com.ekarya.DAO.BlobDAO;
+import com.ekarya.DAO.PropertyDAO;
+import com.ekarya.Models.ImageModel;
+import com.ekarya.Models.Property;
+import com.ekarya.Models.User;
+
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class PropertyDashboardController {
+    User currentUser = new User();
+
+    public Property currentProperty;
 
     @FXML
-    private VBox propertiesContainer;
+    private Text bathroomsText;
 
     @FXML
-    private VBox notificationsContainer;
+    private Text bedroomsText;
 
     @FXML
-    private Button addPropertyButton;
-
-    @FXML
-    private Button editButton;
+    private Text bedsText;
 
     @FXML
     private Button deleteButton;
 
     @FXML
-    private Text propertyTitle;
+    private Text descriptionText;
 
     @FXML
-    private ImageView mainImageView;
+    private Button editButton;
+
+    @FXML
+    private Text guestsText;
 
     @FXML
     private ImageView image1View;
@@ -49,201 +63,181 @@ public class PropertyDashboardController {
     private ImageView image4View;
 
     @FXML
-    private Text titleText;
+    private Text locationText;
 
     @FXML
-    private Text locationText;
+    private ImageView mainImageView;
+
+    @FXML
+    private VBox notificationsContainer;
 
     @FXML
     private Text priceText;
 
     @FXML
-    private Text guestsText;
+    private VBox propertiesContainer;
 
     @FXML
-    private Text bedroomsText;
+    private Text propertyTitle;
 
     @FXML
-    private Text bedsText;
+    private Text titleText;
 
     @FXML
-    private Text bathroomsText;
-
-    @FXML
-    private Text descriptionText;
-
-    /**
-     * Initializes the controller class. This method is automatically called
-     * after the FXML file has been loaded.
-     */
-    @FXML
-    private void initialize() {
-        // Initialize the controller, load data, etc.
-        loadPropertyData();
+    public void initialize(User user) throws Exception {
+        this.currentUser = user;
+        PropertyDAO.loadAllProperties();
+        refreshPropertyList();
     }
 
-    /**
-     * Handles the back button action to navigate back to the home page
-     */
-    @FXML
-    private void handleBackToHome(ActionEvent event) {
-        try {
-            // Load the home page FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
-            Parent homePageRoot = loader.load();
-            
-            // Get the current stage
-            Stage stage = (Stage) addPropertyButton.getScene().getWindow();
-            
-            // Set the home page scene
-            Scene scene = new Scene(homePageRoot);
-            stage.setScene(scene);
-            stage.show();
-            stage.setFullScreen(true);
-        } catch (IOException e) {
-            System.err.println("Error loading HomePage.fxml: " + e.getMessage());
-            e.printStackTrace();
+    private void refreshPropertyList() {
+        propertiesContainer.getChildren().clear();
+        for (Property p : PropertyDAO.properties) {
+            if (p.getLandlord_id() == currentUser.getId())
+                addPropertyToList(p);
         }
     }
 
-    /**
-     * Switches the interface to the home page
-     * This method can be called from anywhere to navigate to the home page
-     */
-    @FXML
-    public void ToAddHome() {
-        try {
-            // Load the home page FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddProprety.fxml"));
-            Parent homePageRoot = loader.load();
-            
-            // Get the current stage
-            Stage stage = (Stage) addPropertyButton.getScene().getWindow();
-            
-            // Set the home page scene
-            Scene scene = new Scene(homePageRoot);
-            stage.setScene(scene);
-            stage.show();
-            stage.setFullScreen(true);
-        } catch (IOException e) {
-            System.err.println("Error loading HomePage.fxml: " + e.getMessage());
-            e.printStackTrace();
-        }
+    public void addPropertyToList(Property property) {
+        Button propertyButton = createPropertyButton(property);
+        propertiesContainer.getChildren().add(propertyButton);
     }
 
-    /**
-     * Loads property details when a property is selected from the list
-     */
     @FXML
-    private void loadPropertyDetails(ActionEvent event) {
-        // Get the source button that was clicked
-        //Button clickedButton = (Button) event.getSource();
-        
-        // Extract property information from the button or its data
-        // This is a simplified example - in a real app, you would get the property ID
-        // and load the data from your data model or database
-        String propertyName = "Selected Property";
-        
-        // For demonstration, we'll just update the UI with some hardcoded values
-        propertyTitle.setText(propertyName + " Details");
-        
-        // In a real application, you would load the actual property data here
-        // and update all the fields with the property's information
-    }
-
-    /**
-     * Handles adding a new property
-     */
-    @FXML
-    private void handleAddProperty(ActionEvent event) {
+    void handleAddPropertyButton(ActionEvent event) {
+        Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+        Scene scene = node.getScene();
         try {
-            // Load the add property form FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ekarya/view/AddPropertyForm.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddProperty.fxml"));
             Parent addPropertyRoot = loader.load();
-            
-            // Get the current stage
-            Stage stage = (Stage) addPropertyButton.getScene().getWindow();
-            
-            // Set the add property form scene
-            Scene scene = new Scene(addPropertyRoot);
-            stage.setScene(scene);
-            stage.show();
+
+            AddPropertyController addPropertyController = loader.getController();
+            addPropertyController.initialize(currentUser);
+
+            // Apply fade-in transition
+            addPropertyRoot.setOpacity(0); // Start invisible
+            scene.setRoot(addPropertyRoot); // Set the new root
+
+            FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), addPropertyRoot);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.play();
         } catch (IOException e) {
-            System.err.println("Error loading AddPropertyForm.fxml: " + e.getMessage());
+            System.err.println("Error loading AddProperty.fxml: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    /**
-     * Handles editing the currently selected property
-     */
     @FXML
-    private void handleEditProperty(ActionEvent event) {
+    private void handleBackToHome(ActionEvent event) throws Exception {
+        Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
+        Scene scene = node.getScene();
+
         try {
-            // Load the edit property form FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ekarya/view/EditPropertyForm.fxml"));
-            Parent editPropertyRoot = loader.load();
-            
-            // Get the controller and pass the current property data
-            // EditPropertyFormController controller = loader.getController();
-            // controller.setPropertyData(currentPropertyData);
-            
-            // Get the current stage
-            Stage stage = (Stage) editButton.getScene().getWindow();
-            
-            // Set the edit property form scene
-            Scene scene = new Scene(editPropertyRoot);
-            stage.setScene(scene);
-            stage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+            Parent root = loader.load();
+
+            MainController controller = loader.getController();
+            controller.initData(currentUser);
+
+            // Apply fade-in transition
+            root.setOpacity(0); // Start invisible
+            scene.setRoot(root); // Set the new root
+
+            FadeTransition fadeIn = new FadeTransition(javafx.util.Duration.millis(01), root);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+            fadeIn.play();
+
         } catch (IOException e) {
-            System.err.println("Error loading EditPropertyForm.fxml: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    /**
-     * Handles deleting the currently selected property
-     */
     @FXML
-    private void handleDeleteProperty(ActionEvent event) {
-        // In a real application, you would:
-        // 1. Show a confirmation dialog
-        // 2. Delete the property from your data model or database if confirmed
-        // 3. Update the UI to reflect the deletion
-        
-        System.out.println("Delete property functionality would be implemented here");
-        
-        // For demonstration purposes, we'll just clear the property details
-        propertyTitle.setText("Property Details");
-        titleText.setText("");
-        locationText.setText("");
-        priceText.setText("");
-        guestsText.setText("");
-        bedroomsText.setText("");
-        bedsText.setText("");
-        bathroomsText.setText("");
-        descriptionText.setText("");
+    void handleDeleteProperty(ActionEvent event) {
+        // TODO be implemented
     }
 
-    /**
-     * Loads sample property data for demonstration purposes
-     */
-    private void loadPropertyData() {
-        // In a real application, you would load this data from a database or service
-        // This is just for demonstration purposes
-        
-        // Set default property details
-        propertyTitle.setText("Property Details");
-        titleText.setText("Cozy apartment in the heart of Paris");
-        locationText.setText("Paris, Île-de-France, France");
-        priceText.setText("104 €");
-        guestsText.setText("4 guests");
-        bedroomsText.setText("2 bedrooms");
-        bedsText.setText("3 beds");
-        bathroomsText.setText("1 bathroom");
-        descriptionText.setText("Discover this charming apartment located in the heart of Paris. " +
-                "Perfectly situated to explore the city, this comfortable space offers everything " +
-                "you need for a pleasant stay. Enjoy the equipped kitchen, bright living room, " +
-                "and cozy bedroom. Just steps away from major attractions and public transportation.");
+    @FXML
+    void handleEditProperty(ActionEvent event) {
+        // TODO be implemented
     }
+
+    public void loadPropertyData(String id) {
+        for (Property p : PropertyDAO.getProperties()) {
+            if (p.getId().equals(id)) {
+                currentProperty = p;
+                loadPropertyDetails();
+                break;
+            }
+        }
+    }
+
+    private void loadPropertyDetails() {
+        ArrayList<File> TheFivePhotos = new ArrayList<>();
+    
+        if (currentProperty != null) {
+            locationText.setText(currentProperty.getLocation());
+            descriptionText.setText(currentProperty.getDescription());
+            titleText.setText(currentProperty.getTitle());
+            bathroomsText.setText(String.valueOf(currentProperty.getBathrooms()));
+            bedroomsText.setText(String.valueOf(currentProperty.getBedrooms()));
+            bedsText.setText(String.valueOf(currentProperty.getBeds()));
+            guestsText.setText(String.valueOf(currentProperty.getGuests()));
+            priceText.setText(String.valueOf(currentProperty.getPrice()));
+    
+            try {
+                ArrayList<ImageModel> propertyImages = BlobDAO.loadImagesForProperty(currentProperty.getId());
+                for (ImageModel i : propertyImages) {
+                    TheFivePhotos.add(i.getImgFile());
+                }
+            } catch (Exception e) {
+                System.err.println("Failed to load images for property: " + e.getMessage());
+            }
+    
+            if (!TheFivePhotos.isEmpty()) {
+                mainImageView.setImage(new Image(TheFivePhotos.get(0).toURI().toString()));
+                if (TheFivePhotos.size() > 1) image1View.setImage(new Image(TheFivePhotos.get(1).toURI().toString()));
+                if (TheFivePhotos.size() > 2) image2View.setImage(new Image(TheFivePhotos.get(2).toURI().toString()));
+                if (TheFivePhotos.size() > 3) image3View.setImage(new Image(TheFivePhotos.get(3).toURI().toString()));
+                if (TheFivePhotos.size() > 4) image4View.setImage(new Image(TheFivePhotos.get(4).toURI().toString()));
+                TheFivePhotos.clear();
+            } else {
+                mainImageView.setImage(new Image("/pictures/error.png"));
+            }
+        }
+    }
+    
+
+    private Button createPropertyButton(Property property) {
+        Button propertyButton = new Button();
+        propertyButton.setId("PropertyBtn_" + property.getId());
+        propertyButton.setMaxWidth(Double.MAX_VALUE);
+        propertyButton.setOnAction(event -> loadPropertyData(property.getId()));
+        propertyButton.setStyle("""
+                    -fx-background-color: white;
+                    -fx-border-color: #E0E0E0;
+                    -fx-border-radius: 12;
+                    -fx-background-radius: 12;
+                    -fx-alignment: center-left;
+                    -fx-padding: 10;
+                    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);
+                """);
+
+        Text propertyNameText = new Text(property.getTitle());
+        propertyNameText.setStyle(
+                "-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 14; -fx-fill: #000000;");
+
+        Text priceText = new Text(property.getPrice() + " TND per night");
+        priceText.setStyle("-fx-font-family: 'Montserrat'; -fx-font-size: 12; -fx-fill: #555555;");
+
+        VBox textVBox = new VBox(propertyNameText, priceText);
+        HBox hbox = new HBox(10, textVBox);
+        propertyButton.setGraphic(hbox);
+
+        return propertyButton;
+
+    }
+
 }

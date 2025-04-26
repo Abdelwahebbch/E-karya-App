@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="600" minHeight="600" prefHeight="600" spacing="0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ekarya.controller.AddPropertyController">
+    <!-- Modern Top Navigation Bar -->
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 12 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10, 0, 0, 4); -fx-border-color: #F0F0F0; -fx-border-width: 0 0 1 0;">
+        <HBox alignment="CENTER" spacing="8">
+         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../pictures/AppLogo2.png" />
+            </image>
+         </ImageView>
+            <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 20; -fx-font-weight: 700; -fx-fill: #000000;" text="E-Karya" />
+        </HBox>
+
+        <Region HBox.hgrow="ALWAYS" />
+        <Button onAction="#handleBackToDashboard" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 8 16;">
+            <graphic>
+                <HBox alignment="CENTER" spacing="8">
+                    <SVGPath content="M19 12H5M12 19l-7-7 7-7" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                    <Text fill="WHITE" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Back to Dashboard" />
+                </HBox>
+            </graphic>
+        </Button>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <!-- Form Title -->
+            <VBox spacing="5">
+                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 24; -fx-font-weight: 800; -fx-fill: #000000;" text="Add New Property" />
+                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #555555;" text="Fill in the information below to add your property" />
+            </VBox>
+
+            <!-- General Information Section -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
+                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="General Information" />
+                
+                <VBox spacing="10">
+                    <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Listing Title" />
+                    <TextField fx:id="titleField" promptText="Ex: Cozy apartment in the heart of Paris" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
+                </VBox>
+                
+                <VBox spacing="10">
+                    <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Location" />
+                    <TextField fx:id="locationField" promptText="Ex: Paris, Île-de-France, France" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
+                </VBox>
+            </VBox>
+
+            <!-- Property Images Section -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
+                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Property Photos" />
+                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 14; -fx-fill: #555555;" text="Add at least 5 photos to show travelers what your property looks like" />
+                
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50" />
+                        <ColumnConstraints percentWidth="25" />
+                        <ColumnConstraints percentWidth="25" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints percentHeight="50" />
+                        <RowConstraints percentHeight="50" />
+                    </rowConstraints>
+                    
+                    <!-- Main Image Upload -->
+                    <VBox alignment="CENTER" style="-fx-border-color: #E0E0E0; -fx-border-style: dashed; -fx-border-radius: 12; -fx-background-radius: 12;" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="2">
+                        <ImageView fx:id="mainImageView" fitHeight="250" fitWidth="400" preserveRatio="true">
+                            <Image url="@../../../../../../../Desktop/abb.png" />
+                        </ImageView>
+                        <Button onAction="#handelLoadImage" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+ Main Image" />
+                    </VBox>
+                    
+                    <!-- Additional Images Upload -->
+                    <VBox alignment="CENTER" style="-fx-border-color: #E0E0E0; -fx-border-style: dashed; -fx-border-radius: 12; -fx-background-radius: 12;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <ImageView fx:id="image1View" fitHeight="120" fitWidth="200.0" preserveRatio="true">
+                            <Image url="@placeholder.png" />
+                        </ImageView>
+                        <Button onAction="#handelLoadImage" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+" />
+                    </VBox>
+                    
+                    <VBox alignment="CENTER" style="-fx-border-color: #E0E0E0; -fx-border-style: dashed; -fx-border-radius: 12; -fx-background-radius: 12;" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <ImageView fx:id="image2View" fitHeight="120" fitWidth="200.0" preserveRatio="true">
+                            <Image url="@placeholder.png" />
+                        </ImageView>
+                        <Button onAction="#handelLoadImage" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+" />
+                    </VBox>
+                    
+                    <VBox alignment="CENTER" style="-fx-border-color: #E0E0E0; -fx-border-style: dashed; -fx-border-radius: 12; -fx-background-radius: 12;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <ImageView fx:id="image3View" fitHeight="120" fitWidth="200.0" preserveRatio="true">
+                            <Image url="@placeholder.png" />
+                        </ImageView>
+                        <Button onAction="#handelLoadImage" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+" />
+                    </VBox>
+                    
+                    <VBox alignment="CENTER" style="-fx-border-color: #E0E0E0; -fx-border-style: dashed; -fx-border-radius: 12; -fx-background-radius: 12;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <ImageView fx:id="image4View" fitHeight="120" fitWidth="200.0" preserveRatio="true">
+                            <Image url="@placeholder.png" />
+                        </ImageView>
+                        <Button onAction="#handelLoadImage" style="-fx-background-color: transparent; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #000000;" text="+" />
+                    </VBox>
+                </GridPane>
+            </VBox>
+
+            <!-- Property Details Section -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
+                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Property Details" />
+                
+                <VBox spacing="10">
+                    <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Description" />
+                    <TextArea fx:id="descriptionArea" prefHeight="100" promptText="Describe your property, its features, location, etc." style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" wrapText="true" />
+                </VBox>
+                
+                <HBox spacing="15">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Guests" />
+                        <TextField fx:id="guestsField" prefWidth="150" promptText="Number" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
+                    </VBox>
+                    
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Bedrooms" />
+                        <TextField fx:id="bedroomsField" prefWidth="150" promptText="Number" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
+                    </VBox>
+                    
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Beds" />
+                        <TextField fx:id="bedsField" prefWidth="150" promptText="Number" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
+                    </VBox>
+                    
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Bathrooms" />
+                        <TextField fx:id="bathroomsField" prefWidth="150" promptText="Number" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- Pricing Section -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: #E0E0E0; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 12, 0, 0, 2);">
+                <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Pricing" />
+                
+                <VBox spacing="10">
+                    <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Price per night ($)" />
+                    <TextField fx:id="priceField" promptText="Ex: 104" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
+                </VBox>
+            </VBox>
+
+            <!-- Submit Button -->
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Button fx:id="submitButton" onAction="#createPropertyButton" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-background-radius: 24; -fx-padding: 12 24;" text="Publish Listing">
+                    <graphic>
+                        <HBox alignment="CENTER" spacing="8">
+                            <SVGPath content="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" fill="transparent" stroke="WHITE" strokeWidth="2" />
+                        </HBox>
+                    </graphic>
+                </Button>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+</VBox>
