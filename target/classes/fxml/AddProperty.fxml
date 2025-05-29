@@ -154,7 +154,7 @@
                 <Text style="-fx-font-family: 'Montserrat'; -fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #000000;" text="Pricing" />
                 
                 <VBox spacing="10">
-                    <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Price per night ($)" />
+                    <Label style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-text-fill: #555555;" text="Price per night (TND)" />
                     <TextField fx:id="priceField" promptText="Ex: 104" style="-fx-font-family: 'Montserrat'; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0;" />
                 </VBox>
             </VBox>

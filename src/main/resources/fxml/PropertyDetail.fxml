@@ -63,21 +63,11 @@
                     <RowConstraints percentHeight="50" />
                     <RowConstraints percentHeight="50" />
                 </rowConstraints>
-                <ImageView fitHeight="250" fitWidth="400" preserveRatio="true" style="-fx-background-radius: 12;" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="2">
-                    <Image url="@solo.png" />
-                </ImageView>
-                <ImageView fitHeight="84.0" fitWidth="199.0" preserveRatio="true" style="-fx-background-radius: 12;" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                    <Image url="@solo.png" />
-                </ImageView>
-                <ImageView fitHeight="120" fitWidth="195" preserveRatio="true" style="-fx-background-radius: 12;" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                    <Image url="@solo.png" />
-                </ImageView>
-                <ImageView fitHeight="120" fitWidth="195" preserveRatio="true" style="-fx-background-radius: 12;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <Image url="@solo.png" />
-                </ImageView>
-                <ImageView fitHeight="120" fitWidth="195" preserveRatio="true" style="-fx-background-radius: 12;" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                    <Image url="@solo.png" />
-                </ImageView>
+                <ImageView fx:id="img1" fitHeight="250" fitWidth="400" preserveRatio="true" style="-fx-background-radius: 12;" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="2" />
+                <ImageView fx:id="img2" fitHeight="107.0" fitWidth="199.0" preserveRatio="true" style="-fx-background-radius: 12;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <ImageView fx:id="img3" fitHeight="120" fitWidth="195" preserveRatio="true" style="-fx-background-radius: 12;" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <ImageView fx:id="img4" fitHeight="120" fitWidth="195" preserveRatio="true" style="-fx-background-radius: 12;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <ImageView fx:id="img5" fitHeight="120" fitWidth="195" preserveRatio="true" style="-fx-background-radius: 12;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             </GridPane>
 
             <!-- Room Details and Booking -->
@@ -116,18 +106,18 @@
                         <HBox>
                             <Text fx:id="equationField" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="pick a Date " HBox.hgrow="ALWAYS" />
                             <Region HBox.hgrow="ALWAYS" />
-                            <Text fx:id="equationResultField" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="*** TND" />
+                            <Text fx:id="equationResultField" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="0 TND" />
                         </HBox>
                         <HBox>
                             <Text style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="Service fee" HBox.hgrow="ALWAYS" />
                             <Region HBox.hgrow="ALWAYS" />
-                            <Text fx:id="tvaField" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="74 TND" />
+                            <Text fx:id="tvaField" style="-fx-font-family: 'Montserrat'; -fx-fill: #000000;" text="0 TND" />
                         </HBox>
                         <Separator style="-fx-background-color: #E0E0E0;" />
                         <HBox>
                             <Text style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text="Total" HBox.hgrow="ALWAYS" />
                             <Region HBox.hgrow="ALWAYS" />
-                            <Text fx:id="finalPriceField" style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text="594 TND" />
+                            <Text fx:id="finalPriceField" style="-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-fill: #000000;" text="0 TND" />
                         </HBox>
                     </VBox>
                 </VBox>

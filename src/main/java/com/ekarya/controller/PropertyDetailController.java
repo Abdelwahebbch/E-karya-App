@@ -10,14 +10,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
+import com.ekarya.DAO.BlobDAO;
 import com.ekarya.DAO.BookingDAO;
+import com.ekarya.Models.ImageModel;
 import com.ekarya.Models.Property;
 import com.ekarya.Models.User;
 
@@ -28,6 +34,20 @@ public class PropertyDetailController {
     public static User currentUser = new User();
     public static Property currentProperty = new Property();
     DecimalFormat df = new DecimalFormat("#.00");
+    @FXML
+    private ImageView img1;
+
+    @FXML
+    private ImageView img2;
+
+    @FXML
+    private ImageView img3;
+
+    @FXML
+    private ImageView img4;
+
+    @FXML
+    private ImageView img5;
     @FXML
     private Button bookButton;
 
@@ -70,8 +90,10 @@ public class PropertyDetailController {
     @FXML
     private Text tvaField;
 
-    @FXML private Text ratingText;
-    @FXML private Text numRatersText;
+    @FXML
+    private Text ratingText;
+    @FXML
+    private Text numRatersText;
 
     public void initialize() {
         checkInDatePicker.valueProperty().addListener((obs, oldDate, newDate) -> {
@@ -113,11 +135,12 @@ public class PropertyDetailController {
     }
 
     public void initData(Property p, User u) {
+        ArrayList<File> TheFivePhotos = new ArrayList<>();
         currentUser = u;
         currentProperty = p;
 
-        ratingText.setText("★ "+df.format(p.getRating()));
-        numRatersText.setText("("+p.getNumRaters()+" reviews)");
+        ratingText.setText("★ " + df.format(p.getRating()));
+        numRatersText.setText("(" + p.getNumRaters() + " reviews)");
         descriptionField.setText(p.getDescription());
         detailsField.setText(
                 p.getGuests() + " Guestes " + p.getBathrooms() + " Bathrooms " + p.getBedrooms() + " Bedrooms");
@@ -125,15 +148,39 @@ public class PropertyDetailController {
         priceField.setText(p.getPrice() + " TND per night ");
         propNameField.setText(p.getTitle());
         titleField.setText(p.getTitle());
+        try {
+            ArrayList<ImageModel> propertyImages = BlobDAO.loadImagesForProperty(currentProperty.getId());
+            for (ImageModel i : propertyImages) {
+                TheFivePhotos.add(i.getImgFile());
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to load images for property: " + e.getMessage());
+        }
+
+        if (!TheFivePhotos.isEmpty()) {
+            img1.setImage(new Image(TheFivePhotos.get(0).toURI().toString()));
+            if (TheFivePhotos.size() > 1)
+                img2.setImage(new Image(TheFivePhotos.get(1).toURI().toString()));
+            if (TheFivePhotos.size() > 2)
+                img3.setImage(new Image(TheFivePhotos.get(2).toURI().toString()));
+            if (TheFivePhotos.size() > 3)
+                img4.setImage(new Image(TheFivePhotos.get(3).toURI().toString()));
+            if (TheFivePhotos.size() > 4)
+                img5.setImage(new Image(TheFivePhotos.get(4).toURI().toString()));
+            TheFivePhotos.clear();
+        } else {
+            img1.setImage(new Image("/pictures/error.png"));
+        }
 
     }
 
     /**
      * Handles the back button action to navigate back to the home page
-          * @throws Exception 
-          */
-         @FXML
-         private void handleBackToHome(ActionEvent event) throws Exception {
+     * 
+     * @throws Exception
+     */
+    @FXML
+    private void handleBackToHome(ActionEvent event) throws Exception {
         Node node = (Node) event.getSource(); // Works for Button, MenuItem, etc.
         Scene scene = node.getScene();
 
@@ -186,6 +233,5 @@ public class PropertyDetailController {
         }
 
     }
-
 
 }
